@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { selectCartCount } from "../Features/Cart/CartSlice";
-import { selectWishlistCount } from "../Features/WishList/WishListSlice";
+import { selectWishlistCount } from "../Features/wishlist/wishlistSlice";
 
 export default function Navbar() {
     return (
@@ -14,7 +14,7 @@ export default function Navbar() {
                     <span className="navbar__count">{useSelector(selectCartCount)}</span>
                 </span>
                 <span className="navbar__item">
-                    <Link to="/cart" className="navbar__link navbar__link--with-badge">WishList</Link>
+                    <Link to="/cart" className="navbar__link navbar__link--with-badge">wishlist</Link>
                     <span className="navbar__count">{useSelector(selectWishlistCount)}</span>
                 </span>            </nav>
         </header>

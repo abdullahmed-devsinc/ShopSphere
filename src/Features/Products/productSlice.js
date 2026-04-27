@@ -1,7 +1,8 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
-import { act } from "react";
+import productData from "../../data/product.json"
+
 const initialState = {
-    items: [],
+    items: productData,
     filters: { category: 'all', priceRange: [0, 1000], rating: 0 },
     sortBy: 'newest',
     searchBy: '',
