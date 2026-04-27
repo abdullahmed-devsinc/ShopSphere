@@ -21,9 +21,13 @@ const wishListSlice = createSlice({
 export const { addToWishList, removeFromWishList } = wishListSlice.actions;
 export default wishListSlice.reducer;
 
-const selectWishlistItems = state => state.wishList.items;
+const selectWishlistItems = state => state.wishlist.items;
 
 export const selectIsInWishList = (productId) => createSelector(
     selectWishlistItems,
     (items) => items.some(item => item.id === productId)
+)
+export const selectWishlistCount = createSelector(
+    selectWishlistItems,
+    (items) => items.length
 )
