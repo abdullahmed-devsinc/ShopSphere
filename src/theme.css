@@ -104,3 +104,74 @@ a {
 .btn-secondary:hover {
   background: #f0f0f0;
 }
+
+.navbar {
+  height: 64px;
+  padding: 0 24px;
+  border-bottom: 1px solid #e5e5e5;
+  background: #ffffff;
+  color: #111111;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar__brand {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #111111;
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar__link {
+  text-decoration: none;
+  color: #1f1f1f;
+  font-size: 0.92rem;
+  font-weight: 500;
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: all 0.18s ease;
+}
+
+.navbar__link:hover {
+  border-color: #d9d9d9;
+  background: #f7f7f7;
+  color: #000000;
+}
+
+.navbar__link:focus-visible {
+  outline: 2px solid #000000;
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .navbar {
+    padding: 0 14px;
+  }
+
+  .navbar__brand {
+    font-size: 0.9rem;
+  }
+
+  .navbar__links {
+    gap: 4px;
+  }
+
+  .navbar__link {
+    padding: 6px 8px;
+    font-size: 0.85rem;
+  }
+}
