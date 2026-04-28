@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import { selectCartItems, selectCartSubTotal } from "../Features/Cart/cartSlice";
-import Button from "../Components/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import CartItem from '../Features/Cart/CartItem'
 export default function CartPage() {
     const items = useSelector(selectCartItems);
@@ -13,7 +12,7 @@ export default function CartPage() {
             <div className="cart-page">
                 <h1>Cart</h1>
                 <p>There are currently no items in cart. Browse for some!</p>
-                <Button variant="primary" onClick={() => navigate('/', { replace: true })}>Home</Button>
+                <Link to="/" className="btn btn-primary">Continue Shopping</Link>
             </div>
         )
     }
@@ -27,7 +26,7 @@ export default function CartPage() {
                 </div>
                 <div className="cart-summary">
                     <p>Sub Total: <span>${subTotal}</span></p>
-                    <Button variant="primary" onClick={() => navigate('/checkout', { replace: true })}>Proceed to Checkout</Button>
+                    <Link to='/checkout' className="btn btn-primary">Checkout</Link>
                 </div>
             </div>
         )

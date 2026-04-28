@@ -56,6 +56,13 @@ export const selectStock = (productId) => createSelector(
         return product ? product.stock : 0
     }
 )
+export const selectProductById = (productId) => createSelector(
+    selectAllProducts,
+    (items) => {
+        const product = items.find(p => p.id === productId)
+        return product
+    }
+)
 export const selectFilteredProducts = createSelector(
     selectAllProducts,
     selectSearchQuery,

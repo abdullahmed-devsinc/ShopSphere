@@ -1,0 +1,20 @@
+import Button from "./Button";
+
+export default function ItemCard({ item, onRemove, onAddToCart, isInCart }) {
+    return (
+        <div className="card">
+            <img className="card-img" src={item.img} />
+            <h3 className="card-title">{item.name}</h3>
+            <p className="card-rating">{item.rating}</p>
+            <p className="card-price">{item.price}</p>
+            <p className="card-stock">{item.stock > 0 ? "In Stock" : "Out of Stock"}</p>
+            {onRemove && <Button onClick={onRemove}>Remove</Button>}
+            {onAddToCart && (
+                <Button disabled={isInCart} onClick={onAddToCart}>{isInCart ? "Already in Cart" : "Add to Cart"}</Button>
+            )}
+            {/* <Button variant="primary" onClick={() => dispatch(removeFromwishlist(item.id))}>Remove from WishList</Button>
+            <Button variant="primary" disabled={isInCart} onClick={() => dispatch(addToCart(item))}>{isInCart ? "Item Already in Cart" : "Add to Cart"}</Button> */}
+
+        </div>
+    )
+}

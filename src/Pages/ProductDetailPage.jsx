@@ -1,7 +1,41 @@
+import { useParams, Link } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux";
+import { selectProductById } from "../Features/Products/productSlice";
+import { addToCart, selectIsInCart } from "../Features/Cart/cartSlice";
+import { addTowishlist, selectIsInwishlist } from "../Features/Wishlist/wishlistSlice";
+import Button from "../Components/Button";
+import NotFoundPage from "./NotFoundPage";
+
 export default function ProductDetailPage() {
+    const { id } = useParams();
+    const product = useSelector(selectProductById(Number(id)));
+    const dispatch = useDispatch();
+
+    if (!product) {
+        return (
+            <NotFoundPage />
+        )
+    }
+
+    const isInCart = useSelector(selectIsInCart(product.id));
+    const isInWishlist = useSelector(selectIsInwishlist(product.id));
+
     return (
-        <>
-            <h1>Product Detail</h1>
-        </>
+        <div className="page product-detail">
+            <div className="product-detail__image">
+                <img src={product.img || "https://placehold.co/600x600?text=No+Image"} alt={product.name} />
+            </div>
+            <div className="product-detail__info">
+                <h1 className="page-title">{product.name}</h1>
+                <p className="card-rating">{product.rating}</p>
+                <p className="card-price">{product.price}</p>
+                <p className="card-stock">{product.stock > 0 ? "In Stock" : "Out of stock"}</p>
+
+                <div className="product-detail__actions">
+                    <Button variant="primary" onClick={() => dispatch(addToCart(product))}>{isInCart ? "Added to Cart" : "Add to Cart"}</Button>
+                    <Button variant="secondary" disabled={isInWishlist} onClick={() => dispatch(addTowishlist(product))}>{isInWishlist ? "Already in WishList" : "Add to WishList"}</Button>
+                </div>
+            </div>
+        </div>
     )
 }

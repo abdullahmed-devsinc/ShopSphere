@@ -10,7 +10,7 @@ export default function Routes() {
     return (
         <AppRoutes>
             <Route path="/" element={<ProductListingPage />} />
-            <Route path="/productdetail" element={<ProductDetailPage />} />
+            <Route path="/productdetail/:id" element={<ProductDetailPage />} />
             <Route path="/checkout" element={<CheckoutSummaryPage />} />
             <Route path="/wishlist" element={<WishlistPage />} />
             <Route path="/cart" element={<CartPagePage />} />

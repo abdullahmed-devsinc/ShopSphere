@@ -8,15 +8,16 @@ export default function CartItem({ item }) {
     const itemStock = useSelector(selectStock(item.id));
 
     return (
-        <div className="cart-item">
-            <img src={item.img} />
-            <h3>{item.name}</h3>
-            <div className="cart-item-quantity">
+        <div className="card card-horizontal">
+            <img className="card-img" src={item.img} />
+            <h3 className="card-title">{item.name}</h3>
+            <div className="card-quantity">
                 <Button variant="secondary" onClick={() => dispatch(updateQuantity({ id: item.id, quantity: item.quantity + 1 }))} disabled={itemStock <= item.quantity}> + </Button>
                 <p>{item.quantity}</p>
                 <Button variant="secondary" onClick={() => dispatch(updateQuantity({ id: item.id, quantity: item.quantity - 1 }))} disabled={item.quantity < 1}>-</Button>
             </div>
-            <p>${item.quantity * item.price}</p>
+            <p className="card-price-per-item">Price per item: $ {item.price}</p>
+            <p className="card-price">Total Price: ${item.quantity * item.price}</p>
             <Button variant="secondary" onClick={() => dispatch(removeFromCart(item.id))}>Remove</Button>
         </div>
     )
