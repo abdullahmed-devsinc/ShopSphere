@@ -1,9 +1,10 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 import productData from "../../data/product.json"
 
+const initialFilters = { category: 'all', priceRange: [0, 1000], rating: 0 }
 const initialState = {
     items: productData,
-    filters: { category: 'all', priceRange: [0, 1000], rating: 0 },
+    filters: initialFilters,
     sortBy: 'newest',
     searchBy: '',
 
@@ -36,12 +37,18 @@ const productsSlice = createSlice({
             if (existing) {
                 existing.stock -= 1
             }
+        },
+        resetFilters(state) {
+            state.searchBy = ''
+            state.filters = initialFilters
+            state.searchBy = ''
+
         }
     }
 
 })
 
-export const { setFilters, setSearchQuery, setSortBy, addProduct } = productsSlice.actions;
+export const { setFilters, setSearchQuery, setSortBy, addProduct, resetFilters } = productsSlice.actions;
 export default productsSlice.reducer
 
 const selectAllProducts = (state) => state.products.items

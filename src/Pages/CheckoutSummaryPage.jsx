@@ -1,10 +1,13 @@
-import { useSelector } from "react-redux";
-import { selectCartItems } from "../Features/Cart/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { clearCart, selectCartItems } from "../Features/Cart/cartSlice";
 import ItemCard from "../Components/ItemCard";
 import { Link } from "react-router-dom";
+import Button from "../Components/Button";
+
 
 export default function CheckoutSummaryPage() {
     const items = useSelector(selectCartItems);
+    const dispatch = useDispatch();
 
     if (items.length === 0) {
         return (
@@ -23,6 +26,7 @@ export default function CheckoutSummaryPage() {
                         <ItemCard key={item.id} item={item} />
                     )}
                 </div>
+                <Button variant="primary" onClick={dispatch(clearCart)}>Complete Checkout</Button>
             </div>
         )
     }

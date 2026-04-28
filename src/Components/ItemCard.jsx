@@ -5,8 +5,8 @@ export default function ItemCard({ item, onRemove, onAddToCart, isInCart }) {
     return (
         <div className="card">
             <img className="card-img" src={item.img} />
-            <Link to={`/productdetail/${product.id}`}>
-                <h2 className="card-title">{product.name}</h2>
+            <Link to={`/productdetail/${item.id}`}>
+                <h2 className="card-title">{item.name}</h2>
             </Link>
             <p className="card-rating">{item.rating}</p>
             <p className="card-price">{item.price}</p>
