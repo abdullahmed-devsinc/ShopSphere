@@ -178,5 +178,95 @@
     "category": "grocery",
     "rating": 4,
     "image": ""
+  },
+  {
+    "id": 21,
+    "name": "The Art of Everyday Coding",
+    "price": 24,
+    "stock": 38,
+    "category": "books",
+    "rating": 5,
+    "image": ""
+  },
+  {
+    "id": 22,
+    "name": "Modern Startup Playbook",
+    "price": 19,
+    "stock": 44,
+    "category": "books",
+    "rating": 4,
+    "image": ""
+  },
+  {
+    "id": 23,
+    "name": "Mindful Productivity Journal",
+    "price": 14,
+    "stock": 60,
+    "category": "books",
+    "rating": 4,
+    "image": ""
+  },
+  {
+    "id": 24,
+    "name": "Adjustable Dumbbell Set",
+    "price": 179,
+    "stock": 12,
+    "category": "sports",
+    "rating": 5,
+    "image": ""
+  },
+  {
+    "id": 25,
+    "name": "Non-Slip Yoga Mat",
+    "price": 29,
+    "stock": 55,
+    "category": "sports",
+    "rating": 4,
+    "image": ""
+  },
+  {
+    "id": 26,
+    "name": "Insulated Water Bottle",
+    "price": 21,
+    "stock": 80,
+    "category": "sports",
+    "rating": 4,
+    "image": ""
+  },
+  {
+    "id": 27,
+    "name": "Hydrating Face Serum",
+    "price": 27,
+    "stock": 33,
+    "category": "beauty",
+    "rating": 4,
+    "image": ""
+  },
+  {
+    "id": 28,
+    "name": "Vitamin C Moisturizer",
+    "price": 31,
+    "stock": 29,
+    "category": "beauty",
+    "rating": 5,
+    "image": ""
+  },
+  {
+    "id": 29,
+    "name": "Herbal Shampoo",
+    "price": 13,
+    "stock": 66,
+    "category": "beauty",
+    "rating": 3,
+    "image": ""
+  },
+  {
+    "id": 30,
+    "name": "Travel Toiletry Organizer",
+    "price": 17,
+    "stock": 47,
+    "category": "beauty",
+    "rating": 4,
+    "image": ""
   }
 ]

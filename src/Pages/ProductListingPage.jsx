@@ -8,8 +8,10 @@ export default function ProductListingPage() {
 
     return (
         <div className="product-listing">
-            <ProductSearch />
-            <ProductGrid products={products} />
+            <div className="listing-main">
+                <ProductSearch />
+                <ProductGrid products={products} />
+            </div>
         </div>
     )
 }

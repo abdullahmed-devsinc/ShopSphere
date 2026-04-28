@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from 'react';
-import useDebounce from "../../hooks/useDebounce";
+// import useDebounce from "../../hooks/useDebounce";
 import { setSearchQuery } from "./productSlice";
 
 export default function ProductSearch() {
