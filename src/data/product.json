@@ -10,24 +10,6 @@
   },
   {
     "id": 2,
-    "name": "Minimalist Desk Lamp",
-    "price": 45,
-    "stock": 32,
-    "category": "home",
-    "rating": 4,
-    "image": ""
-  },
-  {
-    "id": 3,
-    "name": "Running Shoes Pro",
-    "price": 89,
-    "stock": 24,
-    "category": "fashion",
-    "rating": 4,
-    "image": ""
-  },
-  {
-    "id": 4,
     "name": "Smart Fitness Watch",
     "price": 199,
     "stock": 11,
@@ -36,34 +18,7 @@
     "image": ""
   },
   {
-    "id": 5,
-    "name": "Organic Green Tea Pack",
-    "price": 16,
-    "stock": 70,
-    "category": "grocery",
-    "rating": 3,
-    "image": ""
-  },
-  {
-    "id": 6,
-    "name": "Ergonomic Office Chair",
-    "price": 249,
-    "stock": 9,
-    "category": "home",
-    "rating": 5,
-    "image": ""
-  },
-  {
-    "id": 7,
-    "name": "Leather Backpack",
-    "price": 72,
-    "stock": 27,
-    "category": "fashion",
-    "rating": 4,
-    "image": ""
-  },
-  {
-    "id": 8,
+    "id": 3,
     "name": "Bluetooth Speaker Mini",
     "price": 59,
     "stock": 35,
@@ -72,7 +27,43 @@
     "image": ""
   },
   {
-    "id": 9,
+    "id": 4,
+    "name": "4K Ultra HD Smart TV",
+    "price": 499,
+    "stock": 5,
+    "category": "electronics",
+    "rating": 4,
+    "image": ""
+  },
+  {
+    "id": 5,
+    "name": "Wireless Gaming Mouse",
+    "price": 49,
+    "stock": 50,
+    "category": "electronics",
+    "rating": 4,
+    "image": ""
+  },
+  {
+    "id": 6,
+    "name": "Minimalist Desk Lamp",
+    "price": 45,
+    "stock": 32,
+    "category": "home",
+    "rating": 4,
+    "image": ""
+  },
+  {
+    "id": 7,
+    "name": "Ergonomic Office Chair",
+    "price": 249,
+    "stock": 9,
+    "category": "home",
+    "rating": 5,
+    "image": ""
+  },
+  {
+    "id": 8,
     "name": "Ceramic Dinner Set",
     "price": 99,
     "stock": 14,
@@ -81,12 +72,111 @@
     "image": ""
   },
   {
+    "id": 9,
+    "name": "Memory Foam Mattress Topper",
+    "price": 129,
+    "stock": 20,
+    "category": "home",
+    "rating": 5,
+    "image": ""
+  },
+  {
     "id": 10,
+    "name": "Automatic Espresso Machine",
+    "price": 350,
+    "stock": 8,
+    "category": "home",
+    "rating": 5,
+    "image": ""
+  },
+  {
+    "id": 11,
+    "name": "Running Shoes Pro",
+    "price": 89,
+    "stock": 24,
+    "category": "fashion",
+    "rating": 4,
+    "image": ""
+  },
+  {
+    "id": 12,
+    "name": "Leather Backpack",
+    "price": 72,
+    "stock": 27,
+    "category": "fashion",
+    "rating": 4,
+    "image": ""
+  },
+  {
+    "id": 13,
+    "name": "Classic Denim Jacket",
+    "price": 55,
+    "stock": 40,
+    "category": "fashion",
+    "rating": 4,
+    "image": ""
+  },
+  {
+    "id": 14,
+    "name": "Polarized Sunglasses",
+    "price": 30,
+    "stock": 60,
+    "category": "fashion",
+    "rating": 3,
+    "image": ""
+  },
+  {
+    "id": 15,
+    "name": "Cozy Winter Beanies",
+    "price": 15,
+    "stock": 100,
+    "category": "fashion",
+    "rating": 4,
+    "image": ""
+  },
+  {
+    "id": 16,
+    "name": "Organic Green Tea Pack",
+    "price": 16,
+    "stock": 70,
+    "category": "grocery",
+    "rating": 3,
+    "image": ""
+  },
+  {
+    "id": 17,
     "name": "Protein Oats Mix",
     "price": 22,
     "stock": 40,
     "category": "grocery",
     "rating": 5,
+    "image": ""
+  },
+  {
+    "id": 18,
+    "name": "Premium Almond Butter",
+    "price": 12,
+    "stock": 45,
+    "category": "grocery",
+    "rating": 4,
+    "image": ""
+  },
+  {
+    "id": 19,
+    "name": "Extra Virgin Olive Oil",
+    "price": 25,
+    "stock": 30,
+    "category": "grocery",
+    "rating": 5,
+    "image": ""
+  },
+  {
+    "id": 20,
+    "name": "Assorted Dark Chocolate Bars",
+    "price": 18,
+    "stock": 50,
+    "category": "grocery",
+    "rating": 4,
     "image": ""
   }
 ]
