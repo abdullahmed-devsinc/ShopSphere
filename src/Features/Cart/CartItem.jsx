@@ -1,0 +1,23 @@
+import { useSelector, useDispatch } from "react-redux";
+import Button from "../../Components/Button";
+import { updateQuantity, removeFromCart, selectIsInCart, selectCartSubTotal } from "./cartSlice";
+import { selectStock } from "../Products/productSlice";
+
+export default function CartItem({ item }) {
+    const dispatch = useDispatch();
+    const itemStock = useSelector(selectStock(item.id));
+
+    return (
+        <div className="cart-item">
+            <img src={item.img} />
+            <h3>{item.name}</h3>
+            <div className="cart-item-quantity">
+                <Button variant="secondary" onClick={() => dispatch(updateQuantity({ id: item.id, quantity: item.quantity + 1 }))} disabled={itemStock <= item.quantity}> + </Button>
+                <p>{item.quantity}</p>
+                <Button variant="secondary" onClick={() => dispatch(updateQuantity({ id: item.id, quantity: item.quantity - 1 }))} disabled={item.quantity < 1}>-</Button>
+            </div>
+            <p>${item.quantity * item.price}</p>
+            <Button variant="secondary" onClick={() => dispatch(removeFromCart(item.id))}>Remove</Button>
+        </div>
+    )
+}

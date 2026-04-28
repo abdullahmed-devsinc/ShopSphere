@@ -16,7 +16,7 @@ const productsSlice = createSlice({
         setSearchQuery(state, action) {
             state.searchBy = action.payload
         },
-        setFitlers(state, action) {
+        setFilters(state, action) {
             state.filters = { ...state.filters, ...action.payload }
         },
         setSortBy(state, action) {
@@ -24,12 +24,24 @@ const productsSlice = createSlice({
         },
         addProduct(state, action) {
             state.items.push(action.payload)
+        },
+        increaseStock(state, action) {
+            const existing = state.items.find((i) => i.id === action.payload.id)
+            if (existing) {
+                existing.stock += 1
+            }
+        },
+        decreaseStock(state, action) {
+            const existing = state.items.find((i) => i.id === action.payload.id)
+            if (existing) {
+                existing.stock -= 1
+            }
         }
     }
 
 })
 
-export const { setFitlers, setSearchQuery, setSortBy, addProduct } = productsSlice.actions;
+export const { setFilters, setSearchQuery, setSortBy, addProduct } = productsSlice.actions;
 export default productsSlice.reducer
 
 const selectAllProducts = (state) => state.products.items
@@ -37,6 +49,13 @@ const selectSearchQuery = (state) => state.products.searchBy
 const selectFilters = (state) => state.products.filters
 const selectSortBy = (state) => state.products.sortBy
 
+export const selectStock = (productId) => createSelector(
+    selectAllProducts,
+    (items) => {
+        const product = items.find(p => p.id === productId);
+        return product ? product.stock : 0
+    }
+)
 export const selectFilteredProducts = createSelector(
     selectAllProducts,
     selectSearchQuery,
@@ -51,7 +70,7 @@ export const selectFilteredProducts = createSelector(
             result = result.filter(p => p.category === filters.category)
         }
         if (filters.rating > 0) {
-            result = result.filter(p => p.rating === filters.rating)
+            result = result.filter(p => p.rating >= filters.rating)
         }
         result = result.filter(p => p.price >= filters.priceRange[0] && p.price <= filters.priceRange[1])
         if (sortBy === 'price-asc') {

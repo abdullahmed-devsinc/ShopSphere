@@ -14,7 +14,7 @@ export default function Navbar() {
                     <span className="navbar__count">{useSelector(selectCartCount)}</span>
                 </span>
                 <span className="navbar__item">
-                    <Link to="/cart" className="navbar__link navbar__link--with-badge">wishlist</Link>
+                    <Link to="/wishlist" className="navbar__link navbar__link--with-badge">Wishlist</Link>
                     <span className="navbar__count">{useSelector(selectwishlistCount)}</span>
                 </span>            </nav>
         </header>

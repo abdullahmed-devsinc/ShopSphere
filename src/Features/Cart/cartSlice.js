@@ -38,7 +38,7 @@ export default cartSlice.reducer;
 
 
 // selectors
-const selectCartItems = state => state.cart.items
+export const selectCartItems = state => state.cart.items
 
 export const selectCartCount = createSelector(
 
