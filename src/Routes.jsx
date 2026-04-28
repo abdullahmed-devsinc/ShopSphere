@@ -4,7 +4,7 @@ import CheckoutSummaryPage from "./Pages/CheckoutSummaryPage";
 import NotFoundPage from "./Pages/NotFoundPage";
 import ProductDetailPage from "./Pages/ProductDetailPage";
 import ProductListingPage from "./Pages/ProductListingPage";
-import wishlistPage from "./Pages/wishlistPage";
+import WishlistPage from "./Pages/WishlistPage";
 
 export default function Routes() {
     return (
@@ -12,7 +12,7 @@ export default function Routes() {
             <Route path="/" element={<ProductListingPage />} />
             <Route path="/productdetail" element={<ProductDetailPage />} />
             <Route path="/checkout" element={<CheckoutSummaryPage />} />
-            <Route path="/wishlist" element={<wishlistPage />} />
+            <Route path="/wishlist" element={<WishlistPage />} />
             <Route path="/cart" element={<CartPagePage />} />
             <Route path="*" element={<NotFoundPage />} />
         </AppRoutes>

@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, selectIsInCart } from "../Cart/cartSlice";
-import { addTowishlist, selectIsInwishlist } from "../WishList/wishlistSlice";
+import { addTowishlist, selectIsInwishlist } from "../Wishlist/wishlistSlice";
 import Button from "../../Components/Button"
 export default function ProductCard({ product }) {
 

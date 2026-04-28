@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { selectCartCount } from "../Features/Cart/CartSlice";
-import { selectWishlistCount } from "../Features/wishlist/wishlistSlice";
+import { selectCartCount } from "../Features/Cart/cartSlice";
+import { selectWishlistCount } from "../Features/Wishlist/wishlistSlice"
 
 export default function Navbar() {
     return (

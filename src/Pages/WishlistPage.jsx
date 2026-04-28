@@ -1,4 +1,4 @@
-export default function wishlistPage() {
+export default function WishlistPage() {
     return (
         <>
             <h1>Wish list</h1>

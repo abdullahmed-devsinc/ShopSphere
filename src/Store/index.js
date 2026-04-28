@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import cartReducer from '../Features/Cart/CartSlice'
-import wishlistReducer from '../Features/wishlist/wishlistSlice'
-import productsReducer from '../Features/Products/ProductSlice'
+import cartReducer from '../Features/Cart/cartSlice'
+import wishlistReducer from '../Features/Wishlist/wishlistSlice'
+import productsReducer from '../Features/Products/productSlice'
 
 const preloadedState = {
     cart: JSON.parse(localStorage.getItem("cart")) ?? { items: [] },
