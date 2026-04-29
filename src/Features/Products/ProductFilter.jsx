@@ -80,7 +80,7 @@ export default function ProductFilter() {
             <Button
                 variant="secondary"
                 onClick={() => {
-                    dispatch(resetFilters)
+                    dispatch(resetFilters())
                     setMinPrice(12)
                     setMaxPrice(499)
                 }}

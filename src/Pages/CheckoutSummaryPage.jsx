@@ -26,7 +26,7 @@ export default function CheckoutSummaryPage() {
                         <ItemCard key={item.id} item={item} />
                     )}
                 </div>
-                <Button variant="primary" onClick={dispatch(clearCart)}>Complete Checkout</Button>
+                <Button variant="primary" onClick={() => dispatch(clearCart)}>Complete Checkout</Button>
             </div>
         )
     }

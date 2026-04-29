@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import Button from "../../Components/Button";
-import { updateQuantity, removeFromCart, selectIsInCart, selectCartSubTotal } from "./cartSlice";
+import { updateQuantity, removeFromCart } from "./cartSlice";
 import { selectStock } from "../Products/productSlice";
 
 export default function CartItem({ item }) {
@@ -14,7 +14,7 @@ export default function CartItem({ item }) {
             <div className="card-quantity">
                 <Button variant="secondary" onClick={() => dispatch(updateQuantity({ id: item.id, quantity: item.quantity + 1 }))} disabled={itemStock <= item.quantity}> + </Button>
                 <p>{item.quantity}</p>
-                <Button variant="secondary" onClick={() => dispatch(updateQuantity({ id: item.id, quantity: item.quantity - 1 }))} disabled={item.quantity < 1}>-</Button>
+                <Button variant="secondary" onClick={() => dispatch(updateQuantity({ id: item.id, quantity: item.quantity - 1 }))} disabled={item.quantity <= 1}>-</Button>
             </div>
             <p className="card-price-per-item">Price per item: $ {item.price}</p>
             <p className="card-price">Total Price: ${item.quantity * item.price}</p>

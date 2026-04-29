@@ -6,7 +6,7 @@
     "stock": 18,
     "category": "electronics",
     "rating": 5,
-    "image": ""
+    "img": ""
   },
   {
     "id": 2,
@@ -15,7 +15,7 @@
     "stock": 11,
     "category": "electronics",
     "rating": 5,
-    "image": ""
+    "img": ""
   },
   {
     "id": 3,
@@ -24,7 +24,7 @@
     "stock": 35,
     "category": "electronics",
     "rating": 3,
-    "image": ""
+    "img": ""
   },
   {
     "id": 4,
@@ -33,7 +33,7 @@
     "stock": 5,
     "category": "electronics",
     "rating": 4,
-    "image": ""
+    "img": ""
   },
   {
     "id": 5,
@@ -42,7 +42,7 @@
     "stock": 50,
     "category": "electronics",
     "rating": 4,
-    "image": ""
+    "img": ""
   },
   {
     "id": 6,
@@ -51,7 +51,7 @@
     "stock": 32,
     "category": "home",
     "rating": 4,
-    "image": ""
+    "img": ""
   },
   {
     "id": 7,
@@ -60,7 +60,7 @@
     "stock": 9,
     "category": "home",
     "rating": 5,
-    "image": ""
+    "img": ""
   },
   {
     "id": 8,
@@ -69,7 +69,7 @@
     "stock": 14,
     "category": "home",
     "rating": 4,
-    "image": ""
+    "img": ""
   },
   {
     "id": 9,
@@ -78,7 +78,7 @@
     "stock": 20,
     "category": "home",
     "rating": 5,
-    "image": ""
+    "img": ""
   },
   {
     "id": 10,
@@ -87,7 +87,7 @@
     "stock": 8,
     "category": "home",
     "rating": 5,
-    "image": ""
+    "img": ""
   },
   {
     "id": 11,
@@ -96,7 +96,7 @@
     "stock": 24,
     "category": "fashion",
     "rating": 4,
-    "image": ""
+    "img": ""
   },
   {
     "id": 12,
@@ -105,7 +105,7 @@
     "stock": 27,
     "category": "fashion",
     "rating": 4,
-    "image": ""
+    "img": ""
   },
   {
     "id": 13,
@@ -114,7 +114,7 @@
     "stock": 40,
     "category": "fashion",
     "rating": 4,
-    "image": ""
+    "img": ""
   },
   {
     "id": 14,
@@ -123,7 +123,7 @@
     "stock": 60,
     "category": "fashion",
     "rating": 3,
-    "image": ""
+    "img": ""
   },
   {
     "id": 15,
@@ -132,7 +132,7 @@
     "stock": 100,
     "category": "fashion",
     "rating": 4,
-    "image": ""
+    "img": ""
   },
   {
     "id": 16,
@@ -141,7 +141,7 @@
     "stock": 70,
     "category": "grocery",
     "rating": 3,
-    "image": ""
+    "img": ""
   },
   {
     "id": 17,
@@ -150,7 +150,7 @@
     "stock": 40,
     "category": "grocery",
     "rating": 5,
-    "image": ""
+    "img": ""
   },
   {
     "id": 18,
@@ -159,7 +159,7 @@
     "stock": 45,
     "category": "grocery",
     "rating": 4,
-    "image": ""
+    "img": ""
   },
   {
     "id": 19,
@@ -168,7 +168,7 @@
     "stock": 30,
     "category": "grocery",
     "rating": 5,
-    "image": ""
+    "img": ""
   },
   {
     "id": 20,
@@ -177,7 +177,7 @@
     "stock": 50,
     "category": "grocery",
     "rating": 4,
-    "image": ""
+    "img": ""
   },
   {
     "id": 21,
@@ -186,7 +186,7 @@
     "stock": 38,
     "category": "books",
     "rating": 5,
-    "image": ""
+    "img": ""
   },
   {
     "id": 22,
@@ -195,7 +195,7 @@
     "stock": 44,
     "category": "books",
     "rating": 4,
-    "image": ""
+    "img": ""
   },
   {
     "id": 23,
@@ -204,7 +204,7 @@
     "stock": 60,
     "category": "books",
     "rating": 4,
-    "image": ""
+    "img": ""
   },
   {
     "id": 24,
@@ -213,7 +213,7 @@
     "stock": 12,
     "category": "sports",
     "rating": 5,
-    "image": ""
+    "img": ""
   },
   {
     "id": 25,
@@ -222,7 +222,7 @@
     "stock": 55,
     "category": "sports",
     "rating": 4,
-    "image": ""
+    "img": ""
   },
   {
     "id": 26,
@@ -231,7 +231,7 @@
     "stock": 80,
     "category": "sports",
     "rating": 4,
-    "image": ""
+    "img": ""
   },
   {
     "id": 27,
@@ -240,7 +240,7 @@
     "stock": 33,
     "category": "beauty",
     "rating": 4,
-    "image": ""
+    "img": ""
   },
   {
     "id": 28,
@@ -249,7 +249,7 @@
     "stock": 29,
     "category": "beauty",
     "rating": 5,
-    "image": ""
+    "img": ""
   },
   {
     "id": 29,
@@ -258,7 +258,7 @@
     "stock": 66,
     "category": "beauty",
     "rating": 3,
-    "image": ""
+    "img": ""
   },
   {
     "id": 30,
@@ -267,6 +267,6 @@
     "stock": 47,
     "category": "beauty",
     "rating": 4,
-    "image": ""
+    "img": ""
   }
 ]
