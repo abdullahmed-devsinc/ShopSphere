@@ -1,5 +1,6 @@
 import { useState } from "react";
 const apiUrl = import.meta.env.VITE_CLOUDINARY_LINK;
+const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
 
 export function useCloudinaryUpload() {
     const [loading, setLoading] = useState(false);
@@ -12,7 +13,7 @@ export function useCloudinaryUpload() {
 
             const formData = new FormData();
             formData.append("file", file);
-            formData.append("upload_preset", jpg);
+            formData.append("upload_preset", uploadPreset);
             const res = await fetch(
                 apiUrl,
                 {
@@ -31,4 +32,5 @@ export function useCloudinaryUpload() {
             setLoading(false);
         }
     }
+    return { uploadImage, loading, error }
 }

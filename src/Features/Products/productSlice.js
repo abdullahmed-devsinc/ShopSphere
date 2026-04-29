@@ -1,4 +1,4 @@
-import { createSelector, createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice, nanoid } from "@reduxjs/toolkit";
 import productData from "../../data/product.json"
 
 const initialFilters = { category: 'all', priceRange: [0, 1000], rating: 0 }
@@ -23,8 +23,19 @@ const productsSlice = createSlice({
         setSortBy(state, action) {
             state.sortBy = action.payload
         },
-        addProduct(state, action) {
-            state.items.push(action.payload)
+        addProduct: {
+            reducer(state, action) {
+                const nextId = state.items.length > 0 ?
+                    Math.max(...state.items.map(item => Number(item.id))) + 1 : 1;
+                state.items.push({ id: nextId, ...action.payload })
+            },
+            // prepare(productData) {
+            //     return {
+            //         payload: {
+            //             id: nanoid(),
+            //             ...productData
+            //         }
+            //     }
         },
         increaseStock(state, action) {
             const existing = state.items.find((i) => i.id === action.payload.id)
