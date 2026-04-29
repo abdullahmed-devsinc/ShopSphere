@@ -1,13 +1,22 @@
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart, selectCartItems } from "../Features/Cart/cartSlice";
+import { useState } from "react";
+import { clearCart, selectCartItems, selectCartSubTotal } from "../Features/Cart/cartSlice";
 import ItemCard from "../Components/ItemCard";
 import { Link } from "react-router-dom";
 import Button from "../Components/Button";
+import CheckoutSuccessPopup from "../Components/CheckoutSuccessPopup";
 
 
 export default function CheckoutSummaryPage() {
     const items = useSelector(selectCartItems);
+    const subTotal = useSelector(selectCartSubTotal);
     const dispatch = useDispatch();
+    const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+
+    const handleCheckout = () => {
+        dispatch(clearCart());
+        setShowSuccessPopup(true);
+    };
 
     if (items.length === 0) {
         return (
@@ -26,7 +35,9 @@ export default function CheckoutSummaryPage() {
                         <ItemCard key={item.id} item={item} />
                     )}
                 </div>
-                <Button variant="primary" onClick={() => dispatch(clearCart)}>Complete Checkout</Button>
+                <div className="checkout-page-subtotal">Total Order Price{subTotal}</div>
+                <Button variant="primary" onClick={handleCheckout}>Complete Checkout</Button>
+                {showSuccessPopup && <CheckoutSuccessPopup />}
             </div>
         )
     }

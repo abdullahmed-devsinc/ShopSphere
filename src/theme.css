@@ -25,7 +25,9 @@
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -54,14 +56,21 @@ a {
 /* ==========================================================================
    Typography & Utils
    ========================================================================== */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
   color: var(--text);
   letter-spacing: -0.025em;
   font-weight: 700;
 }
 
-p { margin: 0; }
+p {
+  margin: 0;
+}
 
 .page-header {
   margin-bottom: 32px;
@@ -254,7 +263,8 @@ p { margin: 0; }
   font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
-  color: #16a34a; /* green */
+  color: #16a34a;
+  /* green */
   background: #f0fdf4;
   padding: 4px 8px;
   border-radius: var(--radius-sm);
@@ -270,11 +280,13 @@ p { margin: 0; }
 .card-rating {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #eab308; /* yellow */
+  color: #eab308;
+  /* yellow */
   display: flex;
   align-items: center;
   gap: 4px;
 }
+
 .card-rating::before {
   content: '★';
   font-size: 1.1em;
@@ -334,23 +346,23 @@ p { margin: 0; }
     grid-template-rows: auto auto auto;
     gap: 12px;
   }
-  
+
   .card-horizontal .card-img {
     width: 80px;
     height: 80px;
     grid-row: 1 / span 3;
   }
-  
+
   .card-horizontal .card-title {
     grid-column: 2;
   }
-  
+
   .card-quantity {
     grid-column: 2;
     justify-self: flex-start;
   }
-  
-  .card-horizontal > .btn {
+
+  .card-horizontal>.btn {
     grid-column: 1 / -1;
     width: 100%;
   }
@@ -410,6 +422,7 @@ p { margin: 0; }
   display: flex;
   margin-bottom: 24px;
 }
+
 .product-search input {
   width: 100%;
   max-width: 400px;
@@ -421,6 +434,7 @@ p { margin: 0; }
   background: var(--bg-elevated);
   transition: border-color 0.2s, box-shadow 0.2s;
 }
+
 .product-search input:focus {
   outline: none;
   border-color: var(--primary);
@@ -496,6 +510,50 @@ p { margin: 0; }
   padding: 80px 20px;
 }
 
+.checkout-page .checkout-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+/* Make checkout item cards match cart's horizontal presentation */
+.checkout-page .checkout-list .card {
+  display: grid;
+  grid-template-columns: 100px 1fr auto auto;
+  align-items: center;
+  gap: 24px;
+  padding: 16px;
+}
+
+.checkout-page .checkout-list .card-img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 0;
+}
+
+.checkout-page .checkout-list .card-title {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+/* Checkout is read-only: show essentials only */
+.checkout-page .checkout-list .card-rating,
+.checkout-page .checkout-list .card-stock,
+.checkout-page .checkout-list .btn {
+  display: none;
+}
+
+.checkout-page .checkout-list .card-price {
+  white-space: nowrap;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.checkout-page>.btn {
+  margin-top: 24px;
+}
+
 .checkout-layout {
   display: grid;
   grid-template-columns: 1fr 350px;
@@ -546,9 +604,24 @@ p { margin: 0; }
 }
 
 @media (max-width: 900px) {
+  .checkout-page .checkout-list .card {
+    grid-template-columns: 80px 1fr;
+    gap: 12px;
+  }
+
+  .checkout-page .checkout-list .card-img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .checkout-page .checkout-list .card-price {
+    grid-column: 2;
+  }
+
   .checkout-layout {
     grid-template-columns: 1fr;
   }
+
   .checkout-summary-box {
     position: static;
     order: -1;
@@ -609,13 +682,25 @@ p { margin: 0; }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes scaleUp {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* ==========================================================================
@@ -738,9 +823,6 @@ p { margin: 0; }
   box-shadow: 0 0 0 1px var(--primary);
 }
 
-/* ==========================================================================
-   Add Product Page Layout & Forms
-   ========================================================================== */
 .add-product-page {
   max-width: 600px;
   margin: 0 auto;
@@ -826,4 +908,3 @@ p { margin: 0; }
   padding: 12px;
   font-size: 1.1rem;
 }
-
