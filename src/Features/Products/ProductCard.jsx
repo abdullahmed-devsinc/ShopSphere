@@ -18,7 +18,7 @@ export default function ProductCard({ product }) {
             <p className="card-price">{product.price}</p>
             <p className="card-stock">{product.stock > 0 ? "In Stock" : "Out of stock"}</p>
             <p className="card-rating">{product.rating}</p>
-            <Button variant="primary" onClick={() => dispatch(addToCart(product))}>{isInCart ? "Added to Cart" : "Add to Cart"}</Button>
+            <Button variant="primary" onClick={() => dispatch(addToCart(product))}>{isInCart ? "Increase Quantity" : "Add to Cart"}</Button>
             <Button variant="primary" disabled={isInWishlist} onClick={() => dispatch(addTowishlist(product))}>{isInWishlist ? "Already in WishList" : "Add to WishList"}</Button>
 
 

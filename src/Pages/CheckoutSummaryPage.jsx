@@ -18,7 +18,7 @@ export default function CheckoutSummaryPage() {
         setShowSuccessPopup(true);
     };
 
-    if (items.length === 0) {
+    if (items.length === 0 && !showSuccessPopup) {
         return (
             <div className="page checkout-page">
                 <h1 className="page-title">Checkout</h1>
@@ -30,12 +30,15 @@ export default function CheckoutSummaryPage() {
     else {
         return (
             <div className="checkout-page">
+                <h1 className="page-title">Checkout</h1>
                 <div className="checkout-list">
                     {items.map(item =>
                         <ItemCard key={item.id} item={item} />
                     )}
                 </div>
-                <div className="checkout-page-subtotal">Total Order Price{subTotal}</div>
+                <div className="checkout-page-subtotal total-row" style={{ marginTop: '24px' }}>
+                    Total Order Price: ${subTotal.toFixed(2)}
+                </div>
                 <Button variant="primary" onClick={handleCheckout}>Complete Checkout</Button>
                 {showSuccessPopup && <CheckoutSuccessPopup />}
             </div>
