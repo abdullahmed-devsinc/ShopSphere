@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { setFilters, setSortBy } from "../../Features/Products/productSlice"
+import { setFilters, setSortBy, resetFilters } from "../../Features/Products/productSlice"
 import Button from "../../Components/Button"
 
 export default function ProductFilter() {
@@ -80,7 +80,7 @@ export default function ProductFilter() {
             <Button
                 variant="secondary"
                 onClick={() => {
-                    dispatch(resetFilters())
+                    dispatch(resetFilters)
                     setMinPrice(12)
                     setMaxPrice(499)
                 }}
