@@ -1,8 +1,10 @@
 import { useDispatch } from "react-redux";
 import { addProduct } from "../Features/Products/productSlice";
 import { useFormik } from "formik";
-import { addProductValidationSchema } from "../Schema/addProductSchema";
+import addProductValidationSchema from "../Schema/addProductSchema";
 import { useCloudinaryUpload } from "../hooks/useCloudinaryUpload";
+import Button from "../Components/Button";
+import { Link } from "react-router-dom";
 
 const initialValues = {
     name: '',
@@ -16,11 +18,10 @@ const initialValues = {
 export default function AddProductPage() {
     const dispatch = useDispatch();
     const { uploadImage, loading, error } = useCloudinaryUpload();
-    dispatch(addProduct(values))
     const formik = useFormik({
         initialValues,
-        validate: addProductValidationSchema,
-        onSubmit: (values) => {
+        validationSchema: addProductValidationSchema,
+        onSubmit: (values, { resetForm, setStatus }) => {
             const newProduct = {
                 name: values.name,
                 category: values.category,
@@ -30,6 +31,7 @@ export default function AddProductPage() {
                 img: values.img
             }
             dispatch(addProduct(newProduct))
+            setStatus({ success: true })
         }
     })
     const handleImageUpload = async (e) => {
@@ -52,7 +54,7 @@ export default function AddProductPage() {
                         value={formik.values.name}
                         onChange={formik.handleChange}
                     />
-                    {formik.errors.name && <p className="error">{formik.errors.name}</p>}
+                    {formik.touched.name && formik.errors.name && <p className="error">{formik.errors.name}</p>}
                 </div>
 
                 <div className="form-group">
@@ -71,7 +73,7 @@ export default function AddProductPage() {
                         <option value="sports">Sports</option>
                         <option value="beauty">Beauty</option>
                     </select>
-                    {formik.errors.category && <p className="error">{formik.errors.category}</p>}
+                    {formik.touched.category && formik.errors.category && <p className="error">{formik.errors.category}</p>}
                 </div>
 
                 <div className="form-group">
@@ -82,7 +84,7 @@ export default function AddProductPage() {
                         value={formik.values.price}
                         onChange={formik.handleChange}
                     />
-                    {formik.errors.price && <p className="error">{formik.errors.price}</p>}
+                    {formik.touched.price && formik.errors.price && <p className="error">{formik.errors.price}</p>}
                 </div>
 
                 <div className="form-group">
@@ -95,7 +97,7 @@ export default function AddProductPage() {
                         value={formik.values.rating}
                         onChange={formik.handleChange}
                     />
-                    {formik.errors.rating && <p className="error">{formik.errors.rating}</p>}
+                    {formik.touched.rating && formik.errors.rating && <p className="error">{formik.errors.rating}</p>}
                 </div>
 
                 <div className="form-group">
@@ -106,7 +108,7 @@ export default function AddProductPage() {
                         value={formik.values.stock}
                         onChange={formik.handleChange}
                     />
-                    {formik.errors.stock && <p className="error">{formik.errors.stock}</p>}
+                    {formik.touched.stock && formik.errors.stock && <p className="error">{formik.errors.stock}</p>}
                 </div>
 
                 <div className="form-group">
@@ -121,12 +123,16 @@ export default function AddProductPage() {
                     {formik.values.img && (
                         <img src={formik.values.img} alt="preview" width={100} />
                     )}
-                    {formik.errors.img && <p className="error">{formik.errors.img}</p>}
+                    {formik.touched.img && formik.errors.img && <p className="error">{formik.errors.img}</p>}
                 </div>
 
-                <Button type="submit" variant="primary" disabled={loading}>
-                    Add Product
+                <Button type="submit" variant="primary" disabled={loading || formik.status?.success} >
+                    {formik.status?.success ? "Product Added" : "Add Product"}
                 </Button>
+                {formik.status?.success &&
+                    <Link to='/'>
+                        Home
+                    </Link>}
 
             </form>
         </div>
