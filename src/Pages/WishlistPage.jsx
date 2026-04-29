@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { selectWishlistItems } from "../Features/Wishlist/wishlistSlice";
-import ItemCard from "../Components/ItemCard";
+import WishlistItem from "../Features/Wishlist/WishlistItem";
 import { Link } from "react-router-dom";
 
 export default function WishlistPage() {
@@ -20,7 +20,7 @@ export default function WishlistPage() {
             <div className="wishlist-page">
                 <div className="wishlist-list">
                     {items.map(item =>
-                        <ItemCard key={item.id} item={item} />
+                        <WishlistItem key={item.id} item={item} />
                     )}
                 </div>
             </div>
