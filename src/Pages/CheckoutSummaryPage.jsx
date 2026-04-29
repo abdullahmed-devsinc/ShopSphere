@@ -39,6 +39,12 @@ export default function CheckoutSummaryPage() {
                 <div className="checkout-page-subtotal total-row" style={{ marginTop: '24px' }}>
                     Total Order Price: ${subTotal.toFixed(2)}
                 </div>
+                <div className="checkout-page-subtotal total-row" style={{ marginTop: '24px' }}>
+                    Tax: 5%
+                </div>
+                <div className="checkout-page-subtotal total-row" style={{ marginTop: '24px' }}>
+                    Price Including Taxes: ${(subTotal + subTotal * 0.05).toFixed(2)}
+                </div>
                 <Button variant="primary" onClick={handleCheckout}>Complete Checkout</Button>
                 {showSuccessPopup && <CheckoutSuccessPopup />}
             </div>

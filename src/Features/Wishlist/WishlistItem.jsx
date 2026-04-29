@@ -1,9 +1,10 @@
+import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from "react-redux";
 import { selectIsInCart } from "../Cart/cartSlice";
 import { removeFromwishlist } from "./wishlistSlice";
 import { addToCart } from "../Cart/cartSlice";
 import ItemCard from "../../Components/ItemCard";
-
+import productShape from "../../propTypes/productShape";
 export default function WishlistItem({ item }) {
     const dispatch = useDispatch();
     const isInCart = useSelector(selectIsInCart(item.id))
@@ -18,3 +19,6 @@ export default function WishlistItem({ item }) {
         </div>
     )
 }
+WishlistItem.propTypes = {
+    item: productShape.isRequired,
+};

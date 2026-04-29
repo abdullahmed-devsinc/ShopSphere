@@ -1,5 +1,7 @@
+import PropTypes from 'prop-types';
 import Button from "./Button";
 import { Link } from "react-router-dom";
+import productShape from "../propTypes/productShape";
 
 export default function ItemCard({ item, onRemove, onAddToCart, isInCart }) {
     return (
@@ -21,3 +23,10 @@ export default function ItemCard({ item, onRemove, onAddToCart, isInCart }) {
         </div>
     )
 }
+
+ItemCard.propTypes = {
+    item: productShape.isRequired,
+    onRemove: PropTypes.func,
+    onAddToCart: PropTypes.func,
+    isInCart: PropTypes.bool,
+};

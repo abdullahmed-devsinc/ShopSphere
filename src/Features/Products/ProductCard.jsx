@@ -1,8 +1,11 @@
+import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, selectIsInCart } from "../Cart/cartSlice";
 import { addTowishlist, selectIsInwishlist } from "../Wishlist/wishlistSlice";
 import { Link } from 'react-router-dom'
 import Button from "../../Components/Button"
+import productShape from "../../propTypes/productShape";
+
 export default function ProductCard({ product }) {
 
     const dispatch = useDispatch();
@@ -26,3 +29,6 @@ export default function ProductCard({ product }) {
     )
 
 }
+ProductCard.propTypes = {
+    product: productShape.isRequired,
+};

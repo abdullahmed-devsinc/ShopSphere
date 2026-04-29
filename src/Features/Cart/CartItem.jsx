@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from "react-redux";
 import Button from "../../Components/Button";
 import { updateQuantity, removeFromCart } from "./cartSlice";
@@ -22,3 +23,14 @@ export default function CartItem({ item }) {
         </div>
     )
 }
+
+CartItem.propTypes = {
+    item: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        quantity: PropTypes.number.isRequired,
+        stock: PropTypes.number.isRequired,
+        img: PropTypes.string,
+    }).isRequired,
+};
