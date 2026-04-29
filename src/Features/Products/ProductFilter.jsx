@@ -23,7 +23,7 @@ export default function ProductFilter() {
 
             <div className="filter-group">
                 <h3>Category</h3>
-                {['all', 'electronics', 'home', 'fashion', 'groceries', 'books', 'sports', 'beauty'].map(cat => (
+                {['all', 'electronics', 'home', 'fashion', 'grocery', 'books', 'sports', 'beauty'].map(cat => (
                     <label key={cat}>
                         <input
                             type="radio"
