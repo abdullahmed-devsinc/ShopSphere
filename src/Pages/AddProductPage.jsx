@@ -129,10 +129,11 @@ export default function AddProductPage() {
                 <Button variant="primary" disabled={loading || formik.status?.success} >
                     {formik.status?.success ? "Product Added" : "Add Product"}
                 </Button>
-                {formik.status?.success &&
-                    <Link to='/'>
-                        Home
-                    </Link>}
+                {formik.status?.success && (
+                    <Link to='/' className="btn btn-secondary home-link-btn">
+                        Return to Home
+                    </Link>
+                )}
 
             </form>
         </div>

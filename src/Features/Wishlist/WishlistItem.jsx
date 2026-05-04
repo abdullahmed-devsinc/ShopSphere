@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from "react-redux";
 import { selectIsInCart } from "../Cart/cartSlice";
 import { removeFromwishlist } from "./wishlistSlice";
