@@ -52,5 +52,9 @@ export const selectCartSubTotal = createSelector(
 export const selectIsInCart = (productId) => createSelector(
     selectCartItems,
     (items) => items.some(item => item.id === productId)
+)
 
+export const selectCartItemById = (productId) => createSelector(
+    selectCartItems,
+    (items) => items.find(item => item.id === productId) ?? null
 )

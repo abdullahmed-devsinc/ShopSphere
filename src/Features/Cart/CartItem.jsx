@@ -10,15 +10,17 @@ export default function CartItem({ item }) {
 
     return (
         <div className="card card-horizontal">
-            <img className="card-img" src={item.img} />
+            <div className="card-img-wrap">
+                <img className="card-img" src={item.img} alt={item.name} />
+            </div>
             <h3 className="card-title">{item.name}</h3>
             <div className="card-quantity">
                 <Button variant="secondary" onClick={() => dispatch(updateQuantity({ id: item.id, quantity: item.quantity + 1 }))} disabled={itemStock <= item.quantity}> + </Button>
                 <p>{item.quantity}</p>
                 <Button variant="secondary" onClick={() => dispatch(updateQuantity({ id: item.id, quantity: item.quantity - 1 }))} disabled={item.quantity <= 1}>-</Button>
             </div>
-            <p className="card-price-per-item">Price per item: $ {item.price}</p>
-            <p className="card-price">Total Price: ${item.quantity * item.price}</p>
+            <p className="card-price-per-item">${item.price} each</p>
+            <p className="card-price">{item.quantity * item.price}</p>
             <Button variant="secondary" onClick={() => dispatch(removeFromCart(item.id))}>Remove</Button>
         </div>
     )

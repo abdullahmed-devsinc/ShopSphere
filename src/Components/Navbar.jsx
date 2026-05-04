@@ -1,24 +1,76 @@
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 import { selectCartCount } from "../Features/Cart/cartSlice";
-import { selectwishlistCount } from "../Features/Wishlist/wishlistSlice"
+import { selectwishlistCount } from "../Features/Wishlist/wishlistSlice";
+import { useState, useEffect } from "react";
+import { setSearchQuery } from "../Features/Products/productSlice";
 
-export default function Navbar() {
+export default function Navbar({ onFilterToggle, isFilterOpen }) {
     const cartCount = useSelector(selectCartCount);
     const wishlistCount = useSelector(selectwishlistCount);
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const isHome = location.pathname === "/";
+
+    const [search, setSearch] = useState('');
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            dispatch(setSearchQuery(search));
+        }, 400);
+        return () => clearTimeout(timeout);
+    }, [search, dispatch]);
+
+    // Clear search when navigating away
+    useEffect(() => {
+        if (!isHome) {
+            setSearch('');
+            dispatch(setSearchQuery(''));
+        }
+    }, [location.pathname, isHome, dispatch]);
 
     return (
         <header className="navbar">
-            <h1 className="navbar__brand">ShopSphere</h1>
+            <div className="navbar__left">
+                <Link to="/" className="navbar__brand">ShopSphere</Link>
+                {isHome && (
+                    <button
+                        className={`navbar__filter-btn ${isFilterOpen ? 'active' : ''}`}
+                        onClick={onFilterToggle}
+                        aria-label="Toggle filters"
+                    >
+                        <span className="material-symbols-outlined">tune</span>
+                        <span>Filters</span>
+                    </button>
+                )}
+            </div>
+
+            {isHome && (
+                <div className="navbar__search">
+                    <span className="material-symbols-outlined navbar__search-icon">search</span>
+                    <input
+                        type="text"
+                        placeholder="Search products..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        className="navbar__search-input"
+                    />
+                </div>
+            )}
+
             <nav className="navbar__links" aria-label="Main navigation">
-                <Link to="/" className="navbar__link">Home</Link>
+                <Link to="/add" className="navbar__link">Add Product</Link>
                 <span className="navbar__item">
-                    <Link to="/cart" className="navbar__link navbar__link--with-badge">Cart</Link>
-                    {cartCount > 0 && <span className="navbar__count">{cartCount}</span>}
+                    <Link to="/wishlist" className="navbar__link navbar__link--icon" aria-label="Wishlist">
+                        <span className="material-symbols-outlined">favorite</span>
+                    </Link>
+                    {wishlistCount > 0 && <span className="navbar__count">{wishlistCount}</span>}
                 </span>
                 <span className="navbar__item">
-                    <Link to="/wishlist" className="navbar__link navbar__link--with-badge">Wishlist</Link>
-                    {wishlistCount > 0 && <span className="navbar__count">{wishlistCount}</span>}
+                    <Link to="/cart" className="navbar__link navbar__link--icon" aria-label="Cart">
+                        <span className="material-symbols-outlined">shopping_cart</span>
+                    </Link>
+                    {cartCount > 0 && <span className="navbar__count">{cartCount}</span>}
                 </span>
             </nav>
         </header>

@@ -8,18 +8,18 @@ const ProductListingPage = lazy(() => import("./Pages/ProductListingPage"))
 const WishlistPage = lazy(() => import("./Pages/WishlistPage"))
 const AddProductPage = lazy(() => import("./Pages/AddProductPage"))
 
-export default function Routes() {
+export default function Routes({ isFilterOpen, setIsFilterOpen }) {
     return (
         <Suspense fallback={<div className="page">Loading…</div>}>
             <AppRoutes>
-                <Route path="/" element={<ProductListingPage />} />
+                <Route path="/" element={<ProductListingPage isFilterOpen={isFilterOpen} setIsFilterOpen={setIsFilterOpen} />} />
                 <Route path="/productdetail/:id" element={<ProductDetailPage />} />
                 <Route path="/checkout" element={<CheckoutSummaryPage />} />
                 <Route path="/wishlist" element={<WishlistPage />} />
                 <Route path="/cart" element={<CartPage />} />
+                <Route path="/add" element={<AddProductPage />} />
                 <Route path="/addProduct" element={<AddProductPage />} />
                 <Route path="*" element={<NotFoundPage />} />
-
             </AppRoutes>
         </Suspense>
     );
