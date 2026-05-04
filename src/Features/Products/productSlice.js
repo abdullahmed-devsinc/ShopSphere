@@ -23,19 +23,10 @@ const productsSlice = createSlice({
         setSortBy(state, action) {
             state.sortBy = action.payload
         },
-        addProduct: {
-            reducer(state, action) {
-                const nextId = state.items.length > 0 ?
-                    Math.max(...state.items.map(item => Number(item.id))) + 1 : 1;
-                state.items.push({ id: nextId, ...action.payload })
-            },
-            // prepare(productData) {
-            //     return {
-            //         payload: {
-            //             id: nanoid(),
-            //             ...productData
-            //         }
-            //     }
+        addProduct(state, action) {
+            const nextId = state.items.length > 0 ?
+                Math.max(...state.items.map(item => Number(item.id))) + 1 : 1;
+            state.items.push({ id: nextId, ...action.payload })
         },
         increaseStock(state, action) {
             const existing = state.items.find((i) => i.id === action.payload.id)
@@ -46,14 +37,12 @@ const productsSlice = createSlice({
         decreaseStock(state, action) {
             const existing = state.items.find((i) => i.id === action.payload.id)
             if (existing) {
-                existing.stock -= 1
+                existing.stock = existing.stock > 0 ? existing.stock - 1 : existing.stock;
             }
         },
         resetFilters(state) {
             state.searchBy = ''
             state.filters = initialFilters
-            state.searchBy = ''
-
         }
     }
 

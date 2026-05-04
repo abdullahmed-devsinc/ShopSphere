@@ -10,15 +10,14 @@ export default function ProductDetailPage() {
     const { id } = useParams();
     const product = useSelector(selectProductById(Number(id)));
     const dispatch = useDispatch();
+    const isInCart = useSelector(selectIsInCart(product?.id ?? -1));
+    const isInWishlist = useSelector(selectIsInwishlist(product?.id ?? -1));
 
     if (!product) {
         return (
             <NotFoundPage />
         )
     }
-
-    const isInCart = useSelector(selectIsInCart(product.id));
-    const isInWishlist = useSelector(selectIsInwishlist(product.id));
 
     return (
         <div className="page product-detail">

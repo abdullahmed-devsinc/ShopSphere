@@ -126,7 +126,7 @@ export default function AddProductPage() {
                     {formik.touched.img && formik.errors.img && <p className="error">{formik.errors.img}</p>}
                 </div>
 
-                <Button type="submit" variant="primary" disabled={loading || formik.status?.success} >
+                <Button variant="primary" disabled={loading || formik.status?.success} >
                     {formik.status?.success ? "Product Added" : "Add Product"}
                 </Button>
                 {formik.status?.success &&

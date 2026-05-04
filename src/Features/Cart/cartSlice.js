@@ -23,7 +23,7 @@ const cartSlice = createSlice({
         },
         updateQuantity(state, action) {
             const { id, quantity } = action.payload
-            const item = state.items.find((i) => i.id == id)
+            const item = state.items.find((i) => i.id === id)
             if (item) {
                 item.quantity = Math.min(quantity, item.stock) > 0 ? Math.min(quantity, item.stock) : 1
             }

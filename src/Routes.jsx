@@ -10,7 +10,7 @@ const AddProductPage = lazy(() => import("./Pages/AddProductPage"))
 
 export default function Routes() {
     return (
-        <Suspense>
+        <Suspense fallback={<div className="page">Loading…</div>}>
             <AppRoutes>
                 <Route path="/" element={<ProductListingPage />} />
                 <Route path="/productdetail/:id" element={<ProductDetailPage />} />
