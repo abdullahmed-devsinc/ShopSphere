@@ -21,7 +21,7 @@ export default function AddProductPage() {
     const formik = useFormik({
         initialValues,
         validationSchema: addProductValidationSchema,
-        onSubmit: (values, { resetForm, setStatus }) => {
+        onSubmit: (values, { setStatus }) => {
             const newProduct = {
                 name: values.name,
                 category: values.category,

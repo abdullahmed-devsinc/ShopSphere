@@ -17,8 +17,6 @@ export default function ItemCard({ item, onRemove, onAddToCart, isInCart }) {
             {onAddToCart && (
                 <Button disabled={isInCart} onClick={onAddToCart}>{isInCart ? "Already in Cart" : "Add to Cart"}</Button>
             )}
-            {/* <Button variant="primary" onClick={() => dispatch(removeFromwishlist(item.id))}>Remove from WishList</Button>
-            <Button variant="primary" disabled={isInCart} onClick={() => dispatch(addToCart(item))}>{isInCart ? "Item Already in Cart" : "Add to Cart"}</Button> */}
 
         </div>
     )
