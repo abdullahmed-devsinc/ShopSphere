@@ -1,10 +1,12 @@
 import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { setFilters, setSortBy, resetFilters } from "../../Features/Products/productSlice"
 import Button from "../../Components/Button"
 
 export default function ProductFilter() {
     const dispatch = useDispatch()
+    const currentFilters = useSelector((state) => state.products.filters)
+    const currentSort = useSelector((state) => state.products.SortBy)
     const [minPrice, setMinPrice] = useState(12)
     const [maxPrice, setMaxPrice] = useState(499)
 
@@ -13,7 +15,9 @@ export default function ProductFilter() {
 
             <div className="filter-group">
                 <h3>Sort By</h3>
-                <select onChange={(e) => dispatch(setSortBy(e.target.value))}>
+                <select
+                    value={currentSort}
+                    onChange={(e) => dispatch(setSortBy(e.target.value))}>
                     <option value="newest">Newest</option>
                     <option value="price-asc">Price: Low to High</option>
                     <option value="price-desc">Price: High to Low</option>
@@ -29,6 +33,7 @@ export default function ProductFilter() {
                             type="radio"
                             name="category"
                             value={cat}
+                            checked={currentFilters.category === cat}
                             onChange={() => dispatch(setFilters({ category: cat }))}
                         />
                         {cat.charAt(0).toUpperCase() + cat.slice(1)}
@@ -44,6 +49,7 @@ export default function ProductFilter() {
                             type="radio"
                             name="rating"
                             value={rating}
+                            checked={currentFilters.rating === rating}
                             onChange={() => dispatch(setFilters({ rating: rating }))}
                         />
                         {rating === 0 ? 'All' : `${rating}+`}
