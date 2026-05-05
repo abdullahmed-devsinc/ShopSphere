@@ -1,9 +1,6 @@
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-
-function formatMoney(n) {
-    return n.toFixed(2);
-}
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { formatMoney } from "../utils/money";
 
 export default function CheckoutLineItem({ item }) {
     const qty = item.quantity ?? 1;
@@ -14,16 +11,19 @@ export default function CheckoutLineItem({ item }) {
             <Link to={`/productdetail/${item.id}`} className="card-img-wrap card-img-wrap--link">
                 <img className="card-img" src={item.img} alt={item.name} />
             </Link>
+
             <div className="checkout-line-main">
                 <Link to={`/productdetail/${item.id}`} className="checkout-line-title-link">
                     <h3 className="card-title">{item.name}</h3>
                 </Link>
                 <p className="card-price-per-item">${formatMoney(item.price)} each</p>
             </div>
+
             <div className="checkout-line-qty">
                 <span className="checkout-line-qty-label">Qty</span>
                 <span className="checkout-line-qty-val">{qty}</span>
             </div>
+
             <p className="card-price checkout-line-price">${formatMoney(lineTotal)}</p>
         </div>
     );

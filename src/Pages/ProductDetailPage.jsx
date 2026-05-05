@@ -1,26 +1,22 @@
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectProductById, selectSimilarProducts } from "../Features/Products/productSlice";
-import { addToCart, selectIsInCart } from "../Features/Cart/cartSlice";
-import { addTowishlist, selectIsInwishlist } from "../Features/Wishlist/wishlistSlice";
 import Button from "../Components/Button";
 import NotFoundPage from "./NotFoundPage";
 import SimilarProductRow from "../Components/SimilarProductsRow";
-import ProductReviews from "../Components/ProductReviews";
 import ProductRatingLine from "../Components/ProductRatingLine";
+import ProductReviewsContainer from "../Features/Reviews/ProductReviewsContainer";
+import { useProductActions } from "../hooks/useProductActions";
 
 export default function ProductDetailPage() {
     const { id } = useParams();
     const pid = Number(id);
+
     const product = useSelector(selectProductById(pid));
     const similar = useSelector(selectSimilarProducts(pid, product?.category ?? ""));
-    const dispatch = useDispatch();
-    const isInCart = useSelector(selectIsInCart(product?.id ?? -1));
-    const isInWishlist = useSelector(selectIsInwishlist(product?.id ?? -1));
+    const { isInCart, isInWishlist, addProductToCart, addProductToWishlist } = useProductActions(product);
 
-    if (!product) {
-        return <NotFoundPage />;
-    }
+    if (!product) return <NotFoundPage />;
 
     return (
         <div className="page product-detail">
@@ -30,28 +26,32 @@ export default function ProductDetailPage() {
                     alt={product.name}
                 />
             </div>
+
             <div className="product-detail__info">
                 <h1 className="page-title">{product.name}</h1>
                 <ProductRatingLine product={product} />
                 <p className="card-price">{product.price}</p>
-                <p className="card-stock">
-                    {product.stock > 0 ? "In Stock" : "Out of stock"}
-                </p>
+                <p className="card-stock">{product.stock > 0 ? "In Stock" : "Out of stock"}</p>
 
                 <div className="product-detail__actions">
-                    <Button variant="primary" onClick={() => dispatch(addToCart(product))}>
+                    <Button
+                        variant="primary"
+                        onClick={addProductToCart}
+                        disabled={isInCart || product.stock <= 0}
+                    >
                         {isInCart ? "Added to Cart" : "Add to Cart"}
                     </Button>
+
                     <Button
                         variant="secondary"
                         disabled={isInWishlist}
-                        onClick={() => dispatch(addTowishlist(product))}
+                        onClick={addProductToWishlist}
                     >
                         {isInWishlist ? "Already in Wishlist" : "Add to Wishlist"}
                     </Button>
                 </div>
 
-                <ProductReviews productId={product.id} reviews={product.reviews} />
+                <ProductReviewsContainer productId={product.id} reviews={product.reviews} />
             </div>
 
             <div className="product-detail__similar">

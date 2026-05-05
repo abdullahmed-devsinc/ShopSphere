@@ -1,13 +1,15 @@
 import { useSelector, useDispatch } from "react-redux";
 import { setFilters } from "./productSlice";
+import { PRODUCT_CATEGORIES } from "../../Constants/productConstants";
+
 export default function CategoryFilter() {
     const dispatch = useDispatch();
-    const currentFilters = useSelector((state) => state.products.filters)
+    const currentFilters = useSelector((state) => state.products.filters);
 
     return (
         <div className="filter-group">
             <h3>Category</h3>
-            {['all', 'electronics', 'home', 'fashion', 'grocery', 'books', 'sports', 'beauty'].map(cat => (
+            {PRODUCT_CATEGORIES.map((cat) => (
                 <label key={cat}>
                     <input
                         type="radio"
@@ -20,5 +22,5 @@ export default function CategoryFilter() {
                 </label>
             ))}
         </div>
-    )
+    );
 }

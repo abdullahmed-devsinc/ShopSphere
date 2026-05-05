@@ -1,44 +1,47 @@
 import { createSelector, createSlice, nanoid } from "@reduxjs/toolkit";
 import productData from "../../data/product.json";
 import { getAverageRating } from "../../utils/productRating";
+import { FILTER_DEFAULTS } from "../../Constants/productConstants";
 
-const initialFilters = { category: 'all', priceRange: [0, 1000], rating: 0 }
 const initialState = {
     items: productData,
-    filters: initialFilters,
-    sortBy: 'newest',
-    searchBy: '',
-
-}
+    filters: FILTER_DEFAULTS,
+    sortBy: "newest",
+    searchBy: "",
+};
 
 const productsSlice = createSlice({
-    name: 'products',
+    name: "products",
     initialState,
     reducers: {
         setSearchQuery(state, action) {
-            state.searchBy = action.payload
+            state.searchBy = action.payload;
         },
         setFilters(state, action) {
-            state.filters = { ...state.filters, ...action.payload }
+            state.filters = { ...state.filters, ...action.payload };
         },
         setSortBy(state, action) {
-            state.sortBy = action.payload
+            state.sortBy = action.payload;
         },
         addProduct(state, action) {
-            const nextId = state.items.length > 0 ?
-                Math.max(...state.items.map(item => Number(item.id))) + 1 : 1;
+            const nextId =
+                state.items.length > 0
+                    ? Math.max(...state.items.map((item) => Number(item.id))) + 1
+                    : 1;
+
             const { rating: _dropRating, ...payload } = action.payload;
             state.items.push({
                 ...payload,
                 id: nextId,
                 reviews: Array.isArray(payload.reviews) ? payload.reviews : [],
-            })
+            });
         },
         addReview(state, action) {
             const { productId, review } = action.payload;
             const product = state.items.find((i) => i.id === productId);
             if (!product) return;
             if (!Array.isArray(product.reviews)) product.reviews = [];
+
             product.reviews.unshift({
                 id: nanoid(),
                 author: review.author.trim(),
@@ -46,28 +49,16 @@ const productsSlice = createSlice({
                 createdAt: new Date().toISOString(),
             });
         },
-        increaseStock(state, action) {
-            const existing = state.items.find((i) => i.id === action.payload.id)
-            if (existing) {
-                existing.stock += 1
-            }
-        },
-        decreaseStock(state, action) {
-            const existing = state.items.find((i) => i.id === action.payload.id)
-            if (existing) {
-                existing.stock = existing.stock > 0 ? existing.stock - 1 : existing.stock;
-            }
-        },
         resetFilters(state) {
-            state.searchBy = ''
-            state.filters = initialFilters
-        }
-    }
+            state.searchBy = "";
+            state.filters = FILTER_DEFAULTS;
+        },
+    },
+});
 
-})
-
-export const { setFilters, setSearchQuery, setSortBy, addProduct, addReview, resetFilters } = productsSlice.actions;
-export default productsSlice.reducer
+export const { setFilters, setSearchQuery, setSortBy, addProduct, addReview, resetFilters } =
+    productsSlice.actions;
+export default productsSlice.reducer;
 
 const selectAllProducts = (state) => state.products.items
 const selectSearchQuery = (state) => state.products.searchBy
