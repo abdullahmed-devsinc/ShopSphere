@@ -1,22 +1,37 @@
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectProductById, selectSimilarProducts } from "../Features/Products/productSlice";
+import { addToCart, selectIsInCart } from "../Features/Cart/cartSlice";
+import { addTowishlist, selectIsInwishlist } from "../Features/Wishlist/wishlistSlice";
 import Button from "../Components/Button";
 import NotFoundPage from "./NotFoundPage";
 import SimilarProductRow from "../Components/SimilarProductsRow";
 import ProductRatingLine from "../Components/ProductRatingLine";
-import ProductReviewsContainer from "../Features/Reviews/ProductReviewsContainer";
-import { useProductActions } from "../hooks/useProductActions";
+import ProductReviews from "../Components/ProductReviews";
 
 export default function ProductDetailPage() {
     const { id } = useParams();
     const pid = Number(id);
+    const dispatch = useDispatch();
 
     const product = useSelector(selectProductById(pid));
     const similar = useSelector(selectSimilarProducts(pid, product?.category ?? ""));
-    const { isInCart, isInWishlist, addProductToCart, addProductToWishlist } = useProductActions(product);
+    const isInCart = useSelector(selectIsInCart(product?.id ?? -1));
+    const isInWishlist = useSelector(selectIsInwishlist(product?.id ?? -1));
 
     if (!product) return <NotFoundPage />;
+
+    const handleAddToCart = () => {
+        if (!isInCart && product.stock > 0) {
+            dispatch(addToCart(product));
+        }
+    };
+
+    const handleAddToWishlist = () => {
+        if (!isInWishlist) {
+            dispatch(addTowishlist(product));
+        }
+    };
 
     return (
         <div className="page product-detail">
@@ -36,7 +51,7 @@ export default function ProductDetailPage() {
                 <div className="product-detail__actions">
                     <Button
                         variant="primary"
-                        onClick={addProductToCart}
+                        onClick={handleAddToCart}
                         disabled={isInCart || product.stock <= 0}
                     >
                         {isInCart ? "Added to Cart" : "Add to Cart"}
@@ -45,13 +60,13 @@ export default function ProductDetailPage() {
                     <Button
                         variant="secondary"
                         disabled={isInWishlist}
-                        onClick={addProductToWishlist}
+                        onClick={handleAddToWishlist}
                     >
                         {isInWishlist ? "Already in Wishlist" : "Add to Wishlist"}
                     </Button>
                 </div>
 
-                <ProductReviewsContainer productId={product.id} reviews={product.reviews} />
+                <ProductReviews productId={product.id} reviews={product.reviews} />
             </div>
 
             <div className="product-detail__similar">

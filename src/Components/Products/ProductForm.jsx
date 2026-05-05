@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Button from "../Button";
-import FormField from "../Forms/FormField";
 import { ADD_PRODUCT_CATEGORIES } from "../../Constants/productConstants";
 
 export default function ProductForm({
@@ -13,7 +12,8 @@ export default function ProductForm({
 }) {
     return (
         <form onSubmit={formik.handleSubmit} noValidate>
-            <FormField label="Name" error={formik.touched.name ? formik.errors.name : undefined}>
+            <div className="form-group">
+                <label>Name</label>
                 <input
                     type="text"
                     name="name"
@@ -21,9 +21,11 @@ export default function ProductForm({
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                 />
-            </FormField>
+                {formik.touched.name && formik.errors.name ? <p className="error">{formik.errors.name}</p> : null}
+            </div>
 
-            <FormField label="Category" error={formik.touched.category ? formik.errors.category : undefined}>
+            <div className="form-group">
+                <label>Category</label>
                 <select
                     name="category"
                     value={formik.values.category}
@@ -37,9 +39,11 @@ export default function ProductForm({
                         </option>
                     ))}
                 </select>
-            </FormField>
+                {formik.touched.category && formik.errors.category ? <p className="error">{formik.errors.category}</p> : null}
+            </div>
 
-            <FormField label="Price" error={formik.touched.price ? formik.errors.price : undefined}>
+            <div className="form-group">
+                <label>Price</label>
                 <input
                     type="number"
                     name="price"
@@ -47,9 +51,11 @@ export default function ProductForm({
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                 />
-            </FormField>
+                {formik.touched.price && formik.errors.price ? <p className="error">{formik.errors.price}</p> : null}
+            </div>
 
-            <FormField label="Stock" error={formik.touched.stock ? formik.errors.stock : undefined}>
+            <div className="form-group">
+                <label>Stock</label>
                 <input
                     type="number"
                     name="stock"
@@ -57,14 +63,17 @@ export default function ProductForm({
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                 />
-            </FormField>
+                {formik.touched.stock && formik.errors.stock ? <p className="error">{formik.errors.stock}</p> : null}
+            </div>
 
-            <FormField label="Image" error={formik.errors.img}>
+            <div className="form-group">
+                <label>Image</label>
                 <input type="file" accept="image/*" onChange={onPickImage} />
                 {previewUrl ? <img className="add-product-preview" src={previewUrl} alt="" /> : null}
                 {loading ? <p>Uploading...</p> : null}
                 {uploadError ? <p className="error">Upload failed. Try again.</p> : null}
-            </FormField>
+                {formik.errors.img ? <p className="error">{formik.errors.img}</p> : null}
+            </div>
 
             <Button variant="primary" type="submit" disabled={loading || formik.status?.success}>
                 {formik.status?.success ? "Product Added" : "Add Product"}

@@ -8,13 +8,13 @@ export default function Navbar({ onFilterToggle, isFilterOpen }) {
     const cartCount = useSelector(selectCartCount);
     const wishlistCount = useSelector(selectwishlistCount);
     const location = useLocation();
-    const isHome = location.pathname === "/";
+    const isProductListing = location.pathname === "/products";
 
     return (
         <header className="navbar">
             <div className="navbar__left">
                 <Link to="/" className="navbar__brand">ShopSphere</Link>
-                {isHome && (
+                {isProductListing && (
                     <button
                         className={`navbar__filter-btn ${isFilterOpen ? 'active' : ''}`}
                         onClick={onFilterToggle}
@@ -26,7 +26,7 @@ export default function Navbar({ onFilterToggle, isFilterOpen }) {
                 )}
             </div>
 
-            {isHome && (
+            {isProductListing && (
                 <div className="navbar__search">
                     <span className="material-symbols-outlined navbar__search-icon">search</span>
                     <ProductSearch />
@@ -34,6 +34,7 @@ export default function Navbar({ onFilterToggle, isFilterOpen }) {
             )}
 
             <nav className="navbar__links" aria-label="Main navigation">
+                <Link to="/products" className="navbar__link">Products</Link>
                 <Link to="/add" className="navbar__link">Add Product</Link>
                 <span className="navbar__item">
                     <Link to="/wishlist" className="navbar__link navbar__link--icon" aria-label="Wishlist">
