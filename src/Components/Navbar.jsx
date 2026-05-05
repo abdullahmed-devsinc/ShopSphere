@@ -1,33 +1,14 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { selectCartCount } from "../Features/Cart/cartSlice";
 import { selectwishlistCount } from "../Features/Wishlist/wishlistSlice";
-import { useState, useEffect } from "react";
-import { setSearchQuery } from "../Features/Products/productSlice";
+import ProductSearch from "../Features/Products/ProductSearch";
 
 export default function Navbar({ onFilterToggle, isFilterOpen }) {
     const cartCount = useSelector(selectCartCount);
     const wishlistCount = useSelector(selectwishlistCount);
-    const dispatch = useDispatch();
     const location = useLocation();
     const isHome = location.pathname === "/";
-
-    const [search, setSearch] = useState('');
-
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            dispatch(setSearchQuery(search));
-        }, 400);
-        return () => clearTimeout(timeout);
-    }, [search, dispatch]);
-
-    // Clear search when navigating away
-    useEffect(() => {
-        if (!isHome) {
-            setSearch('');
-            dispatch(setSearchQuery(''));
-        }
-    }, [location.pathname, isHome, dispatch]);
 
     return (
         <header className="navbar">
@@ -48,13 +29,7 @@ export default function Navbar({ onFilterToggle, isFilterOpen }) {
             {isHome && (
                 <div className="navbar__search">
                     <span className="material-symbols-outlined navbar__search-icon">search</span>
-                    <input
-                        type="text"
-                        placeholder="Search products..."
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                        className="navbar__search-input"
-                    />
+                    <ProductSearch />
                 </div>
             )}
 

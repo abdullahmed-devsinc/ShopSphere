@@ -5,6 +5,7 @@ import ItemCard from "../Components/ItemCard";
 import { Link } from "react-router-dom";
 import Button from "../Components/Button";
 import CheckoutSuccessPopup from "../Components/CheckoutSuccessPopup";
+import { calculateTotal, tax_rate } from "../utils/tax";
 
 
 export default function CheckoutSummaryPage() {
@@ -40,10 +41,10 @@ export default function CheckoutSummaryPage() {
                     Total Order Price: ${subTotal.toFixed(2)}
                 </div>
                 <div className="checkout-page-subtotal total-row" style={{ marginTop: '24px' }}>
-                    Tax: 5%
+                    Tax: {tax_rate * 100} %
                 </div>
                 <div className="checkout-page-subtotal total-row" style={{ marginTop: '24px' }}>
-                    Price Including Taxes: ${(subTotal + subTotal * 0.05).toFixed(2)}
+                    Price Including Taxes: ${calculateTotal(subTotal).toFixed(2)}
                 </div>
                 <Button variant="primary" onClick={handleCheckout}>Complete Checkout</Button>
                 {showSuccessPopup && <CheckoutSuccessPopup />}

@@ -13,6 +13,10 @@ export default function ProductSearch() {
         return () => clearTimeout(timeout);
     }, [search])
 
+    useEffect(() => {
+        return () => dispatch(setSearchQuery(''))
+    }, [dispatch])
+
     return (
         <div className="product-search">
             <input value={search} onChange={(e) => setSearch(e.target.value)}></input>

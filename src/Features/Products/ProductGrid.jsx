@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
-import ProductCard from "./ProductCard";
 import productShape from "../../propTypes/productShape";
+import ProductCardContainer from './ProductsCardContainter';
 
 export default function ProductGrid({ products }) {
     return (
         <div className="product-grid">
             {products.map(product =>
-                <ProductCard key={product.id} product={product} />
+                <ProductCardContainer key={product.id} product={product} />
             )}
         </div>
     )
