@@ -19,7 +19,12 @@ export default function ProductSearch() {
 
     return (
         <div className="product-search">
-            <input value={search} onChange={(e) => setSearch(e.target.value)}></input>
+            <input
+                className="navbar__search-input"
+                placeholder="Search products…"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+            />
         </div>
     )
 }
