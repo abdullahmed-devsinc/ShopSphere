@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 import { addProduct } from "../Features/Products/productSlice";
 import { useFormik } from "formik";
 import addProductValidationSchema from "../Schema/addProductSchema";
@@ -7,45 +8,66 @@ import Button from "../Components/Button";
 import { Link } from "react-router-dom";
 
 const initialValues = {
-    name: '',
-    category: '',
-    price: '',
-    rating: '',
-    img: '',
-    stock: '',
-}
+    name: "",
+    category: "",
+    price: "",
+    stock: "",
+};
 
 export default function AddProductPage() {
     const dispatch = useDispatch();
     const { uploadImage, loading, error } = useCloudinaryUpload();
+    const [imageFile, setImageFile] = useState(null);
+    const [previewUrl, setPreviewUrl] = useState("");
+
+    useEffect(() => {
+        if (!imageFile) {
+            setPreviewUrl("");
+            return;
+        }
+        const url = URL.createObjectURL(imageFile);
+        setPreviewUrl(url);
+        return () => URL.revokeObjectURL(url);
+    }, [imageFile]);
+
     const formik = useFormik({
         initialValues,
         validationSchema: addProductValidationSchema,
-        onSubmit: (values, { setStatus }) => {
-            const newProduct = {
-                name: values.name,
-                category: values.category,
-                price: Number(values.price),
-                rating: Number(values.rating),
-                stock: Number(values.stock),
-                img: values.img
+        onSubmit: async (values, { setStatus, setFieldError }) => {
+            if (!imageFile) {
+                setFieldError("img", "Please choose an image");
+                return;
             }
-            dispatch(addProduct(newProduct))
-            setStatus({ success: true })
-        }
-    })
-    const handleImageUpload = async (e) => {
-        const file = e.target.files[0];
-        if (!file) return
-        const url = await uploadImage(file)
-        formik.setFieldValue('img', url)
+            setStatus(undefined);
+            try {
+                const uploadedUrl = await uploadImage(imageFile);
+                const newProduct = {
+                    name: values.name,
+                    category: values.category,
+                    price: Number(values.price),
+                    stock: Number(values.stock),
+                    img: uploadedUrl,
+                    reviews: [],
+                };
+                dispatch(addProduct(newProduct));
+                setStatus({ success: true });
+                setImageFile(null);
+            } catch {
+                setStatus({ success: false, uploadError: true });
+            }
+        },
+    });
 
-    }
+    const handlePickImage = (e) => {
+        const file = e.target.files?.[0];
+        setImageFile(file ?? null);
+        formik.setFieldError("img", undefined);
+    };
+
     return (
         <div className="add-product-page">
             <h1>Add Product</h1>
-            <form onSubmit={formik.handleSubmit}>
-
+            <form onSubmit={formik.handleSubmit} noValidate>
                 <div className="form-group">
                     <label>Name</label>
                     <input
@@ -54,7 +76,9 @@ export default function AddProductPage() {
                         value={formik.values.name}
                         onChange={formik.handleChange}
                     />
-                    {formik.touched.name && formik.errors.name && <p className="error">{formik.errors.name}</p>}
+                    {formik.touched.name && formik.errors.name && (
+                        <p className="error">{formik.errors.name}</p>
+                    )}
                 </div>
 
                 <div className="form-group">
@@ -73,7 +97,9 @@ export default function AddProductPage() {
                         <option value="sports">Sports</option>
                         <option value="beauty">Beauty</option>
                     </select>
-                    {formik.touched.category && formik.errors.category && <p className="error">{formik.errors.category}</p>}
+                    {formik.touched.category && formik.errors.category && (
+                        <p className="error">{formik.errors.category}</p>
+                    )}
                 </div>
 
                 <div className="form-group">
@@ -84,20 +110,9 @@ export default function AddProductPage() {
                         value={formik.values.price}
                         onChange={formik.handleChange}
                     />
-                    {formik.touched.price && formik.errors.price && <p className="error">{formik.errors.price}</p>}
-                </div>
-
-                <div className="form-group">
-                    <label>Rating (0-5)</label>
-                    <input
-                        type="number"
-                        name="rating"
-                        min="0"
-                        max="5"
-                        value={formik.values.rating}
-                        onChange={formik.handleChange}
-                    />
-                    {formik.touched.rating && formik.errors.rating && <p className="error">{formik.errors.rating}</p>}
+                    {formik.touched.price && formik.errors.price && (
+                        <p className="error">{formik.errors.price}</p>
+                    )}
                 </div>
 
                 <div className="form-group">
@@ -108,34 +123,37 @@ export default function AddProductPage() {
                         value={formik.values.stock}
                         onChange={formik.handleChange}
                     />
-                    {formik.touched.stock && formik.errors.stock && <p className="error">{formik.errors.stock}</p>}
+                    {formik.touched.stock && formik.errors.stock && (
+                        <p className="error">{formik.errors.stock}</p>
+                    )}
                 </div>
 
                 <div className="form-group">
                     <label>Image</label>
-                    <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageUpload}
-                    />
-                    {loading && <p>Uploading...</p>}
-                    {error && <p className="error">Upload failed. Try again.</p>}
-                    {formik.values.img && (
-                        <img src={formik.values.img} alt="preview" width={100} />
+                    <input type="file" accept="image/*" onChange={handlePickImage} />
+                    {formik.errors.img && <p className="error">{formik.errors.img}</p>}
+                    {previewUrl && (
+                        <img className="add-product-preview" src={previewUrl} alt="" />
                     )}
-                    {formik.touched.img && formik.errors.img && <p className="error">{formik.errors.img}</p>}
+                    {loading && <p>Uploading…</p>}
+                    {(error || formik.status?.uploadError) && (
+                        <p className="error">Upload failed. Try again.</p>
+                    )}
                 </div>
 
-                <Button variant="primary" disabled={loading || formik.status?.success} >
+                <Button
+                    variant="primary"
+                    type="submit"
+                    disabled={loading || formik.status?.success}
+                >
                     {formik.status?.success ? "Product Added" : "Add Product"}
                 </Button>
                 {formik.status?.success && (
-                    <Link to='/' className="btn btn-secondary home-link-btn">
+                    <Link to="/" className="btn btn-secondary home-link-btn">
                         Return to Home
                     </Link>
                 )}
-
             </form>
         </div>
-    )
+    );
 }

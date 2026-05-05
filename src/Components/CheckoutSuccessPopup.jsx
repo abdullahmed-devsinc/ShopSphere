@@ -8,11 +8,15 @@ export default function CheckoutSuccessPopup() {
     return (
         <div className="modal-overlay">
             <div className="modal-content">
-                <div className="success-icon">✓</div>
+                <div className="success-icon">
+                    <span className="material-symbols-outlined">check</span>
+                </div>
                 <h2>Order Confirmed!</h2>
                 <p>Thank you for shopping with us. Your order <strong>{orderId}</strong> has been successfully placed.</p>
-                <div style={{ marginTop: '20px' }}>
-                    <Button onClick={() => navigate('/', { replace: true })}>Continue Shopping</Button>
+                <div className="checkout-success-actions">
+                    <Button variant="primary" onClick={() => navigate('/', { replace: true })}>
+                        Continue shopping
+                    </Button>
                 </div>
             </div>
         </div>

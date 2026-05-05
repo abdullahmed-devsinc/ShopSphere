@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useId } from "react";
 import { setFilters } from "./productSlice";
 const MIN_PRICE = 0
 const MAX_PRICE = 500
@@ -9,6 +9,7 @@ export default function PriceRangeFilter() {
     const [minVal, setMinVal] = useState(currentFilters.priceRange[0])
     const [maxVal, setMaxVal] = useState(currentFilters.priceRange[1])
     const [noMaxLimit, setNoMaxLimit] = useState(currentFilters.priceRange[1] >= MAX_PRICE)
+    const gradientId = `price-range-track-${useId().replace(/:/g, "")}`
 
     // Keep local state in sync if filters are reset externally
     useEffect(() => {
@@ -37,17 +38,14 @@ export default function PriceRangeFilter() {
         dispatch(setFilters({ priceRange: [minVal, next ? MAX_PRICE : maxVal] }))
     }
 
-
-
-    // Derived track fill percentages
     const minPct = ((minVal - MIN_PRICE) / (MAX_PRICE - MIN_PRICE)) * 100
     const maxPct = ((effectiveMax - MIN_PRICE) / (MAX_PRICE - MIN_PRICE)) * 100
+    const maxPctVisual = noMaxLimit ? 100 : maxPct
 
     return (
         <div className="filter-group">
             <h3>Price Range</h3>
 
-            {/* Price display */}
             <div className="price-range-display">
                 <span className="price-range-val">${minVal}</span>
                 <span className="price-range-sep">—</span>
@@ -56,18 +54,25 @@ export default function PriceRangeFilter() {
                 </span>
             </div>
 
-            {/* Dual range slider */}
             <div className="price-slider-wrap">
-                <div
+                <svg
                     className="price-slider-track"
-                    style={{
-                        background: `linear-gradient(to right,
-                                        var(--border) ${minPct}%,
-                                        var(--accent) ${minPct}%,
-                                        var(--accent) ${noMaxLimit ? 100 : maxPct}%,
-                                        var(--border) ${noMaxLimit ? 100 : maxPct}%)`
-                    }}
-                />
+                    viewBox="0 0 100 4"
+                    preserveAspectRatio="none"
+                    aria-hidden
+                >
+                    <defs>
+                        <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" className="price-slider-stop price-slider-stop--muted" />
+                            <stop offset={`${minPct}%`} className="price-slider-stop price-slider-stop--muted" />
+                            <stop offset={`${minPct}%`} className="price-slider-stop price-slider-stop--accent" />
+                            <stop offset={`${maxPctVisual}%`} className="price-slider-stop price-slider-stop--accent" />
+                            <stop offset={`${maxPctVisual}%`} className="price-slider-stop price-slider-stop--muted" />
+                            <stop offset="100%" className="price-slider-stop price-slider-stop--muted" />
+                        </linearGradient>
+                    </defs>
+                    <rect width="100" height="4" rx="2" ry="2" fill={`url(#${gradientId})`} />
+                </svg>
                 <input
                     type="range"
                     className="price-slider price-slider--min"
@@ -88,7 +93,6 @@ export default function PriceRangeFilter() {
                 )}
             </div>
 
-            {/* No max limit toggle */}
             <label className="price-no-limit">
                 <input
                     type="checkbox"

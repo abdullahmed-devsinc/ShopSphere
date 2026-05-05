@@ -3,6 +3,7 @@ import Button from "../../Components/Button";
 import productShape from "../../propTypes/productShape";
 import CartStepper from "../Cart/CartStepper";
 import PropTypes from "prop-types";
+import ProductRatingLine from "../../Components/ProductRatingLine";
 
 export default function ProductCard({ product, isInCart, isInWishlist, onAddToCart, onAddToWishlist }) {
 
@@ -16,7 +17,7 @@ export default function ProductCard({ product, isInCart, isInWishlist, onAddToCa
                 <Link to={`/productdetail/${product.id}`}>
                     <h2 className="card-title">{product.name}</h2>
                 </Link>
-                <p className="card-rating">{product.rating}</p>
+                <ProductRatingLine product={product} />
                 <p className="card-price">{product.price}</p>
                 <p className="card-stock">{product.stock > 0 ? "In Stock" : "Out of stock"}</p>
             </div>

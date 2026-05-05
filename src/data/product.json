@@ -5,8 +5,8 @@
     "price": 129,
     "stock": 18,
     "category": "electronics",
-    "rating": 5,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 2,
@@ -14,8 +14,8 @@
     "price": 199,
     "stock": 11,
     "category": "electronics",
-    "rating": 5,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 3,
@@ -23,8 +23,8 @@
     "price": 59,
     "stock": 35,
     "category": "electronics",
-    "rating": 3,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 4,
@@ -32,8 +32,8 @@
     "price": 499,
     "stock": 5,
     "category": "electronics",
-    "rating": 4,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 5,
@@ -41,8 +41,8 @@
     "price": 49,
     "stock": 50,
     "category": "electronics",
-    "rating": 4,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 6,
@@ -50,8 +50,8 @@
     "price": 45,
     "stock": 32,
     "category": "home",
-    "rating": 4,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 7,
@@ -59,8 +59,8 @@
     "price": 249,
     "stock": 9,
     "category": "home",
-    "rating": 5,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 8,
@@ -68,8 +68,8 @@
     "price": 99,
     "stock": 14,
     "category": "home",
-    "rating": 4,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 9,
@@ -77,8 +77,8 @@
     "price": 129,
     "stock": 20,
     "category": "home",
-    "rating": 5,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 10,
@@ -86,8 +86,8 @@
     "price": 350,
     "stock": 8,
     "category": "home",
-    "rating": 5,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 11,
@@ -95,8 +95,8 @@
     "price": 89,
     "stock": 24,
     "category": "fashion",
-    "rating": 4,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 12,
@@ -104,8 +104,8 @@
     "price": 72,
     "stock": 27,
     "category": "fashion",
-    "rating": 4,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 13,
@@ -113,8 +113,8 @@
     "price": 55,
     "stock": 40,
     "category": "fashion",
-    "rating": 4,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 14,
@@ -122,8 +122,8 @@
     "price": 30,
     "stock": 60,
     "category": "fashion",
-    "rating": 3,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 15,
@@ -131,8 +131,8 @@
     "price": 15,
     "stock": 100,
     "category": "fashion",
-    "rating": 4,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 16,
@@ -140,8 +140,8 @@
     "price": 16,
     "stock": 70,
     "category": "grocery",
-    "rating": 3,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 17,
@@ -149,8 +149,8 @@
     "price": 22,
     "stock": 40,
     "category": "grocery",
-    "rating": 5,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 18,
@@ -158,8 +158,8 @@
     "price": 12,
     "stock": 45,
     "category": "grocery",
-    "rating": 4,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 19,
@@ -167,8 +167,8 @@
     "price": 25,
     "stock": 30,
     "category": "grocery",
-    "rating": 5,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 20,
@@ -176,8 +176,8 @@
     "price": 18,
     "stock": 50,
     "category": "grocery",
-    "rating": 4,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 21,
@@ -185,8 +185,8 @@
     "price": 24,
     "stock": 38,
     "category": "books",
-    "rating": 5,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 22,
@@ -194,8 +194,8 @@
     "price": 19,
     "stock": 44,
     "category": "books",
-    "rating": 4,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 23,
@@ -203,8 +203,8 @@
     "price": 14,
     "stock": 60,
     "category": "books",
-    "rating": 4,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 24,
@@ -212,8 +212,8 @@
     "price": 179,
     "stock": 12,
     "category": "sports",
-    "rating": 5,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 25,
@@ -221,8 +221,8 @@
     "price": 29,
     "stock": 55,
     "category": "sports",
-    "rating": 4,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 26,
@@ -230,8 +230,8 @@
     "price": 21,
     "stock": 80,
     "category": "sports",
-    "rating": 4,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 27,
@@ -239,8 +239,8 @@
     "price": 27,
     "stock": 33,
     "category": "beauty",
-    "rating": 4,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 28,
@@ -248,8 +248,8 @@
     "price": 31,
     "stock": 29,
     "category": "beauty",
-    "rating": 5,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 29,
@@ -257,8 +257,8 @@
     "price": 13,
     "stock": 66,
     "category": "beauty",
-    "rating": 3,
-    "img": ""
+    "img": "",
+    "reviews": []
   },
   {
     "id": 30,
@@ -266,7 +266,7 @@
     "price": 17,
     "stock": 47,
     "category": "beauty",
-    "rating": 4,
-    "img": ""
+    "img": "",
+    "reviews": []
   }
 ]

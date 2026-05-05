@@ -1,5 +1,6 @@
 import { createSelector, createSlice, nanoid } from "@reduxjs/toolkit";
-import productData from "../../data/product.json"
+import productData from "../../data/product.json";
+import { getAverageRating } from "../../utils/productRating";
 
 const initialFilters = { category: 'all', priceRange: [0, 1000], rating: 0 }
 const initialState = {
@@ -26,7 +27,24 @@ const productsSlice = createSlice({
         addProduct(state, action) {
             const nextId = state.items.length > 0 ?
                 Math.max(...state.items.map(item => Number(item.id))) + 1 : 1;
-            state.items.push({ id: nextId, ...action.payload })
+            const { rating: _dropRating, ...payload } = action.payload;
+            state.items.push({
+                ...payload,
+                id: nextId,
+                reviews: Array.isArray(payload.reviews) ? payload.reviews : [],
+            })
+        },
+        addReview(state, action) {
+            const { productId, review } = action.payload;
+            const product = state.items.find((i) => i.id === productId);
+            if (!product) return;
+            if (!Array.isArray(product.reviews)) product.reviews = [];
+            product.reviews.unshift({
+                id: nanoid(),
+                author: review.author.trim(),
+                rating: review.rating,
+                createdAt: new Date().toISOString(),
+            });
         },
         increaseStock(state, action) {
             const existing = state.items.find((i) => i.id === action.payload.id)
@@ -48,7 +66,7 @@ const productsSlice = createSlice({
 
 })
 
-export const { setFilters, setSearchQuery, setSortBy, addProduct, resetFilters } = productsSlice.actions;
+export const { setFilters, setSearchQuery, setSortBy, addProduct, addReview, resetFilters } = productsSlice.actions;
 export default productsSlice.reducer
 
 const selectAllProducts = (state) => state.products.items
@@ -84,7 +102,7 @@ export const selectFilteredProducts = createSelector(
             result = result.filter(p => p.category === filters.category)
         }
         if (filters.rating > 0) {
-            result = result.filter(p => p.rating >= filters.rating)
+            result = result.filter((p) => (getAverageRating(p) ?? 0) >= filters.rating)
         }
         result = result.filter(p => p.price >= filters.priceRange[0] && p.price <= filters.priceRange[1])
         if (sortBy === 'price-asc') {
@@ -99,3 +117,9 @@ export const selectFilteredProducts = createSelector(
         return result
     }
 )
+export const selectSimilarProducts = (productId, category, limit = 12) =>
+    createSelector(selectAllProducts, (items) =>
+        items
+            .filter((p) => p.category === category && p.id !== productId)
+            .slice(0, limit)
+    )
