@@ -15,19 +15,19 @@ export default function PriceRangeFilter() {
         const upperBound = noMaxLimit ? Number.POSITIVE_INFINITY : maxVal;
         const nextMin = Math.max(
             0,
-            Math.min(Number(e.target.value), upperBound - 1)
+            Math.min(Number(e.target.value), upperBound)
         );
         const nextMax = noMaxLimit ? null : upperBound;
         applyPriceRange(nextMin, nextMax);
     };
 
     const handleMaxChange = (e) => {
-        const nextMax = Math.max(Number(e.target.value), minVal + 1);
+        const nextMax = Math.max(Number(e.target.value), minVal);
         applyPriceRange(minVal, nextMax);
     };
 
     const handleNoMaxToggle = () => {
-        applyPriceRange(minVal, noMaxLimit ? minVal + 1 : null);
+        applyPriceRange(minVal, noMaxLimit ? minVal : null);
     };
 
     return (
@@ -51,6 +51,7 @@ export default function PriceRangeFilter() {
                 <span>to</span>
                 <input
                     type="number"
+                    value={noMaxLimit ? "" : maxVal}
                     onChange={handleMaxChange}
                     disabled={noMaxLimit}
                     aria-label="Maximum price"
