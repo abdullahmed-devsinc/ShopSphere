@@ -47,15 +47,23 @@ body {
   margin: 0;
   font-family: "Inter", system-ui, sans-serif;
   background-color: #f7f9ff;
-  background-image:
-    radial-gradient(circle at 8% 12%, rgba(37, 99, 235, 0.14), transparent 34%),
-    radial-gradient(circle at 88% 10%, rgba(59, 130, 246, 0.12), transparent 30%),
-    radial-gradient(circle at 82% 88%, rgba(147, 197, 253, 0.14), transparent 36%),
-    linear-gradient(150deg, #eef4ff 0%, #f8faff 42%, #f9fbff 100%);
-  background-attachment: fixed;
   color: var(--text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  position: relative;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: url("../assets/24595852_2202_w039_n003_110b_p1_110.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(5px);
 }
 
 input,
