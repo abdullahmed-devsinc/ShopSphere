@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { selectCartCount } from "../Features/Cart/cartSlice";
 import { selectwishlistCount } from "../Features/Wishlist/wishlistSlice";
 import ProductSearch from "../Features/Products/ProductSearch";
@@ -34,8 +34,18 @@ export default function Navbar({ onFilterToggle, isFilterOpen }) {
             )}
 
             <nav className="navbar__links" aria-label="Main navigation">
-                <Link to="/products" className="navbar__link">Products</Link>
-                <Link to="/add" className="navbar__link">Add Product</Link>
+                <NavLink
+                    to="/products"
+                    className={({ isActive }) => `navbar__link ${isActive ? "active" : ""}`}
+                >
+                    Products
+                </NavLink>
+                <NavLink
+                    to="/add"
+                    className={({ isActive }) => `navbar__link ${isActive ? "active" : ""}`}
+                >
+                    Add Product
+                </NavLink>
                 <span className="navbar__item">
                     <Link to="/wishlist" className="navbar__link navbar__link--icon" aria-label="Wishlist">
                         <span className="material-symbols-outlined">favorite</span>
