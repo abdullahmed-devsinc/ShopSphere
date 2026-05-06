@@ -8,14 +8,14 @@ import NotFoundPage from "./NotFoundPage";
 import SimilarProductRow from "../Components/SimilarProductsRow";
 import ProductRatingLine from "../Components/ProductRatingLine";
 import ProductReviews from "../Components/ProductReviews";
-
+import CartStepper from "../Features/Cart/CartStepper";
 export default function ProductDetailPage() {
     const { id } = useParams();
     const pid = Number(id);
     const dispatch = useDispatch();
 
     const product = useSelector(selectProductById(pid));
-    const similar = useSelector(selectSimilarProducts(pid, product?.category ?? ""));
+    const similar = useSelector(selectSimilarProducts(product?.id, product?.category ?? ""));
     const isInCart = useSelector(selectIsInCart(product?.id ?? -1));
     const isInWishlist = useSelector(selectIsInwishlist(product?.id ?? -1));
 
@@ -34,44 +34,69 @@ export default function ProductDetailPage() {
     };
 
     return (
-        <div className="page product-detail">
-            <div className="product-detail__image">
-                <img
-                    src={product.img || "https://placehold.co/600x600?text=No+Image"}
-                    alt={product.name}
-                />
-            </div>
-
-            <div className="product-detail__info">
-                <h1 className="page-title">{product.name}</h1>
-                <ProductRatingLine product={product} />
-                <p className="card-price">{product.price}</p>
-                <p className="card-stock">{product.stock > 0 ? "In Stock" : "Out of stock"}</p>
-
-                <div className="product-detail__actions">
-                    <Button
-                        variant="primary"
-                        onClick={handleAddToCart}
-                        disabled={isInCart || product.stock <= 0}
-                    >
-                        {isInCart ? "Added to Cart" : "Add to Cart"}
-                    </Button>
-
-                    <Button
-                        variant="secondary"
-                        disabled={isInWishlist}
-                        onClick={handleAddToWishlist}
-                    >
-                        {isInWishlist ? "Already in Wishlist" : "Add to Wishlist"}
-                    </Button>
+        <div className="page product-detail-page">
+            <section className="product-detail">
+                <div className="product-detail__image">
+                    <img
+                        src={product.img || "https://placehold.co/600x600?text=No+Image"}
+                        alt={product.name}
+                    />
                 </div>
 
-                <ProductReviews productId={product.id} reviews={product.reviews} />
-            </div>
+                <div className="product-detail__info">
+                    <header className="page-header product-detail__header">
+                        <h1 className="page-title">{product.name}</h1>
+                        <p className="page-description">
+                            Category: {product.category}
+                        </p>
+                    </header>
 
-            <div className="product-detail__similar">
-                <SimilarProductRow products={similar} />
-            </div>
+                    <div>
+                        <ProductRatingLine product={product} />
+                    </div>
+
+                    <div className="product-detail__meta">
+                        <p className="card-price product-detail__price">{product.price}</p>
+                        {product.stock > 0 ? (
+                            <span className="card-stock">In Stock</span>
+                        ) : (
+                            <span className="card-stock card-stock--out">Out of Stock</span>
+                        )}
+                    </div>
+
+                    <div className="product-detail__actions">
+                        {isInCart ? (
+                            <CartStepper product={product} />
+
+                        ) : (
+                            <Button
+                                variant="primary"
+                                onClick={handleAddToCart}
+                                disabled={product.stock === 0}
+                            >
+                                Add to Cart
+                            </Button>
+                        )}
+                        <Button
+                            variant="secondary"
+                            disabled={isInWishlist}
+                            onClick={handleAddToWishlist}
+                        >
+                            {isInWishlist ? "Saved" : "Wishlist"}
+                        </Button>
+                    </div>
+                </div>
+            </section>
+
+            <section className="product-detail-bottom">
+                <div className="product-detail-section product-detail-section--reviews">
+                    <ProductReviews productId={product.id} reviews={product.reviews} />
+                </div>
+
+                <div className="product-detail-section">
+                    <SimilarProductRow products={similar} />
+                </div>
+            </section>
         </div>
     );
 }

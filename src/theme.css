@@ -50,8 +50,12 @@
 body {
   margin: 0;
   font-family: "Inter", system-ui, sans-serif;
-  background: var(--surface-page);
-  background-image: var(--surface-hero);
+  background-color: #f7f9ff;
+  background-image:
+    radial-gradient(circle at 8% 12%, rgba(37, 99, 235, 0.14), transparent 34%),
+    radial-gradient(circle at 88% 10%, rgba(59, 130, 246, 0.12), transparent 30%),
+    radial-gradient(circle at 82% 88%, rgba(147, 197, 253, 0.14), transparent 36%),
+    linear-gradient(150deg, #eef4ff 0%, #f8faff 42%, #f9fbff 100%);
   background-attachment: fixed;
   color: var(--text);
   line-height: 1.6;
@@ -1164,6 +1168,28 @@ p {
   grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
   gap: 32px;
   align-items: start;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: clamp(18px, 3vw, 30px);
+  box-shadow: var(--shadow-sm);
+}
+
+.product-detail-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(12px, 2vw, 18px);
+  border-radius: calc(var(--radius-lg) + 4px);
+  background: linear-gradient(
+    160deg,
+    rgba(37, 99, 235, 0.08) 0%,
+    rgba(148, 163, 184, 0.06) 38%,
+    rgba(255, 255, 255, 0.7) 100%
+  );
+}
+
+.product-detail__header {
+  margin-bottom: 2px;
 }
 
 @media (min-width: 1100px) {
@@ -1190,6 +1216,17 @@ p {
 
 .product-detail__info .card-price {
   font-size: 1.8rem;
+}
+
+.product-detail__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+}
+
+.product-detail__price {
+  margin: 0;
 }
 
 .product-detail__actions {
@@ -1220,6 +1257,17 @@ p {
 
 .product-detail__similar {
   grid-column: 1 / -1;
+}
+
+.product-detail-bottom {
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.product-detail-section--reviews .product-reviews {
+  margin-top: 0;
 }
 
 /* Similar products strip */

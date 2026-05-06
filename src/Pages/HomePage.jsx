@@ -5,7 +5,6 @@ import ProductGrid from "../Features/Products/ProductGrid";
 
 export default function HomePage() {
     const products = useSelector(selectFilteredProducts);
-    // Just grab a few products for the featured section
     const featuredProducts = products.slice(0, 4);
 
     return (

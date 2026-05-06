@@ -9,7 +9,6 @@ export default function ProductListingPage({ isFilterOpen, setIsFilterOpen }) {
 
     return (
         <div className="product-listing-page">
-            {/* Fixed sidebar overlay */}
             <div className={`filter-sidebar-overlay ${isFilterOpen ? 'open' : ''}`} onClick={() => setIsFilterOpen(false)} />
             <aside className={`filter-sidebar ${isFilterOpen ? 'open' : ''}`}>
                 <div className="filter-sidebar__header">
