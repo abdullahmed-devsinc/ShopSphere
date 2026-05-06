@@ -28,7 +28,7 @@ export default function HomePage() {
                             <h3>Electronics</h3>
                         </div>
                     </Link>
-                    <Link to="/products?category=clothing" className="category-card">
+                    <Link to="/products?category=fashion" className="category-card">
                         <div className="category-card-content">
                             <span className="material-symbols-outlined">checkroom</span>
                             <h3>Clothing</h3>
