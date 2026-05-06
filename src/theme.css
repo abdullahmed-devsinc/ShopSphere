@@ -63,7 +63,7 @@ body::before {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: blur(12px) saturate(1.08);
+  filter: blur(8px) saturate(1.08);
   transform: scale(1.05);
 }
 

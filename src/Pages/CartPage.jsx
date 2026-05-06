@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CartItem from "../Features/Cart/CartItem";
 import PageHeader from "../Components/Common/PageHeader";
 import EmptyState from "../Components/Common/EmptyState";
@@ -6,6 +6,7 @@ import OrderSummary from "../Components/Cart/OrderSummary";
 import { useCartSummary } from "../hooks/useCartSummary";
 
 export default function CartPage() {
+    const navigate = useNavigate();
     const { items, subTotal, cartCount } = useCartSummary();
 
     if (items.length === 0) {
@@ -52,13 +53,14 @@ export default function CartPage() {
                     totalLabel="Estimated total"
                     totalAmount={subTotal}
                     shippingLabel="Calculated at checkout"
+                    ctaText="Complete purchase"
+                    onCtaClick={() => navigate("/checkout")}
                     note="Taxes are calculated on the checkout page."
                 />
 
-                <Link to="/checkout" className="btn btn-primary cart-summary-cta">
-                    Proceed to checkout
-                </Link>
+
             </div>
+
         </div>
     );
 }
