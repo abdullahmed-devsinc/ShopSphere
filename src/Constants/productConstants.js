@@ -11,12 +11,9 @@ export const PRODUCT_CATEGORIES = [
 
 export const ADD_PRODUCT_CATEGORIES = PRODUCT_CATEGORIES.filter((c) => c !== "all");
 
-export const PRICE_RANGE_MIN = 0;
-export const PRICE_RANGE_MAX = 1000;
-
 export const FILTER_DEFAULTS = {
     category: "all",
-    priceRange: [PRICE_RANGE_MIN, PRICE_RANGE_MAX],
+    priceRange: [0, null],
     rating: 0,
 };
 

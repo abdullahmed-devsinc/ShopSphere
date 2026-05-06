@@ -95,7 +95,10 @@ export const selectFilteredProducts = createSelector(
         if (filters.rating > 0) {
             result = result.filter((p) => (getAverageRating(p) ?? 0) >= filters.rating)
         }
-        result = result.filter(p => p.price >= filters.priceRange[0] && p.price <= filters.priceRange[1])
+        const [minPrice, maxPrice] = filters.priceRange;
+        result = result.filter((p) =>
+            p.price >= minPrice && (maxPrice == null || p.price <= maxPrice)
+        )
         if (sortBy === 'price-asc') {
             result.sort((a, b) => a.price - b.price)
         }
