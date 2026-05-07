@@ -7,7 +7,7 @@ export default function ProtectedRoute({ children }) {
 
   if (!isAuthenticated) {
     return (
-      <div className="protected-fallback-page">
+      <div className='protected-fallback-page'>
         <LoginModal />
       </div>
     );

@@ -2077,12 +2077,13 @@ p {
 /* --- Auth Modal Styles --- */
 .protected-fallback-page {
   position: relative;
-  min-height: 70vh;
+  min-height: calc(100vh - var(--navbar-h) - 130px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .auth-modal-overlay {
-  position: fixed;
-  inset: 0;
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(12px);
   display: flex;
