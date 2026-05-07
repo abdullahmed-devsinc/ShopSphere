@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 .env
 stitch_shopsphere_product_catalog
+.prettierrc

@@ -1,11 +1,24 @@
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectFilteredProducts } from "../Features/Products/productSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { resetFilters, selectFilteredProducts } from "../Features/Products/productSlice";
 import ProductGrid from "../Features/Products/ProductGrid";
-
+import { useNavigate } from "react-router-dom";
+import { setFilters } from "../Features/Products/productSlice";
+import { useEffect } from "react";
 export default function HomePage() {
     const products = useSelector(selectFilteredProducts);
     const featuredProducts = products.slice(0, 4);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const handleCategoryClick = (category) => {
+        dispatch(setFilters({ category }))
+        navigate("/products")
+    }
+
+    useEffect(() => {
+        dispatch(resetFilters());
+        console.log("Here")
+    }, [])
 
     return (
         <div className="home-page">
@@ -22,24 +35,27 @@ export default function HomePage() {
             <section className="featured-categories">
                 <h2 className="section-title">Shop by Category</h2>
                 <div className="category-grid">
-                    <Link to="/products?category=electronics" className="category-card">
+                    <div className="category-card" onClick={() => handleCategoryClick("electronics")}>
+
                         <div className="category-card-content">
                             <span className="material-symbols-outlined">devices</span>
                             <h3>Electronics</h3>
                         </div>
-                    </Link>
-                    <Link to="/products?category=fashion" className="category-card">
+                    </div>
+
+                    <div className="category-card" onClick={() => handleCategoryClick("fashion")}>
                         <div className="category-card-content">
                             <span className="material-symbols-outlined">checkroom</span>
                             <h3>Clothing</h3>
                         </div>
-                    </Link>
-                    <Link to="/products?category=home" className="category-card">
+                    </div>
+
+                    <div className="category-card" onClick={() => handleCategoryClick("home")}>
                         <div className="category-card-content">
                             <span className="material-symbols-outlined">home</span>
                             <h3>Home & Garden</h3>
                         </div>
-                    </Link>
+                    </div>
                 </div>
             </section>
 

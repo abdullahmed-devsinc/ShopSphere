@@ -64,7 +64,7 @@ export default function CheckoutSummaryPage() {
                     subtotal={subTotal}
                     taxAmount={taxAmount}
                     taxLabel={`Tax (${Math.round(tax_rate * 100)}%)`}
-                    shippingLabel="Standard · calculated separately"
+                    shippingLabel="Standard  calculated separately"
                     totalLabel="Total"
                     totalAmount={grandTotal}
                     ctaText="Complete purchase"

@@ -19,9 +19,7 @@ export default function CartStepper({ product }) {
         dispatch(updateQuantity({ id: product.id, quantity: quantity - 1 }));
     };
 
-    const handleIncrease = () => {
-        if (!atMaxStock) dispatch(addToCart(product));
-    };
+    const handleIncrease = () => { if (!atMaxStock) dispatch(addToCart(product)); };
 
     return (
         <QuantityStepper

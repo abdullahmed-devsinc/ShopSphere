@@ -1,21 +1,12 @@
-import { useSelector, useDispatch } from "react-redux"
-import { useEffect } from "react"
-import { selectFilteredProducts, setFilters } from "../Features/Products/productSlice"
+import { useSelector } from "react-redux"
+import { selectFilteredProducts } from "../Features/Products/productSlice"
 import ProductGrid from "../Features/Products/ProductGrid"
 import ProductFilter from "../Features/Products/ProductFilter"
 import PropTypes from "prop-types"
-import { PRODUCT_CATEGORIES } from "../Constants/productConstants"
-import { useSearchParams } from "react-router-dom"
 
 export default function ProductListingPage({ isFilterOpen, setIsFilterOpen }) {
     const products = useSelector(selectFilteredProducts);
-    const dispatch = useDispatch();
-    const [searchParams] = useSearchParams();
-    useEffect(() => {
-        const categoryParam = (searchParams.get("category") || "all").toLowerCase();
-        const category = PRODUCT_CATEGORIES.includes(categoryParam) ? categoryParam : "all"
-        dispatch(setFilters({ category }));
-    }, [searchParams, dispatch])
+
 
     return (
         <div className="product-listing-page">

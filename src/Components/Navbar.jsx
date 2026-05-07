@@ -18,8 +18,7 @@ export default function Navbar({ onFilterToggle, isFilterOpen }) {
                     <button
                         className={`navbar__filter-btn ${isFilterOpen ? 'active' : ''}`}
                         onClick={onFilterToggle}
-                        aria-label="Toggle filters"
-                    >
+                        aria-label="Toggle filters">
                         <span className="material-symbols-outlined">tune</span>
                         <span>Filters</span>
                     </button>

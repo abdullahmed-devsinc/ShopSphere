@@ -10,6 +10,7 @@ import ProductRatingLine from "../Components/ProductRatingLine";
 import ProductReviews from "../Components/ProductReviews";
 import CartStepper from "../Features/Cart/CartStepper";
 export default function ProductDetailPage() {
+
     const { id } = useParams();
     const pid = Number(id);
     const dispatch = useDispatch();
@@ -22,9 +23,7 @@ export default function ProductDetailPage() {
     if (!product) return <NotFoundPage />;
 
     const handleAddToCart = () => {
-        if (!isInCart && product.stock > 0) {
-            dispatch(addToCart(product));
-        }
+        if (!isInCart && product.stock > 0) dispatch(addToCart(product));
     };
 
     const handleAddToWishlist = () => {
@@ -35,45 +34,52 @@ export default function ProductDetailPage() {
 
     return (
         <div className="page product-detail-page">
-            <section className="product-detail">
-                <div className="product-detail__image">
-                    <img
-                        src={product.img || "https://placehold.co/600x600?text=No+Image"}
-                        alt={product.name}
-                    />
+            <div className="product-detail-container">
+                <div className="product-detail-gallery">
+                    <div className="product-detail-image-wrapper">
+                        <img
+                            src={product.img || "https://placehold.co/600x600?text=No+Image"}
+                            alt={product.name}
+                        />
+                    </div>
                 </div>
 
-                <div className="product-detail__info">
-                    <header className="page-header product-detail__header">
-                        <h1 className="page-title">{product.name}</h1>
-                        <p className="page-description">
-                            Category: {product.category}
-                        </p>
-                    </header>
-
-                    <div>
+                <div className="product-detail-content">
+                    <span className="product-category-label">{product.category}</span>
+                    <h1 className="product-title">{product.name}</h1>
+                    
+                    <div className="product-rating-box">
                         <ProductRatingLine product={product} />
+                        <span className="product-review-count">
+                            ({product.reviews?.length || 0} customer {product.reviews?.length === 1 ? 'review' : 'reviews'})
+                        </span>
                     </div>
 
-                    <div className="product-detail__meta">
-                        <p className="card-price product-detail__price">{product.price}</p>
+                    <div className="product-price-box">
+                        <span className="product-price">{product.price}</span>
                         {product.stock > 0 ? (
-                            <span className="card-stock">In Stock</span>
+                            <span className="product-stock-badge in-stock">In Stock</span>
                         ) : (
-                            <span className="card-stock card-stock--out">Out of Stock</span>
+                            <span className="product-stock-badge out-of-stock">Out of Stock</span>
                         )}
                     </div>
 
-                    <div className="product-detail__actions">
-                        {isInCart ? (
-                            <CartStepper product={product} />
+                    <div className="product-description-box">
+                        <p>Experience the perfect blend of style and comfort with the {product.name}. Designed for everyday wear, it features premium materials and unparalleled craftsmanship.</p>
+                    </div>
 
+                    <div className="product-actions-box">
+                        {isInCart ? (
+                            <div className="product-cart-stepper-wrapper">
+                                <CartStepper product={product} />
+                            </div>
                         ) : (
                             <Button
                                 variant="primary"
                                 onClick={handleAddToCart}
                                 disabled={product.stock === 0}
                             >
+                                <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>shopping_bag</span>
                                 Add to Cart
                             </Button>
                         )}
@@ -82,21 +88,34 @@ export default function ProductDetailPage() {
                             disabled={isInWishlist}
                             onClick={handleAddToWishlist}
                         >
+                            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>
+                                {isInWishlist ? "favorite" : "favorite_border"}
+                            </span>
                             {isInWishlist ? "Saved" : "Wishlist"}
                         </Button>
                     </div>
+                    
+                    <div className="product-perks">
+                        <div className="perk-item">
+                            <span className="material-symbols-outlined">local_shipping</span>
+                            <span>Free Delivery</span>
+                        </div>
+                        <div className="perk-item">
+                            <span className="material-symbols-outlined">assignment_return</span>
+                            <span>30 Days Return</span>
+                        </div>
+                    </div>
                 </div>
-            </section>
+            </div>
 
-            <section className="product-detail-bottom">
-                <div className="product-detail-section product-detail-section--reviews">
+            <div className="product-bottom-sections">
+                <div className="product-reviews-container">
                     <ProductReviews productId={product.id} reviews={product.reviews} />
                 </div>
-
-                <div className="product-detail-section">
+                <div className="similar-products-container">
                     <SimilarProductRow products={similar} />
                 </div>
-            </section>
+            </div>
         </div>
     );
 }

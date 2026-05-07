@@ -5,6 +5,7 @@ import productsReducer from "../Features/Products/productSlice";
 import products from "../data/product.json";
 import { FILTER_DEFAULTS } from "../Constants/productConstants";
 import { loadState, saveState } from "../utils/storage";
+import authReducer from "../Features/Auth/authSlice"
 
 const defaultProductsState = {
     items: products,
@@ -35,6 +36,7 @@ export const store = configureStore({
         cart: cartReducer,
         wishlist: wishlistReducer,
         products: productsReducer,
+        auth: authReducer,
     },
     preloadedState,
 });

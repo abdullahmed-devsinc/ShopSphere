@@ -13,7 +13,7 @@ export default function CartItem({ item }) {
     const lineTotal = item.quantity * item.price;
 
     const handleDecrease = () => {
-        if (item.quantity <= 1) return; // canonical rule: stop at 1 in cart page
+        if (item.quantity <= 1) return;
         dispatch(updateQuantity({ id: item.id, quantity: item.quantity - 1 }));
     };
 
