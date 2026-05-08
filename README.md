@@ -7,11 +7,13 @@ A React-based product catalog application with state management via Redux Toolki
 Assuming you already have Node.js installed on your machine:
 
 1. Clone the repository and navigate to the project root:
+
    ```bash
    cd ShopSphere
    ```
 
 2. Install the dependencies:
+
    ```bash
    npm install
    ```
@@ -27,12 +29,12 @@ Assuming you already have Node.js installed on your machine:
 
 The application follows a feature-centric structure rather than separating by file type (like having all actions/reducers in separate giant folders).
 
-*   `src/Features/`: Contains our Redux slices grouped by feature (Products, Cart, Wishlist). This keeps the state logic closely tied to the domain it represents.
-*   `src/Pages/`: Contains the top-level route components. These are lazy-loaded in `Routes.jsx` for code splitting.
-*   `src/Components/`: Reusable, generic UI components (`Button`, `ItemCard`, `Navbar`) that are agnostic to the business logic.
-*   `src/Store/`: Holds the Redux store configuration and persistence middleware.
-*   `src/Schema/`: Formik/Yup validation schemas.
-*   `src/hooks/`: Custom React hooks (like `useCloudinaryUpload`).
+- `src/Features/`: Contains our Redux slices grouped by feature (Products, Cart, Wishlist). This keeps the state logic closely tied to the domain it represents.
+- `src/Pages/`: Contains the top-level route components. These are lazy-loaded in `Routes.jsx` for code splitting.
+- `src/Components/`: Reusable, generic UI components (`Button`, `ItemCard`, `Navbar`) that are agnostic to the business logic.
+- `src/Store/`: Holds the Redux store configuration and persistence middleware.
+- `src/Schema/`: Formik/Yup validation schemas.
+- `src/hooks/`: Custom React hooks (like `useCloudinaryUpload`).
 
 ## Redux Slice Design
 
@@ -46,9 +48,9 @@ Derived data (like calculating the total cart price or the filtered list of prod
 
 ## Persistence
 
-Data persistence is handled natively without external libraries (like `redux-persist`). 
+Data persistence is handled natively without external libraries (like `redux-persist`).
 
-This is implemented directly in `src/Store/index.js`. We use `store.subscribe()` to listen for any state changes. Whenever an action is dispatched, the callback fires, grabs the latest state via `store.getState()`, and saves the cart, wishlist, and products slices to `localStorage`. 
+This is implemented directly in `src/Store/index.js`. We use `store.subscribe()` to listen for any state changes. Whenever an action is dispatched, the callback fires, grabs the latest state via `store.getState()`, and saves the cart, wishlist, and products slices to `localStorage`.
 
 When the app first loads, we parse `localStorage` and inject it into the `configureStore` setup via `preloadedState`.
 
@@ -68,6 +70,6 @@ To get the "Add Product" image upload working, you need to configure Cloudinary 
 
 If I had more time, I would revisit the following areas:
 
-*   **Synchronous LocalStorage Writes**: Currently, `store.subscribe()` writes to `localStorage` on every single Redux action. If a user is typing in a search bar and dispatching actions on every keystroke, this synchronous write could cause UI lag. I would wrap the write function in a `debounce` (e.g., 500ms).
-*   **ID Generation**: When adding a new product, the `productSlice` calculates the next ID by mapping over the array to find the `Math.max`. This is `O(n)` complexity and unsafe for concurrent use. In a real app, I'd use `nanoid()` or rely on a backend database.
-*   **Initial State Mutation Risk**: In `productSlice`, `resetFilters` assigns `state.filters = initialFilters`. Because `initialFilters` is declared outside the slice, mutating the state later could accidentally mutate the external reference. Returning a deep copy would be safer.
+- **Synchronous LocalStorage Writes**: Currently, `store.subscribe()` writes to `localStorage` on every single Redux action. If a user is typing in a search bar and dispatching actions on every keystroke, this synchronous write could cause UI lag. I would wrap the write function in a `debounce` (e.g., 500ms).
+- **ID Generation**: When adding a new product, the `productSlice` calculates the next ID by mapping over the array to find the `Math.max`. This is `O(n)` complexity and unsafe for concurrent use. In a real app, I'd use `nanoid()` or rely on a backend database.
+- **Initial State Mutation Risk**: In `productSlice`, `resetFilters` assigns `state.filters = initialFilters`. Because `initialFilters` is declared outside the slice, mutating the state later could accidentally mutate the external reference. Returning a deep copy would be safer.

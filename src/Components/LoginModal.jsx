@@ -56,7 +56,20 @@ export default function LoginModal() {
             </label>
           </div>
 
-          {error && <p className="error" style={{ color: 'var(--danger)', margin: '4px 0 0', fontSize: '0.9rem', textAlign: 'center', fontWeight: '600' }}>{error}</p>}
+          {error && (
+            <p
+              className='error'
+              style={{
+                color: 'var(--danger)',
+                margin: '4px 0 0',
+                fontSize: '0.9rem',
+                textAlign: 'center',
+                fontWeight: '600',
+              }}
+            >
+              {error}
+            </p>
+          )}
 
           <Button variant='primary' type='submit'>
             Login

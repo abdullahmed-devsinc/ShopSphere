@@ -12,14 +12,11 @@ const AddProductPage = lazy(() => import('./Pages/AddProductPage'));
 
 export default function Routes({ isFilterOpen, setIsFilterOpen }) {
   return (
-    <Suspense fallback={<div className="page">Loading…</div>}>
+    <Suspense fallback={<div className='page'>Loading…</div>}>
       <AppRoutes>
+        <Route path='/' element={<HomePage />} />
         <Route
-          path="/"
-          element={<HomePage />}
-        />
-        <Route
-          path="/products"
+          path='/products'
           element={
             <ProductListingPage
               isFilterOpen={isFilterOpen}
@@ -27,34 +24,19 @@ export default function Routes({ isFilterOpen, setIsFilterOpen }) {
             />
           }
         />
+        <Route path='/productdetail/:id' element={<ProductDetailPage />} />
+        <Route path='/checkout' element={<CheckoutSummaryPage />} />
+        <Route path='/wishlist' element={<WishlistPage />} />
+        <Route path='/cart' element={<CartPage />} />
         <Route
-          path="/productdetail/:id"
-          element={<ProductDetailPage />}
-        />
-        <Route
-          path="/checkout"
-          element={<CheckoutSummaryPage />}
-        />
-        <Route
-          path="/wishlist"
-          element={<WishlistPage />}
-        />
-        <Route
-          path="/cart"
-          element={<CartPage />}
-        />
-        <Route
-          path="/add"
+          path='/add'
           element={
             <ProtectedRoute>
               <AddProductPage />
             </ProtectedRoute>
           }
         />
-        <Route
-          path="*"
-          element={<NotFoundPage />}
-        />
+        <Route path='*' element={<NotFoundPage />} />
       </AppRoutes>
     </Suspense>
   );

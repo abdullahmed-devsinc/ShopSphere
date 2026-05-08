@@ -1,30 +1,30 @@
-import { useDispatch } from "react-redux";
+import { useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { setSearchQuery } from "./productSlice";
+import { setSearchQuery } from './productSlice';
 
 export default function ProductSearch() {
-    const [search, setSearch] = useState('');
-    const dispatch = useDispatch();
+  const [search, setSearch] = useState('');
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            dispatch(setSearchQuery(search))
-        }, 500)
-        return () => clearTimeout(timeout);
-    }, [search])
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      dispatch(setSearchQuery(search));
+    }, 500);
+    return () => clearTimeout(timeout);
+  }, [search]);
 
-    useEffect(() => {
-        return () => dispatch(setSearchQuery(''))
-    }, [dispatch])
+  useEffect(() => {
+    return () => dispatch(setSearchQuery(''));
+  }, [dispatch]);
 
-    return (
-        <div className="product-search">
-            <input
-                className="navbar__search-input"
-                placeholder="Search products…"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-            />
-        </div>
-    )
+  return (
+    <div className='product-search'>
+      <input
+        className='navbar__search-input'
+        placeholder='Search products…'
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+    </div>
+  );
 }
