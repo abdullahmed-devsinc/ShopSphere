@@ -1046,11 +1046,12 @@ p { margin: 0; }
   justify-content: center;
   z-index: 1000;
   padding: 16px;
+  width: 60%;
+  max-width: 600px;
 }
 .auth-modal {
   background: var(--bg-elevated);
   width: 100%;
-  max-width: 440px;
   padding: 40px 32px;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
@@ -1104,6 +1105,7 @@ p { margin: 0; }
   .wishlist-card__actions { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
   .wishlist-card__actions .btn { flex: 1; min-width: min(120px,100%); }
   .navbar{ height: auto; flex-wrap: wrap; padding: 20px 20px; gap: 8px;}
+  .navbar__brand{ display: block; text-align: center;}
   .navbar__links{ flex-wrap: wrap; width: 100%; order: 1; margin-left: 0; padding: 4px 0; justify-content: space-between;}
   .navbar__link{ order: 1;}
 
