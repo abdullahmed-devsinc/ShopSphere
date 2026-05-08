@@ -32,7 +32,7 @@
     "price": 499,
     "stock": 5,
     "category": "electronics",
-    "img": "",
+    "img": "https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778259769/thsknzyuvwxdyd63jaj6.webp",
     "reviews": []
   },
   {
@@ -50,7 +50,7 @@
     "price": 45,
     "stock": 32,
     "category": "home",
-    "img": "",
+    "img": "https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778259832/ccqmlmw8nlvcwnpilvse.jpg",
     "reviews": []
   },
   {
@@ -59,7 +59,7 @@
     "price": 249,
     "stock": 9,
     "category": "home",
-    "img": "",
+    "img": "https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778259696/eacuyfnwjlezfwi6u2wp.jpg",
     "reviews": []
   },
   {
@@ -68,16 +68,16 @@
     "price": 99,
     "stock": 14,
     "category": "home",
-    "img": "",
+    "img": "https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778257577/xs8rmm7oxsbvdgs5ipfi.jpg",
     "reviews": []
   },
   {
     "id": 9,
-    "name": "Memory Foam Mattress Topper",
+    "name": "Memory Foam Mattress",
     "price": 129,
     "stock": 20,
     "category": "home",
-    "img": "",
+    "img": "https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778257391/p0y0d8mfcvlzeckqvdxt.webp",
     "reviews": []
   },
   {
@@ -86,7 +86,7 @@
     "price": 350,
     "stock": 8,
     "category": "home",
-    "img": "",
+    "img": "https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778259593/g0wy5gvpq5zhfauktzwt.webp",
     "reviews": []
   },
   {
@@ -95,7 +95,7 @@
     "price": 89,
     "stock": 24,
     "category": "fashion",
-    "img": "",
+    "img": "https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778257286/qcz51kxvgrgfjxc3mtlh.webp",
     "reviews": []
   },
   {
@@ -131,7 +131,7 @@
     "price": 15,
     "stock": 100,
     "category": "fashion",
-    "img": "",
+    "img": "https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778257684/ol81rnp7td1nd55pied8.jpg",
     "reviews": []
   },
   {
@@ -140,7 +140,7 @@
     "price": 16,
     "stock": 70,
     "category": "grocery",
-    "img": "",
+    "img": "https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778258377/pvxshldvxv95wvm3pi7o.webp",
     "reviews": []
   },
   {
@@ -149,7 +149,7 @@
     "price": 22,
     "stock": 40,
     "category": "grocery",
-    "img": "",
+    "img": "https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778258430/mqzb0pgmowroxczh9or5.jpg",
     "reviews": []
   },
   {
@@ -167,7 +167,7 @@
     "price": 25,
     "stock": 30,
     "category": "grocery",
-    "img": "",
+    "img": "https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778258331/zeniak64daz4f51cydk4.webp",
     "reviews": []
   },
   {
@@ -176,16 +176,16 @@
     "price": 18,
     "stock": 50,
     "category": "grocery",
-    "img": "",
+    "img": "https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778258250/doivhb0zhffmtjqj4jo8.webp",
     "reviews": []
   },
   {
     "id": 21,
-    "name": "The Art of Everyday Coding",
+    "name": "The Art of Computer Programming",
     "price": 24,
     "stock": 38,
     "category": "books",
-    "img": "",
+    "img": "https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778258168/hjdk4knqenqwskemasp8.webp",
     "reviews": []
   },
   {
@@ -194,7 +194,7 @@
     "price": 19,
     "stock": 44,
     "category": "books",
-    "img": "",
+    "img": "https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778258069/obvtb3fwg4gcqddmtwjw.jpg",
     "reviews": []
   },
   {
@@ -203,16 +203,16 @@
     "price": 14,
     "stock": 60,
     "category": "books",
-    "img": "",
+    "img": "https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778257903/bzpdripowezyc7aswg2s.webp",
     "reviews": []
   },
   {
     "id": 24,
-    "name": "Adjustable Dumbbell Set",
+    "name": "Adjustable Dumbbell",
     "price": 179,
     "stock": 12,
     "category": "sports",
-    "img": "",
+    "img": "https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778257491/vaq31wka2hn3finrtaha.webp",
     "reviews": []
   },
   {
@@ -221,7 +221,7 @@
     "price": 29,
     "stock": 55,
     "category": "sports",
-    "img": "",
+    "img": "https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778257890/eceeo6hpsynykp0wuxp2.jpg",
     "reviews": []
   },
   {
@@ -239,7 +239,7 @@
     "price": 27,
     "stock": 33,
     "category": "beauty",
-    "img": "",
+    "img": "https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778257559/ak4pmmqrveqs8dd91qxp.webp",
     "reviews": []
   },
   {
