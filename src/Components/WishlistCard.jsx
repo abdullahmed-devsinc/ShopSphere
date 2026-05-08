@@ -13,7 +13,14 @@ export default function WishlistCard({ item, onRemove, onAddToCart, isInCart = f
         to={`/productdetail/${item.id}`}
         className='wishlist-card__media card-img-wrap'
       >
-        <img className='card-img' src={item.img} alt={item.name} />
+        <img
+          className='card-img'
+          src={
+            item.img ||
+            'https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778245743/mvmobckdnxwhq66leqpo.jpg'
+          }
+          alt={item.name}
+        />
       </Link>
 
       <div className='wishlist-card__main'>

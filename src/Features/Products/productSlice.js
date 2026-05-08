@@ -28,8 +28,7 @@ const productsSlice = createSlice({
         state.items.length > 0
           ? Math.max(...state.items.map((item) => Number(item.id))) + 1
           : 1;
-
-      const { rating: _dropRating, ...payload } = action.payload;
+      const payload = action.payload;
       state.items.push({
         ...payload,
         id: nextId,

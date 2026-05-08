@@ -23,10 +23,6 @@ const preloadedState = {
     ? {
         ...defaultProductsState,
         ...persistedProducts,
-        filters: {
-          ...defaultProductsState.filters,
-          ...(persistedProducts.filters || {}),
-        },
       }
     : defaultProductsState,
 };
@@ -45,5 +41,5 @@ store.subscribe(() => {
   const { cart, wishlist, products: productState } = store.getState();
   saveState('cart', cart);
   saveState('wishlist', wishlist);
-  saveState('products', productState);
+  saveState('products', {items: productState.items});
 });
