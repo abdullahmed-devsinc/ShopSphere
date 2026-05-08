@@ -104,7 +104,7 @@
     "price": 72,
     "stock": 27,
     "category": "fashion",
-    "img": "",
+    "img": "https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778244994/wkktszl13mjhoyumy4ca.webp",
     "reviews": []
   },
   {
@@ -113,7 +113,7 @@
     "price": 55,
     "stock": 40,
     "category": "fashion",
-    "img": "",
+    "img": "https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778244737/yei6cbpklxmaqgux6ksa.jpg",
     "reviews": []
   },
   {
@@ -122,7 +122,7 @@
     "price": 30,
     "stock": 60,
     "category": "fashion",
-    "img": "",
+    "img": "https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778244083/rs5efstgiwgllqgzhyfd.webp",
     "reviews": []
   },
   {
