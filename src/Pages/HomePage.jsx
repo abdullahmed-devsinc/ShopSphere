@@ -1,13 +1,19 @@
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { resetFilters, selectFilteredProducts } from '../Features/Products/productSlice';
+import {
+  resetFilters,
+  selectFilteredProducts,
+  selectTopRatedProducts,
+} from '../Features/Products/productSlice';
 import ProductGrid from '../Features/Products/ProductGrid';
 import { useNavigate } from 'react-router-dom';
 import { setFilters } from '../Features/Products/productSlice';
 import { useEffect } from 'react';
+
 export default function HomePage() {
   const products = useSelector(selectFilteredProducts);
-  const featuredProducts = products.slice(0, 4);
+  const ratedProducts = useSelector(selectTopRatedProducts);
+  const featuredProducts = ratedProducts?.slice(0, 4);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleCategoryClick = (category) => {
@@ -17,7 +23,6 @@ export default function HomePage() {
 
   useEffect(() => {
     dispatch(resetFilters());
-    console.log('Here');
   }, []);
 
   return (
@@ -63,15 +68,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className='featured-products'>
-        <div className='section-header'>
-          <h2 className='section-title'>Featured Products</h2>
-          <Link to='/products' className='view-all-link'>
-            View All
-          </Link>
-        </div>
-        <ProductGrid products={featuredProducts} />
-      </section>
+      {featuredProducts.length > 0 && (
+        <section className='featured-products'>
+          <div className='section-header'>
+            <h2 className='section-title'>Featured Products</h2>
+            <Link to='/products' className='view-all-link'>
+              View All
+            </Link>
+          </div>
+          <ProductGrid products={featuredProducts} />
+        </section>
+      )}
     </div>
   );
 }

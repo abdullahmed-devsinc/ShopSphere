@@ -17,6 +17,7 @@ const defaultProductsState = {
 const persistedProducts = loadState('products', null);
 
 const preloadedState = {
+  auth: loadState('auth', { isAuthenticated: false, user: null }),
   cart: loadState('cart', { items: [] }),
   wishlist: loadState('wishlist', { items: [] }),
   products: persistedProducts
@@ -38,8 +39,9 @@ export const store = configureStore({
 });
 
 store.subscribe(() => {
-  const { cart, wishlist, products: productState } = store.getState();
+  const { auth, cart, wishlist, products: productState } = store.getState();
+  saveState('auth', auth);
   saveState('cart', cart);
   saveState('wishlist', wishlist);
-  saveState('products', {items: productState.items});
+  saveState('products', { items: productState.items });
 });

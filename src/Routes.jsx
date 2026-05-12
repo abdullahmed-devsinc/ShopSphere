@@ -25,13 +25,20 @@ export default function Routes({ isFilterOpen, setIsFilterOpen }) {
           }
         />
         <Route path='/productdetail/:id' element={<ProductDetailPage />} />
-        <Route path='/checkout' element={<CheckoutSummaryPage />} />
+        <Route
+          path='/checkout'
+          element={
+            <ProtectedRoute allowedRoutes={['user']}>
+              <CheckoutSummaryPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path='/wishlist' element={<WishlistPage />} />
         <Route path='/cart' element={<CartPage />} />
         <Route
           path='/add'
           element={
-            <ProtectedRoute>
+            <ProtectedRoute allowedRoutes={['admin']}>
               <AddProductPage />
             </ProtectedRoute>
           }

@@ -1,15 +1,19 @@
-import { useSelector } from 'react-redux';
+import {  useDispatch,useSelector } from 'react-redux';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { selectCartCount } from '../Features/Cart/cartSlice';
 import { selectwishlistCount } from '../Features/Wishlist/wishlistSlice';
 import ProductSearch from '../Features/Products/ProductSearch';
+import { logoutUser } from '../Services/loginService';
+import { selectAuthState, selectIsAdmin } from '../Features/Auth/authSlice';
+
 
 export default function Navbar({ onFilterToggle, isFilterOpen }) {
   const cartCount = useSelector(selectCartCount);
   const wishlistCount = useSelector(selectwishlistCount);
   const location = useLocation();
   const isProductListing = location.pathname === '/products';
-
+  const isAuthenticated = useSelector(selectAuthState);
+  const isAdmin = useSelector(selectIsAdmin);
   return (
     <header className='navbar'>
       <div className='navbar__left'>
@@ -42,12 +46,14 @@ export default function Navbar({ onFilterToggle, isFilterOpen }) {
         >
           Products
         </NavLink>
-        <NavLink
-          to='/add'
-          className={({ isActive }) => `navbar__link ${isActive ? 'active' : ''}`}
-        >
-          Add Product
-        </NavLink>
+       {(!isAuthenticated || isAdmin) && (
+         <NavLink
+           to='/add'
+           className={({ isActive }) => `navbar__link ${isActive ? 'active' : ''}`}
+         >
+           Add Product
+         </NavLink>
+       )}
         <span className='navbar__item'>
           <Link
             to='/wishlist'
@@ -65,6 +71,12 @@ export default function Navbar({ onFilterToggle, isFilterOpen }) {
           {cartCount > 0 && <span className='navbar__count'>{cartCount}</span>}
         </span>
       </nav>
+      {isAuthenticated && (
+        <button className='navbar__logout-btn' onClick={() => logoutUser()}>
+          Logout
+        </button>
+      )}
+      
     </header>
   );
 }

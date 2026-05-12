@@ -14,10 +14,12 @@ export default function QuantityStepper({
       <Button
         variant='card-qty-btn'
         onClick={onDecrease}
-        disabled={disableDecrease}
+        disabled={quantity < 0}
         aria-label='Decrease quantity'
       >
-        <span className='material-symbols-outlined'>remove</span>
+        <span className='material-symbols-outlined'>
+          {quantity < 2 ? 'delete' : 'remove'}
+        </span>
       </Button>
 
       <span className='card-qty-count'>{quantity}</span>

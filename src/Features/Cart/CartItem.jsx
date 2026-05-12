@@ -28,7 +28,7 @@ export default function CartItem({ item }) {
         to={`/productdetail/${item.id}`}
         className='card-img-wrap card-img-wrap--link'
       >
-        <img className='card-img' src={item.img} alt={item.name} />
+        <img className='card-img' src={item.img || 'https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778245743/mvmobckdnxwhq66leqpo.jpg'} alt={item.name} />
       </Link>
 
       <div className='cart-item-info'>
@@ -40,7 +40,9 @@ export default function CartItem({ item }) {
 
       <QuantityStepper
         quantity={item.quantity}
-        onDecrease={handleDecrease}
+        onDecrease={
+          item.quantity <= 1 ? () => dispatch(removeFromCart(item.id)) : handleDecrease
+        }
         onIncrease={handleIncrease}
         disableDecrease={item.quantity <= 1}
         disableIncrease={itemStock <= item.quantity}
@@ -48,10 +50,6 @@ export default function CartItem({ item }) {
       />
 
       <p className='card-price cart-item-line-total'>${formatMoney(lineTotal)}</p>
-
-      <Button variant='danger' onClick={() => dispatch(removeFromCart(item.id))}>
-        Remove
-      </Button>
     </div>
   );
 }

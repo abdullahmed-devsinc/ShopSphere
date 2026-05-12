@@ -1,35 +1,27 @@
-import { useDispatch } from 'react-redux';
-import { login } from '../Features/Auth/authSlice';
+import { loginUser, logoutUser } from '../Services/loginService';
 import { useState } from 'react';
 import Button from './Button';
 
-export default function LoginModal() {
-  const dispatch = useDispatch();
+export default function LoginModal({ role = 'user'}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const title = role === 'admin' ? 'Admin Login' : 'User Login';
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const EMAIL = 'beffjezos@devsinc.com';
-    const PASSWORD = 'shopsphere';
-
-    if (!email || !password) {
-      setError('Please fill in all fields.');
-      return;
-    }
-
-    if (email === EMAIL && password === PASSWORD) {
-      dispatch(login());
+    const success = loginUser(email, password);
+    if (!success) {
+      setError('Invalid email or password');
     } else {
-      setError('Invalid credentials.');
+      setError('');
     }
   };
 
   return (
     <div className='auth-modal-overlay'>
       <div className='auth-modal'>
-        <h2 className='auth-modal-title'>Admin Login</h2>
+        <h2 className='auth-modal-title'>{title}</h2>
 
         <form className='auth-modal-form' onSubmit={handleLogin}>
           <div className='form-group'>

@@ -4,12 +4,19 @@ export default function Button({
   variant = 'primary',
   disabled = false,
   type = 'button',
+  title,
   onClick,
 }) {
   const variantClass =
     variant === 'card-qty-btn' ? 'btn card-qty-btn' : `btn btn-${variant}`;
   return (
-    <button type={type} onClick={onClick} disabled={disabled} className={variantClass}>
+    <button
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      className={variantClass}
+      title={title}
+    >
       {children}
     </button>
   );

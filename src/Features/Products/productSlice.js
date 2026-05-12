@@ -114,6 +114,10 @@ export const selectFilteredProducts = createSelector(
     return result;
   },
 );
+export const selectTopRatedProducts = createSelector(selectAllProducts, (products) => {
+  const withRatings = products.filter((p) => getAverageRating(p) != null);
+  return withRatings.sort((a, b) => getAverageRating(b) - getAverageRating(a));
+});
 export const selectSimilarProducts = (productId, category, limit = 12) =>
   createSelector(selectAllProducts, (items) =>
     items.filter((p) => p.category === category && p.id !== productId).slice(0, limit),

@@ -3,9 +3,29 @@ import { selectFilteredProducts } from '../Features/Products/productSlice';
 import ProductGrid from '../Features/Products/ProductGrid';
 import ProductFilter from '../Features/Products/ProductFilter';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import Button from '../Components/Button';
 
+const ITEMS_PER_PAGE = 12;
 export default function ProductListingPage({ isFilterOpen, setIsFilterOpen }) {
   const products = useSelector(selectFilteredProducts);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const paginatedProducts = products.slice(startIndex, endIndex);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [products.length]);
+  const handlePageChange = (page) => {
+    setCurrentPage(Math.max(1, Math.min(page, totalPages)));
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
 
   return (
     <div className='product-listing-page'>
@@ -28,8 +48,28 @@ export default function ProductListingPage({ isFilterOpen, setIsFilterOpen }) {
       </aside>
 
       <div className='product-main'>
-        <ProductGrid products={products} />
+        <ProductGrid products={paginatedProducts} />
       </div>
+      {totalPages > 1 && (
+        <div className='pagination'>
+          <Button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </Button>
+          <span className='pagination-info'>
+            Page {currentPage} of {totalPages}
+          </span>
+          <Button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            {' '}
+            Next
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

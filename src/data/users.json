@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "Admin",
+    "email": "admin@devsinc.com",
+    "password": "admin123",
+    "role": "admin"
+  },
+  {
+    "id": 2,
+    "name": "John Doe",
+    "email": "user@devsinc.com",
+    "password": "password123",
+    "role": "user"
+  }
+]
