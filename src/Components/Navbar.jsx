@@ -1,11 +1,10 @@
-import {  useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { selectCartCount } from '../Features/Cart/cartSlice';
 import { selectwishlistCount } from '../Features/Wishlist/wishlistSlice';
 import ProductSearch from '../Features/Products/ProductSearch';
 import { logoutUser } from '../Services/loginService';
 import { selectAuthState, selectIsAdmin } from '../Features/Auth/authSlice';
-
 
 export default function Navbar({ onFilterToggle, isFilterOpen }) {
   const cartCount = useSelector(selectCartCount);
@@ -46,14 +45,14 @@ export default function Navbar({ onFilterToggle, isFilterOpen }) {
         >
           Products
         </NavLink>
-       {(!isAuthenticated || isAdmin) && (
-         <NavLink
-           to='/add'
-           className={({ isActive }) => `navbar__link ${isActive ? 'active' : ''}`}
-         >
-           Add Product
-         </NavLink>
-       )}
+        {(!isAuthenticated || isAdmin) && (
+          <NavLink
+            to='/add'
+            className={({ isActive }) => `navbar__link ${isActive ? 'active' : ''}`}
+          >
+            Add Product
+          </NavLink>
+        )}
         <span className='navbar__item'>
           <Link
             to='/wishlist'
@@ -76,7 +75,6 @@ export default function Navbar({ onFilterToggle, isFilterOpen }) {
           Logout
         </button>
       )}
-      
     </header>
   );
 }

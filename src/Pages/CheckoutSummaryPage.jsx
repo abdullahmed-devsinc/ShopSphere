@@ -24,7 +24,7 @@ export default function CheckoutSummaryPage() {
     dispatch(clearCart());
     setShowSuccessPopup(true);
   };
- 
+
   if (showSuccessPopup) return <CheckoutSuccessPopup />;
 
   if (items.length === 0) {

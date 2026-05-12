@@ -28,7 +28,14 @@ export default function CartItem({ item }) {
         to={`/productdetail/${item.id}`}
         className='card-img-wrap card-img-wrap--link'
       >
-        <img className='card-img' src={item.img || 'https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778245743/mvmobckdnxwhq66leqpo.jpg'} alt={item.name} />
+        <img
+          className='card-img'
+          src={
+            item.img ||
+            'https://res.cloudinary.com/dnx0tlcxk/image/upload/v1778245743/mvmobckdnxwhq66leqpo.jpg'
+          }
+          alt={item.name}
+        />
       </Link>
 
       <div className='cart-item-info'>

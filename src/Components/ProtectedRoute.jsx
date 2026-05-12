@@ -9,7 +9,7 @@ export default function ProtectedRoute({ children, allowedRoutes }) {
   if (!isAuthenticated) {
     return (
       <div className='protected-fallback-page'>
-        <LoginModal role={allowedRoutes?.[0] || 'user'}/>
+        <LoginModal role={allowedRoutes?.[0] || 'user'} />
       </div>
     );
   }

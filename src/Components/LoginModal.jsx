@@ -2,7 +2,7 @@ import { loginUser, logoutUser } from '../Services/loginService';
 import { useState } from 'react';
 import Button from './Button';
 
-export default function LoginModal({ role = 'user'}) {
+export default function LoginModal({ role = 'user' }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
