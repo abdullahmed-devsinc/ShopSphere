@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { clearCart } from '../Features/Cart/cartSlice';
 import CheckoutLineItem from '../Components/CheckoutLineItem';
@@ -9,15 +9,10 @@ import EmptyState from '../Components/Common/EmptyState';
 import OrderSummary from '../Components/Cart/OrderSummary';
 import { tax_rate } from '../utils/tax';
 import { useCartSummary } from '../hooks/useCartSummary';
-import { useNavigate } from 'react-router-dom';
-import { selectAuthState } from '../Features/Auth/authSlice';
-import { useSelector } from 'react-redux';
 
 export default function CheckoutSummaryPage() {
   const dispatch = useDispatch();
-  const authState = useSelector(selectAuthState);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
-  const navigate = useNavigate();
   const { items, subTotal, cartCount, taxAmount, grandTotal } = useCartSummary();
 
   const handleCheckout = () => {

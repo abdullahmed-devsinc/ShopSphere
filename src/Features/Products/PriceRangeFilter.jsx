@@ -5,26 +5,39 @@ export default function PriceRangeFilter() {
   const dispatch = useDispatch();
   const { priceRange } = useSelector((state) => state.products.filters);
   const [minVal, maxVal] = priceRange;
+
   const noMaxLimit = maxVal == null;
+  const maxInput = maxVal == null ? '' : String(maxVal);
 
   const applyPriceRange = (nextMin, nextMax = null) => {
     dispatch(setFilters({ priceRange: [nextMin, nextMax] }));
   };
 
   const handleMinChange = (e) => {
-    const upperBound = noMaxLimit ? Number.POSITIVE_INFINITY : maxVal;
+    const upperBound = maxVal == null ? Number.POSITIVE_INFINITY : maxVal;
     const nextMin = Math.max(0, Math.min(Number(e.target.value), upperBound));
-    const nextMax = noMaxLimit ? null : upperBound;
-    applyPriceRange(nextMin, nextMax);
+    applyPriceRange(nextMin, maxVal);
   };
 
   const handleMaxChange = (e) => {
-    const nextMax = Math.max(Number(e.target.value), minVal);
+    const value = e.target.value;
+
+    if (value === '') {
+      applyPriceRange(minVal, null);
+      return;
+    }
+
+    const nextMax = Math.max(Number(value), minVal);
     applyPriceRange(minVal, nextMax);
   };
 
   const handleNoMaxToggle = () => {
-    applyPriceRange(minVal, noMaxLimit ? minVal : null);
+    if (maxVal == null) {
+      applyPriceRange(minVal, minVal);
+      return;
+    }
+
+    applyPriceRange(minVal, null);
   };
 
   return (
@@ -34,7 +47,9 @@ export default function PriceRangeFilter() {
       <div className='price-range-display'>
         <span className='price-range-val'>${minVal}</span>
         <span className='price-range-sep'>—</span>
-        <span className='price-range-val'>{noMaxLimit ? 'Any' : `$${maxVal}`}</span>
+        <span className='price-range-val'>
+          {noMaxLimit || maxInput === '' ? 'Any' : `$${maxInput}`}
+        </span>
       </div>
 
       <div className='price-inputs'>
@@ -48,7 +63,7 @@ export default function PriceRangeFilter() {
         <span>to</span>
         <input
           type='number'
-          value={noMaxLimit ? '' : maxVal}
+          value={noMaxLimit ? '' : maxInput}
           onChange={handleMaxChange}
           disabled={noMaxLimit}
           aria-label='Maximum price'

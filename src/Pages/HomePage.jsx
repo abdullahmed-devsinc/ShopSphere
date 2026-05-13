@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   resetFilters,
-  selectFilteredProducts,
   selectTopRatedProducts,
 } from '../Features/Products/productSlice';
 import ProductGrid from '../Features/Products/ProductGrid';
@@ -11,7 +10,6 @@ import { setFilters } from '../Features/Products/productSlice';
 import { useEffect } from 'react';
 
 export default function HomePage() {
-  const products = useSelector(selectFilteredProducts);
   const ratedProducts = useSelector(selectTopRatedProducts);
   const featuredProducts = ratedProducts?.slice(0, 4);
   const navigate = useNavigate();

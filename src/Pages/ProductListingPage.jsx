@@ -3,7 +3,7 @@ import { selectFilteredProducts } from '../Features/Products/productSlice';
 import ProductGrid from '../Features/Products/ProductGrid';
 import ProductFilter from '../Features/Products/ProductFilter';
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Button from '../Components/Button';
 
 const ITEMS_PER_PAGE = 12;
@@ -11,16 +11,17 @@ export default function ProductListingPage({ isFilterOpen, setIsFilterOpen }) {
   const products = useSelector(selectFilteredProducts);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const totalPages = Math.max(1, Math.ceil(products.length / ITEMS_PER_PAGE));
+  const safeCurrentPage = Math.min(currentPage, totalPages)
+  ;
+  const startIndex = (safeCurrentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const paginatedProducts = products.slice(startIndex, endIndex);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [products.length]);
   const handlePageChange = (page) => {
-    setCurrentPage(Math.max(1, Math.min(page, totalPages)));
+
+    const nextPage = Math.max(1, Math.min(page, totalPages));
+    setCurrentPage(nextPage);
     window.scrollTo({
       top: 0,
       behavior: 'smooth',

@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { selectCartCount } from '../Features/Cart/cartSlice';
 import { selectwishlistCount } from '../Features/Wishlist/wishlistSlice';

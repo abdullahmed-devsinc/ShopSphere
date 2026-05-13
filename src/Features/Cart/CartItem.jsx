@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Button from '../../Components/Button';
 import QuantityStepper from '../../Components/Cart/QuantityStepper';
 import { updateQuantity, removeFromCart } from './cartSlice';
 import { selectStock } from '../Products/productSlice';

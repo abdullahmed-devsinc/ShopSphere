@@ -1,4 +1,4 @@
-import { loginUser, logoutUser } from '../Services/loginService';
+import { loginUser } from '../Services/loginService';
 import { useState } from 'react';
 import Button from './Button';
 
