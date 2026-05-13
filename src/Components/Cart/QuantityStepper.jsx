@@ -11,12 +11,7 @@ export default function QuantityStepper({
 }) {
   return (
     <div className={`card-qty-stepper ${className}`.trim()}>
-      <Button
-        variant='card-qty-btn'
-        onClick={onDecrease}
-        disabled={quantity < 0}
-        aria-label='Decrease quantity'
-      >
+      <Button variant='card-qty-btn' onClick={onDecrease} disabled={quantity < 0}>
         <span className='material-symbols-outlined'>
           {quantity < 2 ? 'delete' : 'remove'}
         </span>
@@ -24,12 +19,7 @@ export default function QuantityStepper({
 
       <span className='card-qty-count'>{quantity}</span>
 
-      <Button
-        variant='card-qty-btn'
-        onClick={onIncrease}
-        disabled={disableIncrease}
-        aria-label='Increase quantity'
-      >
+      <Button variant='card-qty-btn' onClick={onIncrease} disabled={disableIncrease}>
         <span className='material-symbols-outlined'>add</span>
       </Button>
     </div>

@@ -22,7 +22,7 @@ export default function OrderSummary({
         <span>${formatMoney(subtotal)}</span>
       </div>
 
-      {taxAmount != null && (
+      {taxAmount && (
         <div className='summary-row'>
           <span>{taxLabel}</span>
           <span>${formatMoney(taxAmount)}</span>
