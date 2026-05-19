@@ -16,9 +16,12 @@ export default function App() {
         isFilterOpen={isFilterOpen}
       />
       <main className='app-shell'>
-        <ScrollToTop />
-        <Breadcrumbs />
-        <Routes isFilterOpen={isFilterOpen} setIsFilterOpen={setIsFilterOpen} />
+        <div className='app-bg' />
+        <div className='app-content'>
+          <ScrollToTop />
+          <Breadcrumbs />
+          <Routes isFilterOpen={isFilterOpen} setIsFilterOpen={setIsFilterOpen} />
+        </div>
       </main>
     </BrowserRouter>
   );

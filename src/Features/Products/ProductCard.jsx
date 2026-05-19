@@ -1,17 +1,21 @@
-import { Link } from 'react-router-dom';
+import { Link, replace } from 'react-router-dom';
 import Button from '../../Components/Button';
 import productShape from '../../propTypes/productShape';
 import CartStepper from '../Cart/CartStepper';
 import PropTypes from 'prop-types';
 import ProductRatingLine from '../../Components/ProductRatingLine';
+import { useNavigate } from 'react-router-dom';
 
 export default function ProductCard({
   product,
   isInCart,
   isInWishlist,
+  isUserLoggedIn,
+  checkIfAdmin,
   onAddToCart,
   onAddToWishlist,
 }) {
+  const navigate = useNavigate();
   return (
     <div className='card'>
       <Link to={`/productdetail/${product.id}`}>
@@ -43,9 +47,22 @@ export default function ProductCard({
             Add to Cart
           </Button>
         )}
-        <Button variant='secondary' disabled={isInWishlist} onClick={onAddToWishlist}>
-          {isInWishlist ? 'Saved' : 'Wishlist'}
-        </Button>
+        {isUserLoggedIn ? (
+          <Button variant='secondary' disabled={isInWishlist} onClick={onAddToWishlist}>
+            {isInWishlist ? 'Saved in Wishlist' : 'Wishlist'}
+          </Button>
+        ) : checkIfAdmin ? (
+          <Button variant='secondary' disabled={true}>
+            Wishlist not allowed for Admin
+          </Button>
+        ) : (
+          <Button
+            variant='secondary'
+            onClick={() => navigate('/login', { replace: true })}
+          >
+            Login to add to Wishlist
+          </Button>
+        )}
       </div>
     </div>
   );

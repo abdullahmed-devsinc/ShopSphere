@@ -1,20 +1,17 @@
 import { useSelector } from 'react-redux';
 import { selectAuthState, selectCurrentUser } from '../Features/Auth/authSlice';
-import LoginModal from './LoginModal';
-import { Navigate } from 'react-router-dom';
-export default function ProtectedRoute({ children, allowedRoutes }) {
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
+
+export default function ProtectedRoute({ allowedRoles }) {
   const isAuthenticated = useSelector(selectAuthState);
   const currentUser = useSelector(selectCurrentUser);
+  const location = useLocation();
 
   if (!isAuthenticated) {
-    return (
-      <div className='protected-fallback-page'>
-        <LoginModal role={allowedRoutes?.[0] || 'user'} />
-      </div>
-    );
+    return <Navigate to='/login' state={{ from: location }} replace />;
   }
-  if (allowedRoutes && !allowedRoutes.includes(currentUser?.role)) {
-    return <Navigate to='/' replace />;
+  if (allowedRoles && !allowedRoles.includes(currentUser?.role)) {
+    return <Navigate to='/unauthorized' replace />;
   }
-  return children;
+  return <Outlet />;
 }

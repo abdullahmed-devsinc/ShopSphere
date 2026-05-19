@@ -3,16 +3,15 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { selectCartCount } from '../Features/Cart/cartSlice';
 import { selectwishlistCount } from '../Features/Wishlist/wishlistSlice';
 import ProductSearch from '../Features/Products/ProductSearch';
-import { logoutUser } from '../Services/loginService';
-import { selectAuthState, selectIsAdmin } from '../Features/Auth/authSlice';
+import { useAuth } from '../hooks/useAuth';
 
 export default function Navbar({ onFilterToggle, isFilterOpen }) {
   const cartCount = useSelector(selectCartCount);
   const wishlistCount = useSelector(selectwishlistCount);
   const location = useLocation();
   const isProductListing = location.pathname === '/products';
-  const isAuthenticated = useSelector(selectAuthState);
-  const isAdmin = useSelector(selectIsAdmin);
+  const { isAdmin, isUser, isAuthenticated, logout } = useAuth();
+
   return (
     <header className='navbar'>
       <div className='navbar__left'>
@@ -45,7 +44,7 @@ export default function Navbar({ onFilterToggle, isFilterOpen }) {
         >
           Products
         </NavLink>
-        {(!isAuthenticated || isAdmin) && (
+        {isAdmin && (
           <NavLink
             to='/add'
             className={({ isActive }) => `navbar__link ${isActive ? 'active' : ''}`}
@@ -53,16 +52,19 @@ export default function Navbar({ onFilterToggle, isFilterOpen }) {
             Add Product
           </NavLink>
         )}
-        <span className='navbar__item'>
-          <Link
-            to='/wishlist'
-            className='navbar__link navbar__link--icon'
-            aria-label='Wishlist'
-          >
-            <span className='material-symbols-outlined'>favorite</span>
-          </Link>
-          {wishlistCount > 0 && <span className='navbar__count'>{wishlistCount}</span>}
-        </span>
+
+        {isUser && (
+          <span className='navbar__item'>
+            <Link
+              to='/wishlist'
+              className='navbar__link navbar__link--icon'
+              aria-label='Wishlist'
+            >
+              <span className='material-symbols-outlined'>favorite</span>
+            </Link>
+            {wishlistCount > 0 && <span className='navbar__count'>{wishlistCount}</span>}
+          </span>
+        )}
         <span className='navbar__item'>
           <Link to='/cart' className='navbar__link navbar__link--icon' aria-label='Cart'>
             <span className='material-symbols-outlined'>shopping_cart</span>
@@ -70,10 +72,14 @@ export default function Navbar({ onFilterToggle, isFilterOpen }) {
           {cartCount > 0 && <span className='navbar__count'>{cartCount}</span>}
         </span>
       </nav>
-      {isAuthenticated && (
-        <button className='navbar__logout-btn' onClick={() => logoutUser()}>
+      {isAuthenticated ? (
+        <button className='navbar__logout-btn' onClick={() => logout()}>
           Logout
         </button>
+      ) : (
+        <Link to='/login' className='navbar__link navbar__link--login'>
+          Login
+        </Link>
       )}
     </header>
   );

@@ -9,6 +9,8 @@ const ProductListingPage = lazy(() => import('./Pages/ProductListingPage'));
 const HomePage = lazy(() => import('./Pages/HomePage'));
 const WishlistPage = lazy(() => import('./Pages/WishlistPage'));
 const AddProductPage = lazy(() => import('./Pages/AddProductPage'));
+const LoginPage = lazy(() => import('./Pages/LoginPage'));
+const UnAuthoriedPage = lazy(() => import('./Pages/UnAuthorized'));
 
 export default function Routes({ isFilterOpen, setIsFilterOpen }) {
   return (
@@ -24,25 +26,21 @@ export default function Routes({ isFilterOpen, setIsFilterOpen }) {
             />
           }
         />
+        <Route path='/unauthorized' element={<UnAuthoriedPage />} />
+        <Route path='/login' element={<LoginPage />} />
+
         <Route path='/productdetail/:id' element={<ProductDetailPage />} />
-        <Route
-          path='/checkout'
-          element={
-            <ProtectedRoute allowedRoutes={['user']}>
-              <CheckoutSummaryPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route path='/wishlist' element={<WishlistPage />} />
         <Route path='/cart' element={<CartPage />} />
-        <Route
-          path='/add'
-          element={
-            <ProtectedRoute allowedRoutes={['admin']}>
-              <AddProductPage />
-            </ProtectedRoute>
-          }
-        />
+
+        <Route element={<ProtectedRoute allowedRoles={['user']} />}>
+          <Route path='/checkout' element={<CheckoutSummaryPage />} />
+          <Route path='/wishlist' element={<WishlistPage />} />
+        </Route>
+
+        <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+          <Route path='/add' element={<AddProductPage />} />
+        </Route>
+
         <Route path='*' element={<NotFoundPage />} />
       </AppRoutes>
     </Suspense>

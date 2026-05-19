@@ -12,6 +12,8 @@ import SimilarProductRow from '../Components/SimilarProductsRow';
 import ProductRatingLine from '../Components/ProductRatingLine';
 import ProductReviews from '../Components/ProductReviews';
 import CartStepper from '../Features/Cart/CartStepper';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 export default function ProductDetailPage() {
   const { id } = useParams();
   const pid = Number(id);
@@ -23,6 +25,9 @@ export default function ProductDetailPage() {
   );
   const isInCart = useSelector(selectIsInCart(product?.id ?? -1));
   const isInWishlist = useSelector(selectIsInwishlist(product?.id ?? -1));
+
+  const { isAuthenticated, isUser, isAdmin } = useAuth();
+  const navigate = useNavigate();
 
   if (!product) return <NotFoundPage />;
 
@@ -99,13 +104,21 @@ export default function ProductDetailPage() {
             )}
             <Button
               variant='secondary'
-              disabled={isInWishlist}
-              onClick={handleAddToWishlist}
+              disabled={isAdmin || isInWishlist}
+              onClick={
+                isAuthenticated
+                  ? handleAddToWishlist
+                  : () => navigate('/login', { replace: true })
+              }
             >
               <span className='material-symbols-outlined' style={{ fontSize: '20px' }}>
                 {isInWishlist ? 'favorite' : 'favorite_border'}
               </span>
-              {isInWishlist ? 'Saved' : 'Wishlist'}
+              {isAuthenticated
+                ? isAdmin
+                  ? 'Wishlist is not allowed for Admin'
+                  : 'Add to Wishlist'
+                : 'Login to add to Wishlist'}
             </Button>
           </div>
 

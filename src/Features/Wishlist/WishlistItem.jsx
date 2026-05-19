@@ -14,6 +14,7 @@ export default function WishlistItem({ item }) {
       item={item}
       onRemove={() => dispatch(removeFromwishlist(item.id))}
       onAddToCart={() => dispatch(addToCart(item))}
+      onRemoveFromCart={() => dispatch(removeFromwishlist(item.id))}
       isInCart={isInCart}
     />
   );
