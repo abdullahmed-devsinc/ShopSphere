@@ -50,7 +50,7 @@ export default function CartItem({ item }) {
           item.quantity <= 1 ? () => dispatch(removeFromCart(item.id)) : handleDecrease
         }
         onIncrease={handleIncrease}
-        disableDecrease={item.quantity <= 1}
+        disableDecrease={item.quantity <= 0}
         disableIncrease={itemStock <= item.quantity}
         className='card-qty-stepper--cart'
       />

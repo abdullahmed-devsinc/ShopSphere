@@ -112,6 +112,8 @@ p {
   gap: 6px;
   font-size: 0.875rem;
   color: var(--muted);
+  margin-top: -8px;
+  margin-bottom: 24px;
 }
 
 .breadcrumb-link {
@@ -146,7 +148,9 @@ p {
     color 0.16s,
     transform 0.16s,
     box-shadow 0.16s;
-  white-space: nowrap;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.4;
 }
 
 .btn:disabled {
@@ -1032,7 +1036,7 @@ p {
 
 .category-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
   gap: 20px;
   margin-top: 24px;
 }
@@ -1247,6 +1251,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 12px;
   margin-top: 32px;
   padding: 20px 0;
@@ -2101,7 +2106,7 @@ p {
     gap: 8px;
   }
   .product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
     gap: 12px;
   }
 
