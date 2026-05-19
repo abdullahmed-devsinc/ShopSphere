@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { selectCartCount } from '../Features/Cart/cartSlice';
@@ -11,76 +12,117 @@ export default function Navbar({ onFilterToggle, isFilterOpen }) {
   const location = useLocation();
   const isProductListing = location.pathname === '/products';
   const { isAdmin, isUser, isAuthenticated, logout } = useAuth();
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+
+  const closeMobileNav = () => setIsMobileNavOpen(false);
+
+  const handleLogout = () => {
+    logout();
+    closeMobileNav();
+  };
 
   return (
-    <header className='navbar'>
-      <div className='navbar__left'>
-        <Link to='/' className='navbar__brand'>
-          ShopSphere
-        </Link>
-        {isProductListing && (
-          <button
-            className={`navbar__filter-btn ${isFilterOpen ? 'active' : ''}`}
-            onClick={onFilterToggle}
-            aria-label='Toggle filters'
-          >
-            <span className='material-symbols-outlined'>tune</span>
-            <span>Filters</span>
-          </button>
-        )}
-      </div>
+    <>
+      <header className={`navbar ${isProductListing ? 'navbar--products' : ''}`}>
+        <div className='navbar__left'>
+          <Link to='/' className='navbar__brand'>
+            ShopSphere
+          </Link>
 
-      {isProductListing && (
-        <div className='navbar__search'>
-          <span className='material-symbols-outlined navbar__search-icon'>search</span>
-          <ProductSearch />
+          {isProductListing && (
+            <button
+              className={`navbar__filter-btn ${isFilterOpen ? 'active' : ''}`}
+              onClick={onFilterToggle}
+            >
+              <span className='material-symbols-outlined'>tune</span>
+              <span>Filters</span>
+            </button>
+          )}
         </div>
-      )}
 
-      <nav className='navbar__links' aria-label='Main navigation'>
-        <NavLink
-          to='/products'
-          className={({ isActive }) => `navbar__link ${isActive ? 'active' : ''}`}
+        {isProductListing && (
+          <div className='navbar__search'>
+            <span className='material-symbols-outlined navbar__search-icon'>search</span>
+            <ProductSearch />
+          </div>
+        )}
+
+        <button
+          className='navbar__menu-btn'
+          onClick={() => setIsMobileNavOpen((prev) => !prev)}
         >
-          Products
-        </NavLink>
-        {isAdmin && (
+          <span className='material-symbols-outlined'>
+            {isMobileNavOpen ? 'close' : 'menu'}
+          </span>
+        </button>
+
+        <nav
+          className={`navbar__links ${isMobileNavOpen ? 'open' : ''}`}
+        >
           <NavLink
-            to='/add'
+            to='/products'
+            onClick={closeMobileNav}
             className={({ isActive }) => `navbar__link ${isActive ? 'active' : ''}`}
           >
-            Add Product
+            Products
           </NavLink>
-        )}
 
-        {isUser && (
-          <span className='navbar__item'>
-            <Link
-              to='/wishlist'
-              className='navbar__link navbar__link--icon'
-              aria-label='Wishlist'
+          {isAdmin && (
+            <NavLink
+              to='/add'
+              onClick={closeMobileNav}
+              className={({ isActive }) => `navbar__link ${isActive ? 'active' : ''}`}
             >
-              <span className='material-symbols-outlined'>favorite</span>
+              Add Product
+            </NavLink>
+          )}
+
+          <div className='navbar__icon-links'>
+            {isUser && (
+              <span className='navbar__item'>
+                <Link
+                  to='/wishlist'
+                  onClick={closeMobileNav}
+                  className='navbar__link navbar__link--icon'
+                >
+                  <span className='material-symbols-outlined'>favorite</span>
+                </Link>
+                {wishlistCount > 0 && <span className='navbar__count'>{wishlistCount}</span>}
+              </span>
+            )}
+
+            <span className='navbar__item'>
+              <Link
+                to='/cart'
+                onClick={closeMobileNav}
+                className='navbar__link navbar__link--icon'
+              >
+                <span className='material-symbols-outlined'>shopping_cart</span>
+              </Link>
+              {cartCount > 0 && <span className='navbar__count'>{cartCount}</span>}
+            </span>
+          </div>
+
+          {isAuthenticated ? (
+            <button className='navbar__logout-btn' onClick={handleLogout}>
+              Logout
+            </button>
+          ) : (
+            <Link
+              to='/login'
+              onClick={closeMobileNav}
+              className='navbar__link navbar__link--login'
+            >
+              Login
             </Link>
-            {wishlistCount > 0 && <span className='navbar__count'>{wishlistCount}</span>}
-          </span>
-        )}
-        <span className='navbar__item'>
-          <Link to='/cart' className='navbar__link navbar__link--icon' aria-label='Cart'>
-            <span className='material-symbols-outlined'>shopping_cart</span>
-          </Link>
-          {cartCount > 0 && <span className='navbar__count'>{cartCount}</span>}
-        </span>
-      </nav>
-      {isAuthenticated ? (
-        <button className='navbar__logout-btn' onClick={() => logout()}>
-          Logout
-        </button>
-      ) : (
-        <Link to='/login' className='navbar__link navbar__link--login'>
-          Login
-        </Link>
-      )}
-    </header>
+          )}
+        </nav>
+      </header>
+
+      <button
+        className={`navbar__overlay ${isMobileNavOpen ? 'open' : ''}`}
+        onClick={closeMobileNav}
+      />
+    </>
   );
 }

@@ -117,7 +117,7 @@ export default function ProductDetailPage() {
               {isAuthenticated
                 ? isAdmin
                   ? 'Wishlist is not allowed for Admin'
-                  : 'Add to Wishlist'
+                  : isInWishlist ? 'Added to Wishlist' : 'Add to Wishlist'
                 : 'Login to add to Wishlist'}
             </Button>
           </div>
