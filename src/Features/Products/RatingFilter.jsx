@@ -17,6 +17,7 @@ export default function RatingFilter() {
             value={rating}
             checked={currentFilters.rating === rating}
             onChange={() => dispatch(setFilters({ rating }))}
+            className='app-input'
           />
           {rating === 0 ? 'All ratings' : `${rating}+ stars`}
         </label>

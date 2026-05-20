@@ -63,8 +63,13 @@ export default function ProductReviews({ productId, reviews }) {
                 placeholder='Your name'
                 value={author}
                 onChange={(e) => setAuthor(e.target.value)}
+                className='app-input'
               />
-              <select value={rating} onChange={(e) => setRating(e.target.value)}>
+              <select
+                value={rating}
+                onChange={(e) => setRating(e.target.value)}
+                className='app-input'
+              >
                 {[5, 4, 3, 2, 1].map((n) => (
                   <option key={n} value={n}>
                     {n} stars

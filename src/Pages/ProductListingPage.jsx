@@ -12,14 +12,12 @@ export default function ProductListingPage({ isFilterOpen, setIsFilterOpen }) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = Math.max(1, Math.ceil(products.length / ITEMS_PER_PAGE));
-  const safeCurrentPage = Math.min(currentPage, totalPages)
-  ;
+  const safeCurrentPage = Math.min(currentPage, totalPages);
   const startIndex = (safeCurrentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const paginatedProducts = products.slice(startIndex, endIndex);
 
   const handlePageChange = (page) => {
-
     const nextPage = Math.max(1, Math.min(page, totalPages));
     setCurrentPage(nextPage);
     window.scrollTo({

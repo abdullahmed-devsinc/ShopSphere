@@ -17,6 +17,7 @@ export default function CategoryFilter() {
             value={cat}
             checked={currentFilters.category === cat}
             onChange={() => dispatch(setFilters({ category: cat }))}
+            className='app-input'
           />
           {cat.charAt(0).toUpperCase() + cat.slice(1)}
         </label>

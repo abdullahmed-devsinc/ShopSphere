@@ -9,7 +9,11 @@ export default function SortControl() {
   return (
     <div className='filter-group'>
       <h3>Sort By</h3>
-      <select value={currentSort} onChange={(e) => dispatch(setSortBy(e.target.value))}>
+      <select
+        value={currentSort}
+        onChange={(e) => dispatch(setSortBy(e.target.value))}
+        className='app-input'
+      >
         {SORT_OPTIONS.map((opt) => (
           <option key={opt.value} value={opt.value}>
             {opt.label}

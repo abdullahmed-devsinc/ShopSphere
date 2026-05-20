@@ -34,9 +34,7 @@
   --sticky-offset: calc(var(--navbar-h) + 16px);
 }
 
-*,
-*::before,
-*::after {
+*{
   box-sizing: border-box;
 }
 
@@ -285,15 +283,13 @@ p {
   align-items: center;
   gap: 3px;
 }
-.card-rating::before {
-  content: '★';
-}
-.card-rating[data-empty='true'] {
-  color: var(--muted);
+
+.card-rating-empty {
+  font-size: 0.8rem;
   font-weight: 500;
-}
-.card-rating[data-empty='true']::before {
-  display: none;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
 }
 
 .card-stock {
@@ -447,13 +443,7 @@ p {
   color: var(--danger);
   font-size: 0.8rem;
 }
-.filter-group select,
-.price-inputs input[type='number'],
-.product-reviews__form-row input[type='text'],
-.product-reviews__form-row select,
-.form-group input[type='text'],
-.form-group input[type='number'],
-.form-group select {
+.app-input {
   width: 100%;
   padding: 8px 10px;
   border: 1px solid var(--border);
@@ -463,27 +453,13 @@ p {
   font-size: 0.875rem;
 }
 
-.filter-group select:focus,
-.price-inputs input[type='number']:focus,
-.product-reviews__form-row input:focus,
-.product-reviews__form-row select:focus,
-.form-group input:focus,
-.form-group select:focus {
+.app-input:focus {
   outline: none;
   border-color: var(--accent);
   box-shadow: var(--focus-ring);
   background: var(--bg-elevated);
 }
 
-.filter-group select,
-.form-group select {
-  appearance: none;
-  background-image: var(--select-chevron);
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  cursor: pointer;
-  transition: border-color 0.15s;
-}
 
 .empty-state {
   display: flex;
@@ -1389,19 +1365,6 @@ p {
   flex-direction: column;
   gap: 12px;
 }
-.product-reviews__form-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.product-reviews__form-row input[type='text'],
-.product-reviews__form-row select {
-  flex: 1;
-  min-width: 160px;
-  padding: 9px 12px;
-  font-size: 0.9rem;
-}
 
 .cart-page,
 .wishlist-page {
@@ -1987,11 +1950,10 @@ p {
     width: 100%;
     padding: 18px;
   }
-  .product-reviews__form-row {
+  .app-input {
     flex-direction: column;
   }
-  .product-reviews__form-row input[type='text'],
-  .product-reviews__form-row select {
+  .app-input select {
     width: 100%;
     min-width: 0;
   }

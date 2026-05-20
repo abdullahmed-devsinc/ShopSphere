@@ -53,18 +53,14 @@ export default function PriceRangeFilter() {
       </div>
 
       <div className='price-inputs'>
-        <input
-          type='number'
-          min={0}
-          value={minVal}
-          onChange={handleMinChange}
-        />
+        <input type='number' min={0} value={minVal} onChange={handleMinChange} />
         <span>to</span>
         <input
           type='number'
           value={noMaxLimit ? '' : maxInput}
           onChange={handleMaxChange}
           disabled={noMaxLimit}
+          className='app-input'
         />
       </div>
 

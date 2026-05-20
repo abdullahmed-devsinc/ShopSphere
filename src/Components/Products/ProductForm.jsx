@@ -20,6 +20,7 @@ export default function ProductForm({
           value={formik.values.name}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          className='app-input'
         />
         {formik.touched.name && formik.errors.name ? (
           <p className='error'>{formik.errors.name}</p>
@@ -33,6 +34,7 @@ export default function ProductForm({
           value={formik.values.category}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          className='app-input'
         >
           <option value=''>Select a category</option>
           {ADD_PRODUCT_CATEGORIES.map((category) => (
@@ -54,6 +56,7 @@ export default function ProductForm({
           value={formik.values.price}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          className='app-input'
         />
         {formik.touched.price && formik.errors.price ? (
           <p className='error'>{formik.errors.price}</p>
@@ -68,6 +71,7 @@ export default function ProductForm({
           value={formik.values.stock}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          className='app-input'
         />
         {formik.touched.stock && formik.errors.stock ? (
           <p className='error'>{formik.errors.stock}</p>
@@ -76,7 +80,12 @@ export default function ProductForm({
 
       <div className='form-group'>
         <label>Image</label>
-        <input type='file' accept='image/*' onChange={onPickImage} />
+        <input
+          type='file'
+          accept='image/*'
+          onChange={onPickImage}
+          className='app-input'
+        />
         {previewUrl ? (
           <img className='add-product-preview' src={previewUrl} alt='' />
         ) : null}

@@ -51,10 +51,10 @@ export default function WishlistCard({ item, onRemove, onAddToCart, isInCart = f
             type='button'
             disabled={isInCart || !inStock}
             onClick={onAddToCart}
-            title={isInCart ? 'Already in cart' : ''}
+            title={inStock ? (isInCart ? 'Already in cart' : 'Add to Cart') : 'Out of Stock'}
 
           >
-            {isInCart ? 'Already in cart' : 'Add to Cart'}
+           {inStock ? (isInCart ? 'Already in cart' : 'Add to Cart') : 'Out of Stock'}
           </Button>
       </div>
     </article>

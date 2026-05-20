@@ -14,22 +14,22 @@ import ProductReviews from '../Components/ProductReviews';
 import CartStepper from '../Features/Cart/CartStepper';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+
 export default function ProductDetailPage() {
   const { id } = useParams();
-  const pid = Number(id);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isAuthenticated, isUser, isAdmin } = useAuth();
 
+  const pid = Number(id);
   const product = useSelector(selectProductById(pid));
+  if (!product) return <NotFoundPage />;
+
   const similar = useSelector(
     selectSimilarProducts(product?.id, product?.category ?? ''),
   );
   const isInCart = useSelector(selectIsInCart(product?.id ?? -1));
   const isInWishlist = useSelector(selectIsInwishlist(product?.id ?? -1));
-
-  const { isAuthenticated, isUser, isAdmin } = useAuth();
-  const navigate = useNavigate();
-
-  if (!product) return <NotFoundPage />;
 
   const handleAddToCart = () => {
     if (!isInCart && product.stock > 0) dispatch(addToCart(product));
@@ -117,7 +117,9 @@ export default function ProductDetailPage() {
               {isAuthenticated
                 ? isAdmin
                   ? 'Wishlist is not allowed for Admin'
-                  : isInWishlist ? 'Added to Wishlist' : 'Add to Wishlist'
+                  : isInWishlist
+                    ? 'Added to Wishlist'
+                    : 'Add to Wishlist'
                 : 'Login to add to Wishlist'}
             </Button>
           </div>

@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   selectAuthState,
   selectCurrentUser,
-  selectIsAdmin,
   logout,
   login,
 } from '../Features/Auth/authSlice';
@@ -12,8 +11,9 @@ import users from '../data/users.json';
 export function useAuth() {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(selectAuthState);
-  const user = useSelector(selectCurrentUser);
-  const isAdmin = useSelector(selectIsAdmin);
+  const user = isAuthenticated && useSelector(selectCurrentUser);
+
+  const isAdmin = isAuthenticated && user?.role === 'admin';
 
   const isUser = isAuthenticated && !isAdmin;
 

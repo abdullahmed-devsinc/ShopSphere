@@ -1,4 +1,3 @@
-/** Average star rating from customer reviews (not stored on product). */
 export function getAverageRating(product) {
   const reviews = product?.reviews;
   if (!Array.isArray(reviews) || reviews.length === 0) return null;

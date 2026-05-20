@@ -9,7 +9,7 @@ import {
 import { selectStock } from '../Products/productSlice';
 import QuantityStepper from '../../Components/Cart/QuantityStepper';
 
-export default function CartStepper({ product }) {
+export default function CartStepper({ product, className = '' }) {
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItemById(product.id));
   const stock = useSelector(selectStock(product.id));
@@ -25,7 +25,13 @@ export default function CartStepper({ product }) {
   };
 
   const handleIncrease = () => {
-    if (!atMaxStock) dispatch(addToCart(product));
+    if (!atMaxStock) {
+      if (quantity === 0) {
+        dispatch(addToCart(product));
+      } else {
+        dispatch(updateQuantity({ id: product.id, quantity: quantity + 1 }));
+      }
+    }
   };
 
   return (
@@ -35,6 +41,7 @@ export default function CartStepper({ product }) {
       onIncrease={handleIncrease}
       disableDecrease={quantity <= 0}
       disableIncrease={atMaxStock}
+      className={className}
     />
   );
 }

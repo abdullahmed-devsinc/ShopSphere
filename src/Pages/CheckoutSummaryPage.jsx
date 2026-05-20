@@ -77,7 +77,6 @@ export default function CheckoutSummaryPage() {
           totalAmount={grandTotal}
           ctaText='Complete purchase'
           onCtaClick={handleCheckout}
-          note='By completing your purchase you agree to our standard terms for demo checkout.'
         />
       </div>
     </div>
