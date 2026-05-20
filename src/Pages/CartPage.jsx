@@ -18,7 +18,7 @@ export default function CartPage() {
           title='Your cart is empty'
           message='Add products from the catalog — they will show up in this list.'
           action={
-            <Link to='/' className='btn btn-primary'>
+            <Link to='/products' className='btn btn-primary'>
               Browse products
             </Link>
           }

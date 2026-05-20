@@ -6,13 +6,13 @@ export default function Breadcrumbs() {
   const paths = location.pathname.split('/').filter((p) => p);
 
   const products = useSelector((state) => state.products.items);
-  const noShowRoutes = ['/unauthorized', '*', '/login'];
+  const noShowRoutes = ['/unauthorized', '/login'];
 
   if (paths.length === 0) return null;
   const inValidRoute = noShowRoutes.includes(location.pathname);
   if (inValidRoute) return null;
   return (
-    <nav className='breadcrumbs' aria-label='Breadcrumb'>
+    <nav className='breadcrumbs'>
       <Link to='/' className='breadcrumb-link'>
         Home
       </Link>
@@ -30,7 +30,7 @@ export default function Breadcrumbs() {
 
         return (
           <span key={to} className='breadcrumb-item'>
-            <span className='breadcrumb-separator'> / </span>
+            <span> / </span>
             {isLast ? (
               <span className='breadcrumb-current'>{displayName}</span>
             ) : (

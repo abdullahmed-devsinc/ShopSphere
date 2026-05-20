@@ -40,7 +40,6 @@ export default function ProductListingPage({ isFilterOpen, setIsFilterOpen }) {
           <button
             className='filter-sidebar__close'
             onClick={() => setIsFilterOpen(false)}
-            aria-label='Close filters'
           >
             <span className='material-symbols-outlined'>close</span>
           </button>

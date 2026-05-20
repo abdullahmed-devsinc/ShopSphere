@@ -10,7 +10,7 @@ const HomePage = lazy(() => import('./Pages/HomePage'));
 const WishlistPage = lazy(() => import('./Pages/WishlistPage'));
 const AddProductPage = lazy(() => import('./Pages/AddProductPage'));
 const LoginPage = lazy(() => import('./Pages/LoginPage'));
-const UnAuthoriedPage = lazy(() => import('./Pages/UnAuthorized'));
+const UnAuthorized = lazy(() => import('./Pages/UnAuthorized'));
 
 export default function Routes({ isFilterOpen, setIsFilterOpen }) {
   return (
@@ -26,7 +26,7 @@ export default function Routes({ isFilterOpen, setIsFilterOpen }) {
             />
           }
         />
-        <Route path='/unauthorized' element={<UnAuthoriedPage />} />
+        <Route path='/unauthorized' element={<UnAuthorized />} />
         <Route path='/login' element={<LoginPage />} />
 
         <Route path='/productdetail/:id' element={<ProductDetailPage />} />

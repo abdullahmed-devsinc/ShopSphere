@@ -22,7 +22,7 @@ export default function WishlistPage() {
             Tap the heart on a product to save it — you can move items to your cart
             anytime.
           </p>
-          <Link to='/' className='btn btn-primary'>
+          <Link to='/products' className='btn btn-primary'>
             Browse products
           </Link>
         </div>

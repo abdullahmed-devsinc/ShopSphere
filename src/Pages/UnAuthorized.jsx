@@ -6,11 +6,12 @@ export default function UnAuthorized() {
   return (
     <div className='page page-unauthorized error-page-wrapper'>
       <div className='error-glass-card'>
-        <p className='eyebrow'>403 Forbidden</p>
         <h1>Access Denied</h1>
         <p>You do not have permission to view this page.</p>
         <Button variant='primary' onClick={() => navigate('/', { replace: true })}>
-          <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>home</span>
+          <span className='material-symbols-outlined' style={{ fontSize: '20px' }}>
+            home
+          </span>
           Go To Home
         </Button>
       </div>

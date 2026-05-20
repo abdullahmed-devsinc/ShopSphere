@@ -1761,7 +1761,6 @@ p {
 .error-glass-card {
   background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: var(--radius-lg);
   padding: 56px 48px;
@@ -1771,23 +1770,6 @@ p {
   box-shadow:
     var(--shadow-lg),
     0 0 50px rgba(22, 163, 74, 0.08);
-  animation: float-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.error-glass-card .eyebrow {
-  font-size: 1.05rem;
-  font-weight: 800;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  background: linear-gradient(135deg, var(--accent), #0ea5e9);
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 12px;
-}
-
-.page-unauthorized .error-glass-card .eyebrow {
-  background: linear-gradient(135deg, var(--danger), #f97316);
 }
 
 .error-glass-card h1 {

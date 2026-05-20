@@ -58,7 +58,6 @@ export default function PriceRangeFilter() {
           min={0}
           value={minVal}
           onChange={handleMinChange}
-          aria-label='Minimum price'
         />
         <span>to</span>
         <input
@@ -66,7 +65,6 @@ export default function PriceRangeFilter() {
           value={noMaxLimit ? '' : maxInput}
           onChange={handleMaxChange}
           disabled={noMaxLimit}
-          aria-label='Maximum price'
         />
       </div>
 
