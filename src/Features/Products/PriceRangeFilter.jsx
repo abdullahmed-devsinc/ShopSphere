@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilters } from './productSlice';
 
@@ -6,8 +7,16 @@ export default function PriceRangeFilter() {
   const { priceRange } = useSelector((state) => state.products.filters);
   const [minVal, maxVal] = priceRange;
 
-  const noMaxLimit = maxVal == null;
-  const maxInput = maxVal == null ? '' : String(maxVal);
+  const [enforceMax, setEnforceMax] = useState(maxVal != null);
+  const [maxDraft, setMaxDraft] = useState(maxVal != null ? String(maxVal) : '');
+
+  useEffect(() => {
+    const hasMax = maxVal != null;
+    setEnforceMax(hasMax);
+    setMaxDraft(hasMax ? String(maxVal) : '')
+  }, [maxVal]);
+
+  const noMaxLimit = !enforceMax;
 
   const applyPriceRange = (nextMin, nextMax = null) => {
     dispatch(setFilters({ priceRange: [nextMin, nextMax] }));
@@ -21,24 +30,30 @@ export default function PriceRangeFilter() {
 
   const handleMaxChange = (e) => {
     const value = e.target.value;
-
-    if (value === '') {
-      applyPriceRange(minVal, null);
-      return;
-    }
-
-    const nextMax = Math.max(Number(value), minVal);
-    applyPriceRange(minVal, nextMax);
+    setMaxDraft(value);
+    if (value === '') return;
+    const parsed = Number(value);
+    if (!Number.isFinite(parsed)) return;
+    applyPriceRange(minVal, Math.max(parsed, minVal));
   };
 
   const handleNoMaxToggle = () => {
-    if (maxVal == null) {
-      applyPriceRange(minVal, minVal);
+    if (noMaxLimit) {
+      setEnforceMax(true);
+      setMaxDraft('');
       return;
     }
-
+    setEnforceMax(false);
+    setMaxDraft('');
     applyPriceRange(minVal, null);
   };
+  const displayMax =
+    noMaxLimit || maxDraft === ''
+      ? 'Any'
+      : Number.isFinite(Number(maxDraft))
+        ? `$${maxDraft}`
+        : 'Any';
+
 
   return (
     <div className='filter-group'>
@@ -48,16 +63,17 @@ export default function PriceRangeFilter() {
         <span className='price-range-val'>${minVal}</span>
         <span className='price-range-sep'>—</span>
         <span className='price-range-val'>
-          {noMaxLimit || maxInput === '' ? 'Any' : `$${maxInput}`}
+          {displayMax}
         </span>
       </div>
 
       <div className='price-inputs'>
-        <input type='number' min={0} value={minVal} onChange={handleMinChange} />
+        <input type='number' min={0} value={minVal} onChange={handleMinChange} className='app-input' />
         <span>to</span>
         <input
           type='number'
-          value={noMaxLimit ? '' : maxInput}
+          min={minVal}
+          value={maxDraft}
           onChange={handleMaxChange}
           disabled={noMaxLimit}
           className='app-input'
