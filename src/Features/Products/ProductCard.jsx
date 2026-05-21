@@ -48,13 +48,15 @@ export default function ProductCard({
           </Button>
         )}
         {isUserLoggedIn ? (
-          <Button variant='secondary' disabled={isInWishlist} onClick={onAddToWishlist}>
-            {isInWishlist ? 'Saved in Wishlist' : 'Wishlist'}
-          </Button>
-        ) : checkIfAdmin ? (
-          <Button variant='secondary' disabled={true}>
-            Wishlist not allowed for Admin
-          </Button>
+          checkIfAdmin ? (
+            <Button variant='secondary' disabled={true}>
+              Wishlist not allowed for Admin
+            </Button>
+          ) : (
+            <Button variant='secondary' disabled={isInWishlist} onClick={onAddToWishlist}>
+              {isInWishlist ? 'Saved in Wishlist' : 'Wishlist'}
+            </Button>
+          )
         ) : (
           <Button
             variant='secondary'

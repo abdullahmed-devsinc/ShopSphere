@@ -11,11 +11,11 @@ import users from '../data/users.json';
 export function useAuth() {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(selectAuthState);
-  const user = isAuthenticated && useSelector(selectCurrentUser);
+  const currentUser = useSelector(selectCurrentUser);
 
-  const isAdmin = isAuthenticated && user?.role === 'admin';
+  const isAdmin = currentUser?.role === 'admin';
 
-  const isUser = isAuthenticated && !isAdmin;
+  const isUser = !isAdmin;
 
   const handleLogin = (email, password) => {
     const foundUser = users.find((u) => u.email === email && u.password === password);
@@ -32,7 +32,7 @@ export function useAuth() {
   };
   return {
     isAuthenticated,
-    user,
+    currentUser,
     isAdmin,
     isUser,
     logout: handleLogout,

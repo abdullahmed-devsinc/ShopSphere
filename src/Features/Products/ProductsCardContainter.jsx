@@ -16,7 +16,7 @@ export default function ProductCardContainer({ product }) {
       product={product}
       isInCart={isInCart}
       isInWishlist={isInWishlist}
-      isUserLoggedIn={isUser}
+      isUserLoggedIn={isAuthenticated}
       checkIfAdmin={isAdmin}
       onAddToCart={() => dispatch(addToCart(product))}
       onAddToWishlist={() => dispatch(addTowishlist(product))}

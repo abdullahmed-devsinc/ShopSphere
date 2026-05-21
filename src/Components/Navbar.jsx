@@ -10,15 +10,15 @@ export default function Navbar({ onFilterToggle, isFilterOpen }) {
   const cartCount = useSelector(selectCartCount);
   const wishlistCount = useSelector(selectwishlistCount);
   const location = useLocation();
-  const isProductListing = location.pathname === '/products';
   const { isAdmin, isUser, isAuthenticated, logout } = useAuth();
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const isProductListing = location.pathname === '/products';
 
   const closeMobileNav = () => setIsMobileNavOpen(false);
 
   const handleLogout = () => {
-    logout();
     closeMobileNav();
+    logout();
   };
 
   return (
@@ -56,9 +56,7 @@ export default function Navbar({ onFilterToggle, isFilterOpen }) {
           </span>
         </button>
 
-        <nav
-          className={`navbar__links ${isMobileNavOpen ? 'open' : ''}`}
-        >
+        <nav className={`navbar__links ${isMobileNavOpen ? 'open' : ''}`}>
           <NavLink
             to='/products'
             onClick={closeMobileNav}
@@ -87,7 +85,9 @@ export default function Navbar({ onFilterToggle, isFilterOpen }) {
                 >
                   <span className='material-symbols-outlined'>favorite</span>
                 </Link>
-                {wishlistCount > 0 && <span className='navbar__count'>{wishlistCount}</span>}
+                {wishlistCount > 0 && (
+                  <span className='navbar__count'>{wishlistCount}</span>
+                )}
               </span>
             )}
 
