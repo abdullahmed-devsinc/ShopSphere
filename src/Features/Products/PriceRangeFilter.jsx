@@ -80,7 +80,7 @@ export default function PriceRangeFilter() {
         />
       </div>
 
-      <label className='price-no-limit'>
+      <label>
         <input type='checkbox' checked={noMaxLimit} onChange={handleNoMaxToggle} />
         No maximum price
       </label>

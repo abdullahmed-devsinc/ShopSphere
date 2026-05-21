@@ -76,7 +76,7 @@ export default function Navbar({ onFilterToggle, isFilterOpen }) {
           )}
 
           <div className='navbar__icon-links'>
-            {isUser && (
+            {isAuthenticated && isUser && (
               <span className='navbar__item'>
                 <Link
                   to='/wishlist'
