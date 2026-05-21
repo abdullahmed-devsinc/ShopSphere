@@ -1,9 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  resetFilters,
-  selectTopRatedProducts,
-} from '../Features/Products/productSlice';
+import { resetFilters, selectTopRatedProducts } from '../Features/Products/productSlice';
 import ProductGrid from '../Features/Products/ProductGrid';
 import { useNavigate } from 'react-router-dom';
 import { setFilters } from '../Features/Products/productSlice';

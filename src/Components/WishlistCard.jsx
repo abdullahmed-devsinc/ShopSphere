@@ -45,17 +45,18 @@ export default function WishlistCard({ item, onRemove, onAddToCart, isInCart = f
         <Button variant='danger' type='button' onClick={onRemove}>
           Remove
         </Button>
-       
-          <Button
-            variant='primary'
-            type='button'
-            disabled={isInCart || !inStock}
-            onClick={onAddToCart}
-            title={inStock ? (isInCart ? 'Already in cart' : 'Add to Cart') : 'Out of Stock'}
 
-          >
-           {inStock ? (isInCart ? 'Already in cart' : 'Add to Cart') : 'Out of Stock'}
-          </Button>
+        <Button
+          variant='primary'
+          type='button'
+          disabled={isInCart || !inStock}
+          onClick={onAddToCart}
+          title={
+            inStock ? (isInCart ? 'Already in cart' : 'Add to Cart') : 'Out of Stock'
+          }
+        >
+          {inStock ? (isInCart ? 'Already in cart' : 'Add to Cart') : 'Out of Stock'}
+        </Button>
       </div>
     </article>
   );

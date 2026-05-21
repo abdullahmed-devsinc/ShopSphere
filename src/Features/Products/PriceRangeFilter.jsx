@@ -13,7 +13,7 @@ export default function PriceRangeFilter() {
   useEffect(() => {
     const hasMax = maxVal != null;
     setEnforceMax(hasMax);
-    setMaxDraft(hasMax ? String(maxVal) : '')
+    setMaxDraft(hasMax ? String(maxVal) : '');
   }, [maxVal]);
 
   const noMaxLimit = !enforceMax;
@@ -54,7 +54,6 @@ export default function PriceRangeFilter() {
         ? `$${maxDraft}`
         : 'Any';
 
-
   return (
     <div className='filter-group'>
       <h3>Price Range</h3>
@@ -62,13 +61,17 @@ export default function PriceRangeFilter() {
       <div className='price-range-display'>
         <span className='price-range-val'>${minVal}</span>
         <span className='price-range-sep'>—</span>
-        <span className='price-range-val'>
-          {displayMax}
-        </span>
+        <span className='price-range-val'>{displayMax}</span>
       </div>
 
       <div className='price-inputs'>
-        <input type='number' min={0} value={minVal} onChange={handleMinChange} className='app-input' />
+        <input
+          type='number'
+          min={0}
+          value={minVal}
+          onChange={handleMinChange}
+          className='app-input'
+        />
         <span>to</span>
         <input
           type='number'
