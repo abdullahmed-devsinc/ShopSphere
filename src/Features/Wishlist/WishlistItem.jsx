@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { selectIsInCart } from '../Cart/cartSlice';
+import { selectCartItemById } from '../Cart/cartSlice';
 import { removeFromwishlist } from './wishlistSlice';
 import { addToCart } from '../Cart/cartSlice';
 import WishlistCard from '../../Components/WishlistCard';
@@ -7,7 +7,7 @@ import productShape from '../../propTypes/productShape';
 
 export default function WishlistItem({ item }) {
   const dispatch = useDispatch();
-  const isInCart = useSelector(selectIsInCart(item.id));
+  const isInCart = useSelector(selectCartItemById(item.id));
 
   return (
     <WishlistCard

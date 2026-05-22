@@ -4,7 +4,7 @@ import { formatMoney } from '../../utils/money';
 import CartStepper from './CartStepper';
 
 export default function CartItem({ item }) {
-  const lineTotal = item.quantity * item.price;
+  const lineTotal = item.cartQuantity * item.price;
 
   return (
     <div className='card card-horizontal cart-item-row'>
@@ -41,7 +41,7 @@ CartItem.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    quantity: PropTypes.number.isRequired,
+    cartQuantity: PropTypes.number.isRequired,
     stock: PropTypes.number.isRequired,
     img: PropTypes.string,
   }).isRequired,

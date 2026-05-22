@@ -4,7 +4,6 @@ import {
   selectProductById,
   selectSimilarProducts,
 } from '../Features/Products/productSlice';
-import { addToCart, selectIsInCart } from '../Features/Cart/cartSlice';
 import { addTowishlist, selectIsInwishlist } from '../Features/Wishlist/wishlistSlice';
 import Button from '../Components/Button';
 import NotFoundPage from './NotFoundPage';
@@ -19,21 +18,16 @@ export default function ProductDetailPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isAuthenticated, isUser, isAdmin } = useAuth();
+  const { isAuthenticated, isAdmin } = useAuth();
 
   const pid = Number(id);
   const product = useSelector(selectProductById(pid));
-  if (!product) return <NotFoundPage />;
 
   const similar = useSelector(
     selectSimilarProducts(product?.id, product?.category ?? ''),
   );
-  const isInCart = useSelector(selectIsInCart(product?.id ?? -1));
   const isInWishlist = useSelector(selectIsInwishlist(product?.id ?? -1));
-
-  const handleAddToCart = () => {
-    if (!isInCart && product.stock > 0) dispatch(addToCart(product));
-  };
+  if (!product) return <NotFoundPage />;
 
   const handleAddToWishlist = () => {
     if (!isInWishlist) {
@@ -86,22 +80,7 @@ export default function ProductDetailPage() {
           </div>
 
           <div className='product-actions-box'>
-            {isInCart ? (
-              <div className='product-cart-stepper-wrapper'>
-                <CartStepper product={product} />
-              </div>
-            ) : (
-              <Button
-                variant='primary'
-                onClick={handleAddToCart}
-                disabled={product.stock === 0}
-              >
-                <span className='material-symbols-outlined' style={{ fontSize: '20px' }}>
-                  shopping_bag
-                </span>
-                Add to Cart
-              </Button>
-            )}
+            <CartStepper product={product} variant='detail' />
             <Button
               variant='secondary'
               disabled={isAdmin || isInWishlist}

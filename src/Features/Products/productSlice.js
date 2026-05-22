@@ -28,18 +28,14 @@ const productsSlice = createSlice({
         state.items.length > 0
           ? Math.max(...state.items.map((item) => Number(item.id))) + 1
           : 1;
-      const payload = action.payload;
       state.items.push({
-        ...payload,
+        ...action.payload,
         id: nextId,
-        reviews: Array.isArray(payload.reviews) ? payload.reviews : [],
       });
     },
     addReview(state, action) {
       const { productId, review } = action.payload;
       const product = state.items.find((i) => i.id === productId);
-      if (!product) return;
-      if (!Array.isArray(product.reviews)) product.reviews = [];
 
       product.reviews.unshift({
         id: nanoid(),
@@ -70,14 +66,10 @@ const selectSearchQuery = (state) => state.products.searchBy;
 const selectFilters = (state) => state.products.filters;
 const selectSortBy = (state) => state.products.sortBy;
 
-export const selectStock = (productId) =>
-  createSelector(selectAllProducts, (items) => {
-    const product = items.find((p) => p.id === productId);
-    return product ? product.stock : 0;
-  });
 export const selectProductById = (productId) =>
   createSelector(selectAllProducts, (items) => {
     const product = items.find((p) => p.id === productId);
+
     return product;
   });
 export const selectFilteredProducts = createSelector(
@@ -86,7 +78,7 @@ export const selectFilteredProducts = createSelector(
   selectFilters,
   selectSortBy,
   (items, searchQuery, filters, sortBy) => {
-    let result = [...items];
+    let result = items;
     if (searchQuery) {
       result = result.filter((p) =>
         p.name.toLowerCase().includes(searchQuery.toLowerCase()),

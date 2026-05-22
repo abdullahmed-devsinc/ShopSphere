@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { formatMoney } from '../utils/money';
 
 export default function CheckoutLineItem({ item }) {
-  const qty = item.quantity ?? 1;
-  const lineTotal = qty * item.price;
+  const lineTotal = item.cartQuantity * item.price;
 
   return (
     <div className='card card-horizontal checkout-line-item'>
@@ -31,7 +30,7 @@ export default function CheckoutLineItem({ item }) {
 
       <div className='checkout-line-qty'>
         <span className='checkout-line-qty-label'>Qty</span>
-        <span className='checkout-line-qty-val'>{qty}</span>
+        <span className='checkout-line-qty-val'>{item.cartQuantity}</span>
       </div>
 
       <p className='card-price checkout-line-price'>${formatMoney(lineTotal)}</p>
@@ -44,7 +43,7 @@ CheckoutLineItem.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    quantity: PropTypes.number.isRequired,
+    cartQuantity: PropTypes.number.isRequired,
     img: PropTypes.string,
   }).isRequired,
 };

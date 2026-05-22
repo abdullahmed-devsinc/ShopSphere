@@ -1,53 +1,67 @@
 import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
-  addToCart,
   removeFromCart,
-  selectCartItemById,
   updateQuantity,
+  selectCartItemById,
+  addToCart,
 } from './cartSlice';
-import { selectStock } from '../Products/productSlice';
 import QuantityStepper from '../../Components/Cart/QuantityStepper';
+import Button from '../../Components/Button';
 
-export default function CartStepper({ product, className = '' }) {
+export default function CartStepper({ product, className = '', variant = 'card' }) {
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItemById(product.id));
-  const stock = useSelector(selectStock(product.id));
-  const quantity = cartItem?.quantity ?? 0;
-  const atMaxStock = quantity >= stock;
+  const cartQuantity = cartItem?.cartQuantity || product.cartQuantity || 0;
 
   const handleDecrease = () => {
-    if (quantity <= 1) {
+    if (cartQuantity <= 1) {
       dispatch(removeFromCart(product.id));
       return;
     }
-    dispatch(updateQuantity({ id: product.id, quantity: quantity - 1 }));
+    dispatch(updateQuantity({ id: product.id, cartQuantity: cartQuantity - 1 }));
   };
 
   const handleIncrease = () => {
-    if (!atMaxStock) {
-      if (quantity === 0) {
-        dispatch(addToCart(product));
-      } else {
-        dispatch(updateQuantity({ id: product.id, quantity: quantity + 1 }));
-      }
-    }
+    if (product.stock > cartQuantity)
+      dispatch(updateQuantity({ id: product.id, cartQuantity: cartQuantity + 1 }));
   };
 
+  const handleAddToCart = () => {
+    if (product.stock > 0) dispatch(addToCart(product));
+  };
+
+  if (cartQuantity > 0) {
+    const stepperElement = (
+      <QuantityStepper
+        cartQuantity={cartQuantity}
+        onDecrease={handleDecrease}
+        onIncrease={handleIncrease}
+        disableDecrease={cartQuantity <= 0}
+        disableIncrease={cartQuantity >= product.stock}
+        className={className}
+      />
+    );
+    if (variant === 'detail') {
+      return <div className='product-cart-stepper-wrapper'>{stepperElement}</div>;
+    }
+    return stepperElement;
+  }
   return (
-    <QuantityStepper
-      quantity={quantity}
-      onDecrease={handleDecrease}
-      onIncrease={handleIncrease}
-      disableDecrease={quantity <= 0}
-      disableIncrease={atMaxStock}
-      className={className}
-    />
+    <Button variant='primary' onClick={handleAddToCart} disabled={product.stock === 0}>
+      {variant === 'detail' && (
+        <span className='material-symbols-outlined'>shopping_bag</span>
+      )}
+      Add to Cart
+    </Button>
   );
 }
 
 CartStepper.propTypes = {
   product: PropTypes.shape({
     id: PropTypes.number.isRequired,
+    stock: PropTypes.number,
+    cartQuantity: PropTypes.number,
   }).isRequired,
+  className: PropTypes.string,
 };

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Button from '../Button';
 
 export default function QuantityStepper({
-  quantity,
+  cartQuantity,
   onDecrease,
   onIncrease,
   disableDecrease,
@@ -13,11 +13,11 @@ export default function QuantityStepper({
     <div className={`card-qty-stepper ${className}`.trim()}>
       <Button variant='card-qty-btn' onClick={onDecrease} disabled={disableDecrease}>
         <span className='material-symbols-outlined'>
-          {quantity < 2 ? 'delete' : 'remove'}
+          {cartQuantity < 2 ? 'delete' : 'remove'}
         </span>
       </Button>
 
-      <span className='card-qty-count'>{quantity}</span>
+      <span className='card-qty-count'>{cartQuantity}</span>
 
       <Button variant='card-qty-btn' onClick={onIncrease} disabled={disableIncrease}>
         <span className='material-symbols-outlined'>add</span>
@@ -27,7 +27,7 @@ export default function QuantityStepper({
 }
 
 QuantityStepper.propTypes = {
-  quantity: PropTypes.number.isRequired,
+  cartQuantity: PropTypes.number.isRequired,
   onDecrease: PropTypes.func.isRequired,
   onIncrease: PropTypes.func.isRequired,
   disableDecrease: PropTypes.bool,

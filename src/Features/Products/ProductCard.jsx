@@ -1,4 +1,4 @@
-import { Link, replace } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Button from '../../Components/Button';
 import productShape from '../../propTypes/productShape';
 import CartStepper from '../Cart/CartStepper';
@@ -8,11 +8,9 @@ import { useNavigate } from 'react-router-dom';
 
 export default function ProductCard({
   product,
-  isInCart,
   isInWishlist,
   isUserLoggedIn,
   checkIfAdmin,
-  onAddToCart,
   onAddToWishlist,
 }) {
   const navigate = useNavigate();
@@ -40,13 +38,7 @@ export default function ProductCard({
       </Link>
 
       <div className='card-actions'>
-        {isInCart ? (
-          <CartStepper product={product} />
-        ) : (
-          <Button variant='primary' onClick={onAddToCart} disabled={product.stock === 0}>
-            Add to Cart
-          </Button>
-        )}
+        <CartStepper product={product} variant='card' />
         {isUserLoggedIn ? (
           checkIfAdmin ? (
             <Button variant='secondary' disabled={true}>
@@ -72,8 +64,8 @@ export default function ProductCard({
 
 ProductCard.propTypes = {
   product: productShape.isRequired,
-  isInCart: PropTypes.bool.isRequired,
   isInWishlist: PropTypes.bool.isRequired,
-  onAddToCart: PropTypes.func.isRequired,
   onAddToWishlist: PropTypes.func.isRequired,
+  isUserLoggedIn: PropTypes.bool.isRequired,
+  checkIfAdmin: PropTypes.bool.isRequired,
 };
