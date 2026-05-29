@@ -80,12 +80,7 @@ export default function ProductForm({
 
       <div className='form-group'>
         <label>Image</label>
-        <input
-          type='file'
-          accept='image/*'
-          onChange={onPickImage}
-          className='app-input'
-        />
+        <input type='file' accept='image/*' onChange={onPickImage} />
         {previewUrl ? (
           <img className='add-product-preview' src={previewUrl} alt='' />
         ) : null}

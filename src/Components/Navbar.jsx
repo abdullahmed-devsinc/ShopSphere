@@ -5,8 +5,10 @@ import { selectCartCount } from '../Features/Cart/cartSlice';
 import { selectwishlistCount } from '../Features/Wishlist/wishlistSlice';
 import ProductSearch from '../Features/Products/ProductSearch';
 import { useAuth } from '../hooks/useAuth';
+import { useFilter } from '../Context/FilterContext';
 
-export default function Navbar({ onFilterToggle, isFilterOpen }) {
+export default function Navbar({ minimal = false }) {
+  const { isFilterOpen, setIsFilterOpen } = useFilter();
   const cartCount = useSelector(selectCartCount);
   const wishlistCount = useSelector(selectwishlistCount);
   const location = useLocation();
@@ -21,6 +23,17 @@ export default function Navbar({ onFilterToggle, isFilterOpen }) {
     logout();
   };
 
+  if (minimal) {
+    return (
+      <header className='navbar'>
+        <div className='navbar__left'>
+          <Link to='/' className='navbar__brand'>
+            ShopSphere
+          </Link>
+        </div>
+      </header>
+    );
+  }
   return (
     <>
       <header className={`navbar ${isProductListing ? 'navbar--products' : ''}`}>
@@ -32,7 +45,7 @@ export default function Navbar({ onFilterToggle, isFilterOpen }) {
           {isProductListing && (
             <button
               className={`navbar__filter-btn ${isFilterOpen ? 'active' : ''}`}
-              onClick={onFilterToggle}
+              onClick={() => setIsFilterOpen((prev) => !prev)}
             >
               <span className='material-symbols-outlined'>tune</span>
               <span>Filters</span>

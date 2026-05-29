@@ -2,14 +2,16 @@ import { useSelector } from 'react-redux';
 import { selectFilteredProducts } from '../Features/Products/productSlice';
 import ProductGrid from '../Features/Products/ProductGrid';
 import ProductFilter from '../Features/Products/ProductFilter';
-import PropTypes from 'prop-types';
 import { useState } from 'react';
 import Button from '../Components/Button';
+import { useFilter } from '../Context/FilterContext';
 
 const ITEMS_PER_PAGE = 12;
-export default function ProductListingPage({ isFilterOpen, setIsFilterOpen }) {
+
+export default function ProductListingPage() {
   const products = useSelector(selectFilteredProducts);
   const [currentPage, setCurrentPage] = useState(1);
+  const { isFilterOpen, setIsFilterOpen } = useFilter();
 
   const totalPages = Math.max(1, Math.ceil(products.length / ITEMS_PER_PAGE));
   const safeCurrentPage = Math.min(currentPage, totalPages);
@@ -71,8 +73,3 @@ export default function ProductListingPage({ isFilterOpen, setIsFilterOpen }) {
     </div>
   );
 }
-
-ProductListingPage.propTypes = {
-  isFilterOpen: PropTypes.bool,
-  setIsFilterOpen: PropTypes.func,
-};

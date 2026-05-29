@@ -72,36 +72,76 @@ export const selectProductById = (productId) =>
 
     return product;
   });
+// export const selectFilteredProducts = createSelector(
+//   selectAllProducts,
+//   selectSearchQuery,
+//   selectFilters,
+//   selectSortBy,
+//   (items, searchQuery, filters, sortBy) => {
+//     const query = searchQuery.trim().toLowerCase();
+//     const [minPrice, maxPrice] = filters.priceRange;
+//     let result = items;
+//     if (searchQuery) {
+//       result = result.filter((p) => p.name.toLowerCase().includes(query));
+//     }
+//     if (filters.category !== 'all') {
+//       result = result.filter((p) => p.category === filters.category);
+//     }
+//     if (filters.rating > 0) {
+//       result = result.filter((p) => (getAverageRating(p) ?? 0) >= filters.rating);
+//     }
+//     result = result.filter(
+//       (p) => p.price >= minPrice && (maxPrice == null || p.price <= maxPrice),
+//     );
+//     if (sortBy === 'price-asc') {
+//       result.sort((a, b) => a.price - b.price);
+//     }
+//     if (sortBy === 'price-desc') {
+//       result.sort((a, b) => b.price - a.price);
+//     }
+//     if (sortBy === 'name') {
+//       result.sort((a, b) => a.name.localeCompare(b.name));
+//     }
+//     return result;
+//   },
+//);
+
 export const selectFilteredProducts = createSelector(
   selectAllProducts,
   selectSearchQuery,
   selectFilters,
   selectSortBy,
   (items, searchQuery, filters, sortBy) => {
-    let result = items;
-    if (searchQuery) {
-      result = result.filter((p) =>
-        p.name.toLowerCase().includes(searchQuery.toLowerCase()),
-      );
-    }
-    if (filters.category !== 'all') {
-      result = result.filter((p) => p.category === filters.category);
-    }
-    if (filters.rating > 0) {
-      result = result.filter((p) => (getAverageRating(p) ?? 0) >= filters.rating);
-    }
+    const query = searchQuery.trim().toLowerCase();
     const [minPrice, maxPrice] = filters.priceRange;
-    result = result.filter(
-      (p) => p.price >= minPrice && (maxPrice == null || p.price <= maxPrice),
-    );
-    if (sortBy === 'price-asc') {
-      result.sort((a, b) => a.price - b.price);
-    }
-    if (sortBy === 'price-desc') {
-      result.sort((a, b) => b.price - a.price);
-    }
-    if (sortBy === 'name') {
-      result.sort((a, b) => a.name.localeCompare(b.name));
+
+    let result = items.filter((product) => {
+      const matchesSearch = !query || product.name.toLowerCase().includes(query);
+      const matchesCategory =
+        filters.category === 'all' || product.category === filters.category;
+
+      const matchesRating =
+        filters.rating <= 0 || (getAverageRating(product) ?? 0) >= filters.rating;
+
+      const matchesPrice =
+        product.price >= minPrice && (maxPrice == null || product.price <= maxPrice);
+      return matchesSearch && matchesCategory && matchesRating && matchesPrice;
+    });
+    switch (sortBy) {
+      case 'price-asc':
+        result.sort((a, b) => (a.price = b.price));
+        break;
+      case 'price-desc':
+        result.sort((a, b) => b.price - a.price);
+        break;
+      case 'name':
+        result.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case 'rating-desc':
+        result.sort((a, b) => (getAverageRating(b) ?? 0) - (getAverageRating(a) ?? 0));
+        break;
+      default:
+        break;
     }
     return result;
   },
