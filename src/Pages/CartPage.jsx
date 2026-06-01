@@ -43,15 +43,13 @@ export default function CartPage() {
       />
 
       <div className='cart-layout'>
-        <div className='cart-main'>
-          <div className='cart-items-panel'>
+          <div className='cart-items'>
             <div className='cart-list'>
               {items.map((item) => (
                 <CartItem key={item.id} item={item} />
               ))}
             </div>
           </div>
-        </div>
 
         <OrderSummary
           subtotal={subTotal}

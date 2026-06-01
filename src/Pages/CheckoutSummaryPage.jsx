@@ -60,7 +60,6 @@ export default function CheckoutSummaryPage() {
 
       <div className='checkout-layout'>
         <div className='checkout-items'>
-          <h3 className='checkout-section-title'>Items in your order</h3>
           <div className='checkout-list'>
             {items.map((item) => (
               <CheckoutLineItem key={item.id} item={item} />

@@ -32,7 +32,7 @@ export default function ProductCard({
 
           <h2 className='card-title'>{product.name}</h2>
           <ProductRatingLine product={product} />
-          <p className='card-price'>{product.price}</p>
+          <p className='card-price'>${product.price}</p>
           <p className='card-stock'>{product.stock > 0 ? 'In Stock' : 'Out of stock'}</p>
         </div>
       </Link>

@@ -46,7 +46,7 @@ export default function WishlistPage() {
           </span>
         </Link>
       </div>
-      <div className='wishlist-panel'>
+      <div className='wishlist-items'>
         <div className='wishlist-list'>
           {items.map((item) => (
             <WishlistItem key={item.id} item={item} />

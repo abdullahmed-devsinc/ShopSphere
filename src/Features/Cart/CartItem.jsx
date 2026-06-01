@@ -28,10 +28,10 @@ export default function CartItem({ item }) {
         </Link>
         <p className='card-price-per-item'>${formatMoney(item.price)} each</p>
       </div>
-
-      <CartStepper product={item} className='card-qty-stepper--cart' />
-
+      <div className='cart-item-price-stepper'>
       <p className='card-price cart-item-line-total'>${formatMoney(lineTotal)}</p>
+      <CartStepper product={item} className='card-qty-stepper--cart' />
+      </div>
     </div>
   );
 }
